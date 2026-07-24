@@ -1,3 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+.idea/
+data/raw/*.csv
+data/raw/*.xlsx
+!data/raw/.gitkeep
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
