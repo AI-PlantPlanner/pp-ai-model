@@ -48,12 +48,10 @@ def score_plant(plant_row: pd.Series, user_light: float, user_temp: float, user_
     if any(pd.isna(plant_row[col]) for col in required_cols):
         return None
 
-    # 한계온도(temp_limit)는 "이 아래로 내려가면 생존 불가"인 하한값이다. 원본이
-    # "3-5"처럼 범위로 들어온 경우 값이 애매하므로, 더 높은 쪽(temp_limit_max)을
-    # 컷 기준으로 써서 실제로는 위험한데 안전하다고 잘못 점수를 주는 걸 피한다.
-    # 생존 불가는 광량/습도 정도 차이(품질 저하)와 성격이 달라 정도 차이가 아니라
-    # 가능/불가능의 이진 문제 — 광량/습도가 완벽해도 얼어 죽으면 추천이 안 되므로
-    # 온도 feature 점수만 0으로 두지 않고 최종 점수 자체를 0으로 덮어쓴다(게이트).
+    """한계온도(temp_limit)는 "이 아래로 내려가면 생존 불가"인 하한값이다. 
+    원본이 "3-5"처럼 범위로 들어온 경우 값이 애매하므로, 더 높은 쪽(temp_limit_max)을 컷 기준으로 써서 실제로는 위험한데 안전하다고 잘못 점수를 주는 걸 피한다.
+    생존 불가는 광량/습도 정도 차이(품질 저하)와 성격이 달라 정도 차이가 아니라 가능/불가능의 이진 문제 
+    — 광량/습도가 완벽해도 얼어 죽으면 추천이 안 되므로 온도 feature 점수만 0으로 두지 않고 최종 점수 자체를 0으로 덮어쓴다(게이트)."""
     if user_temp < plant_row[config.NORM_TEMP_LIMIT_MAX]:
         return 0.0
 
