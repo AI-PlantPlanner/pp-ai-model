@@ -54,3 +54,22 @@ CULTIVATION_INDOOR = "실내"
 CULTIVATION_OUTDOOR = "실외"
 CULTIVATION_MIXED = "실내·실외"
 CULTIVATION_UNKNOWN = "미상"
+
+# ---- plants_normalized.csv 컬럼명 (teacher_scoring에서 사용) ----
+NORM_LIGHT_LUX_MIN = "light_lux_min"
+NORM_LIGHT_LUX_MAX = "light_lux_max"
+NORM_TEMP_OPTIMAL_MIN = "temp_optimal_min"
+NORM_TEMP_OPTIMAL_MAX = "temp_optimal_max"
+NORM_TEMP_LIMIT_MIN = "temp_limit_min"
+NORM_TEMP_LIMIT_MAX = "temp_limit_max"
+NORM_HUMIDITY_MIN = "humidity_min"
+NORM_HUMIDITY_MAX = "humidity_max"
+
+# ---- 룰 기반 티처 스코어링(v0) ----
+# feature별 가중치(가중합) — 합이 1이 되도록 유지
+SCORE_WEIGHT_LIGHT = 1 / 3
+SCORE_WEIGHT_TEMP = 1 / 3
+SCORE_WEIGHT_HUMIDITY = 1 / 3
+
+# 적정범위를 벗어났을 때, 범위 폭의 이 비율만큼 벗어나면 0점까지 선형 감점
+SCORE_TOLERANCE_RATIO = 0.5
