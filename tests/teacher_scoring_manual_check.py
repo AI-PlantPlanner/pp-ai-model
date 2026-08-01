@@ -11,9 +11,23 @@ from src import config
 from src.teacher_scoring import score_all_plants
 
 SCENARIOS = [
-    {"name": "저광량 + 고온다습 (욕실/구석 자리)", "light": 3000, "temp": 24, "humidity": 80},
-    {"name": "고광량 + 저습 (남향 창가, 건조)", "light": 20000, "temp": 22, "humidity": 30},
-    {"name": "저온 (난방 없는 베란다, 겨울)", "light": 10000, "temp": 5, "humidity": 50},
+    {
+        "name": "저광량 + 고온다습 (욕실/구석 자리)",
+        "light": 3000, "temp": 24, "humidity": 80,
+        "cultivation_context": config.CULTIVATION_INDOOR,
+    },
+    {
+        "name": "고광량 + 저습 (남향 창가, 건조)",
+        "light": 20000, "temp": 22, "humidity": 30,
+        "cultivation_context": config.CULTIVATION_INDOOR,
+    },
+    # 베란다는 실내/실외 어느 쪽으로 볼지 아직 정해진 바 없다 — 여기선 게이트 동작을
+    # 눈으로 확인하기 위한 임시 선택(실외)일 뿐, 실제 UX 매핑 결정은 별도.
+    {
+        "name": "저온 (난방 없는 베란다, 겨울)",
+        "light": 10000, "temp": 5, "humidity": 50,
+        "cultivation_context": config.CULTIVATION_OUTDOOR,
+    },
 ]
 
 
@@ -21,8 +35,11 @@ def main() -> None:
     df = pd.read_csv(config.NORMALIZED_OUTPUT_PATH)
     for scenario in SCENARIOS:
         print(f"\n=== {scenario['name']} "
-              f"(광량={scenario['light']}lux, 온도={scenario['temp']}℃, 습도={scenario['humidity']}%) ===")
-        result = score_all_plants(df, scenario["light"], scenario["temp"], scenario["humidity"])
+              f"(광량={scenario['light']}lux, 온도={scenario['temp']}℃, 습도={scenario['humidity']}%, "
+              f"재배구분={scenario['cultivation_context']}) ===")
+        result = score_all_plants(
+            df, scenario["light"], scenario["temp"], scenario["humidity"], scenario["cultivation_context"]
+        )
         print(result.head(5).to_string(index=False))
 
 
