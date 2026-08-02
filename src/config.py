@@ -111,3 +111,15 @@ SYNTHETIC_N_SAMPLES_OUTDOOR = 300
 SYNTHETIC_RANDOM_SEED = 42
 
 SYNTHETIC_OUTPUT_PATH = PROCESSED_DIR / "synthetic_training_data.csv"
+
+# ---- 5단계: 모델 학습 ----
+MODELS_DIR = PROJECT_ROOT / "models"
+MODEL_OUTPUT_PATH = MODELS_DIR / "recommendation_model_v0.joblib"
+# v1: 원본 값만 쓰던 v0에 사용자값-적정범위 거리(마진)/게이트 근접도 피처를 추가한 버전.
+MODEL_OUTPUT_PATH_V1 = MODELS_DIR / "recommendation_model_v1.joblib"
+MODEL_TEST_SIZE = 0.2
+MODEL_RANDOM_SEED = 42
+# humidity_max가 NaN인 건("≥70"처럼 상한 없는 개방형 범위) 파싱 실패가 아니라 "습도는
+# 100%(물리적 상한)까지 전부 적정"이라는 뜻이라, 모델 입력 피처로는 100으로 채운다 —
+# 임의 추정이 아니라 teacher_scoring이 이 경우를 다루는 것과 동일한 논리를 수치화한 것뿐이다.
+MODEL_HUMIDITY_MAX_FILL = 100.0
