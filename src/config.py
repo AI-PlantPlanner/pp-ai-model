@@ -84,3 +84,30 @@ SCORE_TOLERANCE_RATIO = 0.5
 # 데이터 내 습도 적정범위 폭(10~30, 중앙값 20)을 참고해 정했다 — 실제 범위 폭이 아니라
 # 하한이 없는 case의 감점 기울기를 다른 종들과 비슷하게 맞추기 위한 근사치.
 SCORE_HUMIDITY_ASSUMED_RANGE_WIDTH = 20
+
+# ---- 4단계: 합성 환경 데이터 샘플링 범위 ----
+# "방/주방/거실/마당" 같은 세부 공간 구분은 제외하고 AI 모델 입력에는 실내/실외 여부만 반영한다.
+# 아래 범위는 조사 자료 기반 잠정치 — 진단 모델(사진/센서 → 환경값 추정) 스펙이 확정되면 실제 입력 분포에 맞춰 다시 조정해야 한다.
+#
+# 실내 광량: 방 종류가 아니라 "창문과의 거리/방향"이 결정 요인이라는 조사 결과에 따라
+# 창가 위치 기준(구석~직사광 통과)으로 잡았다. KS 조도 설계기준(거실 100~200lux 등)은
+# 인공조명 설계용이라 식물이 실제로 받는 채광과는 다르므로 쓰지 않았다.
+SYNTHETIC_INDOOR_LIGHT_LUX_RANGE = (100, 20_000)
+
+# 실내 온도/습도: 계절별 냉난방 기준(겨울 18~20℃/40~50%, 여름 22~26℃/50~60%)에 주방 조리 시
+# 습도 상승분까지 여유를 둔 범위.
+SYNTHETIC_INDOOR_TEMP_RANGE = (18, 28)
+SYNTHETIC_INDOOR_HUMIDITY_RANGE = (30, 80)
+
+# 실외 광량: 흐린 날/그늘(약 1,000lux)부터 맑은 날 직사광선(최대 약 120,000lux)까지.
+SYNTHETIC_OUTDOOR_LIGHT_LUX_RANGE = (1_000, 120_000)
+
+# 실외 온도/습도: 한국 사계절 변동 반영(여름 평균습도 79.9%, 봄가을 63.6% 등).
+SYNTHETIC_OUTDOOR_TEMP_RANGE = (-10, 35)
+SYNTHETIC_OUTDOOR_HUMIDITY_RANGE = (30, 90)
+
+SYNTHETIC_N_SAMPLES_INDOOR = 300
+SYNTHETIC_N_SAMPLES_OUTDOOR = 300
+SYNTHETIC_RANDOM_SEED = 42
+
+SYNTHETIC_OUTPUT_PATH = PROCESSED_DIR / "synthetic_training_data.csv"

@@ -21,8 +21,6 @@ SCENARIOS = [
         "light": 20000, "temp": 22, "humidity": 30,
         "cultivation_context": config.CULTIVATION_INDOOR,
     },
-    # 베란다는 실내/실외 어느 쪽으로 볼지 아직 정해진 바 없다 — 여기선 게이트 동작을
-    # 눈으로 확인하기 위한 임시 선택(실외)일 뿐, 실제 UX 매핑 결정은 별도.
     {
         "name": "저온 (난방 없는 베란다, 겨울)",
         "light": 10000, "temp": 5, "humidity": 50,
