@@ -1,13 +1,7 @@
 """6단계: v1 모델(joblib)을 ONNX로 변환 — 게임 등 non-Python 런타임 배포용.
 
-requirements.txt에 skl2onnx/onnx/onnxruntime이 처음부터 있었지만 실제 변환 스크립트는
-없었다. GBM으로 되돌린 이유(train_model.py 모듈 docstring 참고)가 "RF는 joblib이
-575~687MB까지 커져서 ONNX로 변환해도 비슷하게 커질 것"이었으므로, 이 스크립트가 실제로
-그 전제(GBM은 ONNX로 변환해도 작게 유지되는지)를 확인하는 역할을 한다 — joblib 크기가
-아니라 ONNX 변환 후 크기가 배포 가능 여부의 실제 기준이다.
-
-변환 후에는 sklearn 원본 모델과 ONNX(onnxruntime) 예측값이 실질적으로 같은지도 함께
-검증한다 — 크기만 작고 예측이 달라지면 의미가 없기 때문이다.
+joblib 크기가 아니라 ONNX 변환 후 크기가 배포 가능 여부의 실제 기준이라 변환 후 크기를
+출력한다. sklearn 원본과 ONNX(onnxruntime) 예측값이 실질적으로 같은지도 함께 검증한다.
 """
 
 import os

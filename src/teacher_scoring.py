@@ -23,8 +23,7 @@ from src import config
 def _linear_range_score(
     value: float, lo: float, hi: float, tolerance_ratio: float, assumed_range_width: float | None = None
 ) -> float:
-    """적정범위 [lo, hi] 안이면 100점. 벗어나면 범위 폭 * tolerance_ratio만큼
-    벗어날 때 0점이 되도록 선형 감점한다.
+    """적정범위 [lo, hi] 안이면 100점. 벗어나면 범위 폭 * tolerance_ratio만큼 벗어날 때 0점이 되도록 선형 감점한다.
 
     hi가 없는 개방형 범위("≥N")는 lo 이상이면 전부 100점, 미만이면 assumed_range_width
     * tolerance_ratio를 감점 기준으로 쓴다 (범위 폭이 없어 실제 폭을 쓸 수 없기 때문).
@@ -53,9 +52,8 @@ def _linear_range_score(
 def is_gated(plant_row: pd.Series, user_temp: float, user_cultivation_context: str) -> bool:
     """한계온도/재배구분 하드컷 게이트 중 하나라도 걸리면 True.
 
-    score_plant() 내부에서 쓰는 것과 동일한 판정이다. ML모델(predict.py)이 이 게이트를
-    근사 오차 없이 안전장치로 재사용할 수 있도록 별도 함수로 분리했다 — 생존/재배
-    가능 여부는 회귀모델의 근사치가 아니라 이 규칙이 항상 최종 결정권을 가져야 한다.
+    score_plant()와 predict.py(ML 예측의 안전장치)가 공유해서 쓴다 — 생존/재배 가능
+    여부는 회귀모델의 근사치가 아니라 이 규칙이 최종 결정권을 가져야 하기 때문이다.
     """
     cultivation_type = plant_row[config.NORM_CULTIVATION_TYPE]
     if cultivation_type != config.CULTIVATION_MIXED and cultivation_type != user_cultivation_context:
@@ -78,8 +76,7 @@ def score_plant(
     CULTIVATION_OUTDOOR). 세부 장소(베란다/마당 등)를 실내·실외 중 무엇으로 볼지는 이 함수의
     관심사가 아니고, 호출부(향후 UX/합성 데이터 생성 단계)에서 이 둘 중 하나로 정리해서 넘겨준다.
     """
-    # humidity_max는 필수에서 뺐다 — "≥70"처럼 상한이 없는 개방형 범위는 humidity_max가
-    # 정상적으로 NaN이며(파싱 실패가 아님), _linear_range_score가 별도로 처리한다.
+    # humidity_max는 필수에서 제외함 — "≥70"처럼 상한이 없는 개방형 범위는 humidity_max가 정상적으로 NaN이며(파싱 실패가 아님), _linear_range_score가 별도로 처리
     required_cols = (
         config.NORM_LIGHT_LUX_MIN,
         config.NORM_LIGHT_LUX_MAX,
@@ -92,23 +89,12 @@ def score_plant(
     if any(pd.isna(plant_row[col]) for col in required_cols):
         return None
 
-    # 재배구분이 '미상'인 종은 실내/실외 재배 가능 여부 자체를 판단할 근거가 없으므로
-    # (다른 결측 컬럼과 동일하게) 임의로 포함/제외하지 않고 None으로 제외한다.
+    # 재배구분이 '미상'인 종은 실내/실외 재배 가능 여부 자체를 판단할 근거가 없으므로 (다른 결측 컬럼과 동일하게) 임의로 포함/제외하지 않고 None으로 제외
     cultivation_type = plant_row[config.NORM_CULTIVATION_TYPE]
     if cultivation_type == config.CULTIVATION_UNKNOWN:
         return None
 
-    """재배구분 게이트: 실외 전용 식물을 실내 환경으로(혹은 그 반대로) 매칭하는 건
-    광량/온도/습도가 아무리 잘 맞아도 애초에 그 환경에서 재배 자체가 성립하지 않는
-    가능/불가능의 문제다 — 정도 차이가 아니므로 온도 게이트와 동일하게 점수를 0으로 덮어쓴다.
-    '혼합'(실내·실외 다 가능)인 종은 게이트를 적용하지 않는다.
-
-    한계온도(temp_limit)는 "이 아래로 내려가면 생존 불가"인 하한값이다. 원본이 "3-5"처럼
-    범위로 들어온 경우 값이 애매하므로, 더 높은 쪽(temp_limit_max)을 컷 기준으로 써서
-    실제로는 위험한데 안전하다고 잘못 점수를 주는 걸 피한다. 생존 불가는 광량/습도 정도
-    차이(품질 저하)와 성격이 달라 정도 차이가 아니라 가능/불가능의 이진 문제 — 광량/습도가
-    완벽해도 얼어 죽으면 추천이 안 되므로 온도 feature 점수만 0으로 두지 않고 최종 점수
-    자체를 0으로 덮어쓴다(게이트)."""
+    # 재배구분 불일치 또는 한계온도 미만은 광량/습도가 완벽해도 재배 자체가 불가능한 가능/불가능 문제라, 정도 차이로 감점하지 않고 점수를 통째로 0으로 덮어쓴다(게이트).
     if is_gated(plant_row, user_temp, user_cultivation_context):
         return 0.0
 
