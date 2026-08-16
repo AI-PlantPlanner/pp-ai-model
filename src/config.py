@@ -86,28 +86,42 @@ SCORE_TOLERANCE_RATIO = 0.5
 SCORE_HUMIDITY_ASSUMED_RANGE_WIDTH = 20
 
 # ---- 4단계: 합성 환경 데이터 샘플링 범위 ----
-# "방/주방/거실/마당" 같은 세부 공간 구분은 제외하고 AI 모델 입력에는 실내/실외 여부만 반영한다.
-# 아래 범위는 조사 자료 기반 잠정치 — 진단 모델(사진/센서 → 환경값 추정) 스펙이 확정되면 실제 입력 분포에 맞춰 다시 조정해야 한다.
-#
-# 실내 광량: 방 종류가 아니라 "창문과의 거리/방향"이 결정 요인이라는 조사 결과에 따라
-# 창가 위치 기준(구석~직사광 통과)으로 잡았다. KS 조도 설계기준(거실 100~200lux 등)은
-# 인공조명 설계용이라 식물이 실제로 받는 채광과는 다르므로 쓰지 않았다.
-SYNTHETIC_INDOOR_LIGHT_LUX_RANGE = (100, 20_000)
+# "방/주방/거실/마당" 세부 구분은 제외, 실내/실외 여부만 반영. 조사 자료 기반 잠정치라
+# 진단 모델(사진/센서 → 환경값 추정) 스펙이 확정되면 실제 입력 분포로 다시 조정해야 한다.
 
-# 실내 온도/습도: 계절별 냉난방 기준(겨울 18~20℃/40~50%, 여름 22~26℃/50~60%)에 주방 조리 시
-# 습도 상승분까지 여유를 둔 범위.
-SYNTHETIC_INDOOR_TEMP_RANGE = (18, 28)
+# 실내 광량: 창가 위치(창문과의 거리/방향) 기준. 실내 종 light_lux_max가 37,700까지
+# 있어(선룸 등) 상한을 40,000으로 잡았다.
+SYNTHETIC_INDOOR_LIGHT_LUX_RANGE = (100, 40_000)
+
+# 실내 온도: 혼합종 한계온도가 -25℃, 실내 종 적정온도 상한이 32℃까지 있어 하한 -10(냉난방
+# 끊긴 극단 상황 포함) ~ 상한 33으로 잡았다. -25처럼 -10보다도 낮은 한계온도를 가진 극소수
+# 종(애기달맞이꽃 등)은 실외 범위도 못 미쳐 게이트 미검증 상태로 남아있다 — 한국 실제
+# 기후에서 그 정도로 내려가는 경우가 드물어 지금은 의도적으로 남겨둔 한계다.
+SYNTHETIC_INDOOR_TEMP_RANGE = (-10, 33)
 SYNTHETIC_INDOOR_HUMIDITY_RANGE = (30, 80)
 
-# 실외 광량: 흐린 날/그늘(약 1,000lux)부터 맑은 날 직사광선(최대 약 120,000lux)까지.
+# 실외 광량: 흐린 날/그늘(약 1,000lux)부터 직사광선(최대 약 120,000lux)까지.
 SYNTHETIC_OUTDOOR_LIGHT_LUX_RANGE = (1_000, 120_000)
 
 # 실외 온도/습도: 한국 사계절 변동 반영(여름 평균습도 79.9%, 봄가을 63.6% 등).
 SYNTHETIC_OUTDOOR_TEMP_RANGE = (-10, 35)
 SYNTHETIC_OUTDOOR_HUMIDITY_RANGE = (30, 90)
 
-SYNTHETIC_N_SAMPLES_INDOOR = 300
+# 실내 범위가 넓어 실외(300)보다 샘플 밀도가 낮아지므로 800으로 상향.
+SYNTHETIC_N_SAMPLES_INDOOR = 800
 SYNTHETIC_N_SAMPLES_OUTDOOR = 300
 SYNTHETIC_RANDOM_SEED = 42
 
 SYNTHETIC_OUTPUT_PATH = PROCESSED_DIR / "synthetic_training_data.csv"
+
+# ---- 5단계: 모델 학습 ----
+MODELS_DIR = PROJECT_ROOT / "models"
+MODEL_OUTPUT_PATH = MODELS_DIR / "recommendation_model_v0.joblib"
+# v1: 원본 값만 쓰던 v0에 사용자값-적정범위 거리(마진)/게이트 근접도 피처를 추가한 버전.
+MODEL_OUTPUT_PATH_V1 = MODELS_DIR / "recommendation_model_v1.joblib"
+MODEL_TEST_SIZE = 0.2
+MODEL_RANDOM_SEED = 42
+# humidity_max가 NaN인 건("≥70"처럼 상한 없는 개방형 범위) 파싱 실패가 아니라 "습도는
+# 100%(물리적 상한)까지 전부 적정"이라는 뜻이라, 모델 입력 피처로는 100으로 채운다 —
+# 임의 추정이 아니라 teacher_scoring이 이 경우를 다루는 것과 동일한 논리를 수치화한 것뿐이다.
+MODEL_HUMIDITY_MAX_FILL = 100.0
