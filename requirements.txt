@@ -2,6 +2,8 @@ pandas==2.2.0
 numpy==1.26.4
 openpyxl==3.1.5
 scikit-learn==1.4.0
-skl2onnx==1.16.0
+# 1.16.0은 GradientBoostingRegressor 변환 시 "Expected an int, got a boolean" 오류로 실패한다
+# (TreeEnsembleRegressor의 boolean 속성 처리 버그) — 1.20.0에서 확인 및 해결됨.
+skl2onnx==1.20.0
 onnx==1.15.0
 onnxruntime==1.17.0

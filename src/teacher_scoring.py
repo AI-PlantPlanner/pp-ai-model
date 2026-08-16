@@ -50,6 +50,21 @@ def _linear_range_score(
     return max(0.0, 100.0 * (1 - distance / tolerance))
 
 
+def is_gated(plant_row: pd.Series, user_temp: float, user_cultivation_context: str) -> bool:
+    """한계온도/재배구분 하드컷 게이트 중 하나라도 걸리면 True.
+
+    score_plant() 내부에서 쓰는 것과 동일한 판정이다. ML모델(predict.py)이 이 게이트를
+    근사 오차 없이 안전장치로 재사용할 수 있도록 별도 함수로 분리했다 — 생존/재배
+    가능 여부는 회귀모델의 근사치가 아니라 이 규칙이 항상 최종 결정권을 가져야 한다.
+    """
+    cultivation_type = plant_row[config.NORM_CULTIVATION_TYPE]
+    if cultivation_type != config.CULTIVATION_MIXED and cultivation_type != user_cultivation_context:
+        return True
+    if user_temp < plant_row[config.NORM_TEMP_LIMIT_MAX]:
+        return True
+    return False
+
+
 def score_plant(
     plant_row: pd.Series,
     user_light: float,
@@ -86,15 +101,15 @@ def score_plant(
     """재배구분 게이트: 실외 전용 식물을 실내 환경으로(혹은 그 반대로) 매칭하는 건
     광량/온도/습도가 아무리 잘 맞아도 애초에 그 환경에서 재배 자체가 성립하지 않는
     가능/불가능의 문제다 — 정도 차이가 아니므로 온도 게이트와 동일하게 점수를 0으로 덮어쓴다.
-    '혼합'(실내·실외 다 가능)인 종은 게이트를 적용하지 않는다."""
-    if cultivation_type != config.CULTIVATION_MIXED and cultivation_type != user_cultivation_context:
-        return 0.0
+    '혼합'(실내·실외 다 가능)인 종은 게이트를 적용하지 않는다.
 
-    """한계온도(temp_limit)는 "이 아래로 내려가면 생존 불가"인 하한값이다.
-    원본이 "3-5"처럼 범위로 들어온 경우 값이 애매하므로, 더 높은 쪽(temp_limit_max)을 컷 기준으로 써서 실제로는 위험한데 안전하다고 잘못 점수를 주는 걸 피한다.
-    생존 불가는 광량/습도 정도 차이(품질 저하)와 성격이 달라 정도 차이가 아니라 가능/불가능의 이진 문제
-    — 광량/습도가 완벽해도 얼어 죽으면 추천이 안 되므로 온도 feature 점수만 0으로 두지 않고 최종 점수 자체를 0으로 덮어쓴다(게이트)."""
-    if user_temp < plant_row[config.NORM_TEMP_LIMIT_MAX]:
+    한계온도(temp_limit)는 "이 아래로 내려가면 생존 불가"인 하한값이다. 원본이 "3-5"처럼
+    범위로 들어온 경우 값이 애매하므로, 더 높은 쪽(temp_limit_max)을 컷 기준으로 써서
+    실제로는 위험한데 안전하다고 잘못 점수를 주는 걸 피한다. 생존 불가는 광량/습도 정도
+    차이(품질 저하)와 성격이 달라 정도 차이가 아니라 가능/불가능의 이진 문제 — 광량/습도가
+    완벽해도 얼어 죽으면 추천이 안 되므로 온도 feature 점수만 0으로 두지 않고 최종 점수
+    자체를 0으로 덮어쓴다(게이트)."""
+    if is_gated(plant_row, user_temp, user_cultivation_context):
         return 0.0
 
     light_score = _linear_range_score(
