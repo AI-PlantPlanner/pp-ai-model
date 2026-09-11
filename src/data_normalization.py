@@ -82,6 +82,19 @@ def classify_cultivation_type(value) -> tuple[str, str | None]:
     return category, text
 
 
+# 생육형 그룹 판독기
+def classify_plant_group(value) -> str | None:
+    """원예팀이 채워준 생육형 그룹을 표준 그룹명으로 통일한다.
+
+    raw data 시트('관엽', '목본' 등)와 '그룹별 가중치' 시트('관엽식물', '목본류' 등)의 표기가
+    달라서 config.PLANT_GROUP_ALIASES로 매핑한다. 매핑에 없는 값은 임의로 추측하지 않고
+    None으로 남긴다(채점 시 동일 비율 기본 가중치로 처리).
+    """
+    if pd.isna(value):
+        return None
+    return config.PLANT_GROUP_ALIASES.get(str(value).strip())
+
+
 def parse_pest_disease_list(value) -> str | None:
     """"응애, 진딧물" -> "응애|진딧물". 인코딩(멀티핫 등)은 이후 피처엔지니어링 단계에서 처리."""
     if pd.isna(value):
@@ -149,6 +162,72 @@ def _apply_cultivation_type(df: pd.DataFrame, issues: list[dict]) -> pd.DataFram
     )
 
 
+def _apply_plant_group(df: pd.DataFrame, issues: list[dict]) -> pd.DataFrame:
+    groups = []
+    for name, value in zip(df[config.COL_NAME], df[config.COL_PLANT_GROUP]):
+        group = classify_plant_group(value)
+        if group is None:
+            _add_issue(issues, name, config.COL_PLANT_GROUP, value, "생육형 그룹 미상 - 수동 확인 필요")
+        groups.append(group)
+    return pd.DataFrame({config.NORM_PLANT_GROUP: groups}, index=df.index)
+
+
+def detect_light_conflicts(normalized_df: pd.DataFrame) -> pd.DataFrame:
+    """적정 광량과 광보상점/광포화점이 서로 모순되는 종을 찾는다.
+
+    광보상점(광합성량이 호흡량을 넘어서는 최소 광량)보다 적정 광량 하한이 낮거나
+    광포화점보다 적정 광량 상한이 높으면, 그 종은 "적정범위인데 동시에 생육 불가/피해 구간"이 된다.
+    적정 광량(2차 데이터)과 광보상점/광포화점(3차 데이터)의 출처가 달라 생긴 불일치라
+    우리가 임의로 고치지 않고 원예팀 확인 요청용 목록으로만 남긴다.
+    채점 단계(teacher_scoring)는 그동안 종별 적정 광량을 우선하도록 처리한다.
+
+    광보상점/광포화점이 단일값이 아니라 범위로 와서(예: "500-2,000") 경계를 어느 쪽으로
+    보느냐에 따라 충돌 종 수가 달라지므로, 두 해석을 모두 남긴다.
+      - "전체 벗어남": 범위의 관대한 쪽(광포화점 상한 / 광보상점 하한)으로 봐도 어긋나는 경우.
+        적정범위 전체가 피해/생육불가 구간이 되어 사실상 채점이 불가능하다.
+      - "일부 벗어남": 엄격한 쪽(광포화점 하한 / 광보상점 상한)으로 볼 때만 어긋나는 경우.
+    """
+    rows = []
+    for _, row in normalized_df.iterrows():
+        lux_min = row[config.NORM_LIGHT_LUX_MIN]
+        lux_max = row[config.NORM_LIGHT_LUX_MAX]
+        comp_min = row[config.NORM_LIGHT_COMPENSATION_MIN]
+        comp_max = row[config.NORM_LIGHT_COMPENSATION_MAX]
+        sat_min = row[config.NORM_LIGHT_SATURATION_MIN]
+        sat_max = row[config.NORM_LIGHT_SATURATION_MAX]
+
+        reasons = []
+        if pd.notna(lux_max) and pd.notna(sat_max) and lux_max > sat_max:
+            reasons.append("적정 광량 상한 > 광포화점 상한 (전체 벗어남)")
+        elif pd.notna(lux_max) and pd.notna(sat_min) and lux_max > sat_min:
+            reasons.append("적정 광량 상한 > 광포화점 하한 (일부 벗어남)")
+
+        if pd.notna(lux_min) and pd.notna(comp_min) and lux_min < comp_min:
+            reasons.append("적정 광량 하한 < 광보상점 하한 (전체 벗어남)")
+        elif pd.notna(lux_min) and pd.notna(comp_max) and lux_min < comp_max:
+            reasons.append("적정 광량 하한 < 광보상점 상한 (일부 벗어남)")
+
+        if reasons:
+            rows.append({
+                "식물명": row[config.COL_NAME],
+                "생육형그룹": row[config.NORM_PLANT_GROUP],
+                "적정 광량(lux)": row[config.COL_LIGHT_LUX],
+                "광보상점(lux)": row[config.COL_LIGHT_COMPENSATION],
+                "광포화점(lux)": row[config.COL_LIGHT_SATURATION],
+                "사유": " / ".join(reasons),
+            })
+    result = pd.DataFrame(
+        rows,
+        columns=["식물명", "생육형그룹", "적정 광량(lux)", "광보상점(lux)", "광포화점(lux)", "사유"],
+    )
+    # 적정범위 전체가 어긋나는 종(사실상 채점 불가)을 위로 올려서 검토 우선순위를 드러낸다.
+    if not result.empty:
+        result = result.sort_values(
+            by="사유", key=lambda col: ~col.str.contains("전체 벗어남"), kind="stable"
+        ).reset_index(drop=True)
+    return result
+
+
 def normalize_dataframe(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     issues: list[dict] = []
 
@@ -161,6 +240,7 @@ def normalize_dataframe(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
         _apply_range_columns(df, issues),
         _apply_as_needed_range_columns(df, issues),
         _apply_cultivation_type(df, issues),
+        _apply_plant_group(df, issues),
     ]
     result = pd.concat(parts, axis=1)
     result["pest_disease_list"] = df[config.COL_PEST_DISEASE].apply(parse_pest_disease_list)
@@ -169,18 +249,23 @@ def normalize_dataframe(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
     return result, issues_df
 
 
-def save_outputs(normalized_df: pd.DataFrame, issues_df: pd.DataFrame) -> None:
+def save_outputs(
+    normalized_df: pd.DataFrame, issues_df: pd.DataFrame, conflicts_df: pd.DataFrame
+) -> None:
     config.PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
     normalized_df.to_csv(config.NORMALIZED_OUTPUT_PATH, index=False)
     issues_df.to_csv(config.NORMALIZATION_ISSUES_PATH, index=False)
+    conflicts_df.to_csv(config.LIGHT_CONFLICT_PATH, index=False)
 
 
 def main() -> None:
     raw_df = load_raw_data()
     normalized_df, issues_df = normalize_dataframe(raw_df)
-    save_outputs(normalized_df, issues_df)
+    conflicts_df = detect_light_conflicts(normalized_df)
+    save_outputs(normalized_df, issues_df, conflicts_df)
     print(f"정규화 완료: {len(normalized_df)}개 species -> {config.NORMALIZED_OUTPUT_PATH}")
     print(f"확인 필요 항목: {len(issues_df)}건 -> {config.NORMALIZATION_ISSUES_PATH}")
+    print(f"광량 기준 충돌: {len(conflicts_df)}종 -> {config.LIGHT_CONFLICT_PATH}")
 
 
 if __name__ == "__main__":

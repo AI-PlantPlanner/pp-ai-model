@@ -7,3 +7,7 @@ scikit-learn==1.4.0
 skl2onnx==1.20.0
 onnx==1.15.0
 onnxruntime==1.17.0
+
+# 환경 프로파일 생성(src/env_profiles.py generate)에만 필요하다.
+# 생성 결과는 JSON으로 커밋해두므로, 파이프라인 실행·재학습에는 필요 없다.
+anthropic==1.5.0
