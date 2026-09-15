@@ -8,7 +8,7 @@ pytest 없이 python -m tests.teacher_scoring_manual_check 로 바로 실행한�
 import pandas as pd
 
 from src import config
-from src.teacher_scoring import score_all_plants
+from src.teacher_scoring import score_all_plants, summarize_environment
 
 SCENARIOS = [
     {
@@ -36,7 +36,13 @@ def main() -> None:
               f"(광량={scenario['light']}lux, 온도={scenario['temp']}℃, 습도={scenario['humidity']}%, "
               f"재배구분={scenario['cultivation_context']}) ===")
         result = score_all_plants(
-            df, scenario["light"], scenario["temp"], scenario["humidity"], scenario["cultivation_context"]
+            df,
+            summarize_environment(
+                scenario["light"],
+                scenario["temp"],
+                scenario["humidity"],
+                scenario["cultivation_context"],
+            ),
         )
         print(result.head(5).to_string(index=False))
 
