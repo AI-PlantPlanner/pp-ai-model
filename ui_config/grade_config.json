@@ -1,0 +1,32 @@
+{
+  "schema_version": "0.1.0",
+  "status": "pending_horticulture_review",
+  "note": "min_score는 아직 값을 넣지 않았습니다(null) — 원예팀 최종 검증 후 점수 기준이 확정되면 이 파일의 min_score 값만 채우면 됩니다(코드 수정 불필요). 등급 id/label/개수와 구조(높은 점수부터 정렬, 첫 번째로 만족하는 구간을 등급으로 채택)는 지금 확정한 것입니다.",
+  "grades": [
+    {
+      "id": "optimal",
+      "label": "최적",
+      "min_score": null
+    },
+    {
+      "id": "good",
+      "label": "양호",
+      "min_score": null
+    },
+    {
+      "id": "caution",
+      "label": "주의 필요",
+      "min_score": null
+    },
+    {
+      "id": "poor",
+      "label": "비추천",
+      "min_score": null
+    }
+  ],
+  "unavailable_grade": {
+    "id": "unavailable",
+    "label": "재배 불가",
+    "note": "score와 무관하게 availability != 'available'(실내외 불일치/한계온도 미달)인 카드에 부여. 이건 원예팀 검증과 무관하게 지금 바로 확정 가능."
+  }
+}

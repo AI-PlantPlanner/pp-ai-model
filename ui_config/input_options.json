@@ -1,0 +1,204 @@
+{
+  "schema_version": "0.1.0",
+  "status": "draft_pending_horticulture_review",
+  "note": "선택지 라벨/구간은 UX 검토 전 초안입니다. 등급(grade)과 점수 임계값은 별도 파일(grade_config.json, 추후 작업)에서 다루며 여기서는 다루지 않습니다. 수치 기준: plants_normalized.csv 100종 실측 분포 + config.py의 SYNTHETIC_*_RANGE(모델 학습 범위) 참고. 학습 범위를 벗어난 값은 모델 예측 신뢰도가 낮아지므로 각 옵션의 value는 학습 범위 안에서만 정의했습니다.",
+  "cultivation_context_options": [
+    {
+      "id": "indoor",
+      "label": "실내",
+      "value": "실내",
+      "description": "화분을 실내(거실/방/베란다 등)에 둘 예정이에요"
+    },
+    {
+      "id": "outdoor",
+      "label": "실외",
+      "value": "실외",
+      "description": "화분이나 화단을 실외(마당/옥상/테라스 등)에 둘 예정이에요"
+    }
+  ],
+  "light_options": {
+    "indoor": [
+      {
+        "id": "very_low",
+        "label": "창에서 먼 구석 (해가 거의 안 들어옴)",
+        "value_lux": 300
+      },
+      {
+        "id": "low",
+        "label": "창에서 조금 떨어진 곳",
+        "value_lux": 1500
+      },
+      {
+        "id": "medium",
+        "label": "창가 근처 (레이스 커튼 정도의 밝기)",
+        "value_lux": 8000
+      },
+      {
+        "id": "high",
+        "label": "창가 바로 옆 (직사광선이 일부 들어옴)",
+        "value_lux": 20000
+      },
+      {
+        "id": "very_high",
+        "label": "선룸/온실처럼 하루종일 매우 밝음",
+        "value_lux": 35000
+      }
+    ],
+    "outdoor": [
+      {
+        "id": "very_low",
+        "label": "흐린 날 또는 그늘",
+        "value_lux": 1000
+      },
+      {
+        "id": "low",
+        "label": "나무 그늘/반그늘",
+        "value_lux": 10000
+      },
+      {
+        "id": "medium",
+        "label": "구름 약간, 야외 일반적인 밝기",
+        "value_lux": 30000
+      },
+      {
+        "id": "high",
+        "label": "맑은 날 직사광선 근처",
+        "value_lux": 60000
+      },
+      {
+        "id": "very_high",
+        "label": "한여름 한낮 직사광선",
+        "value_lux": 100000
+      }
+    ]
+  },
+  "temperature_options": {
+    "indoor": [
+      {
+        "id": "very_cold",
+        "label": "매우 추움 (난방 안 함, 겨울 외풍)",
+        "value_celsius": 8
+      },
+      {
+        "id": "cold",
+        "label": "서늘함",
+        "value_celsius": 15
+      },
+      {
+        "id": "normal",
+        "label": "보통 (일반적인 실내 적정 온도)",
+        "value_celsius": 21
+      },
+      {
+        "id": "warm",
+        "label": "따뜻함 (난방 중)",
+        "value_celsius": 26
+      },
+      {
+        "id": "hot",
+        "label": "매우 더움 (환기 안 되는 한여름)",
+        "value_celsius": 32
+      }
+    ],
+    "outdoor": [
+      {
+        "id": "very_cold",
+        "label": "한겨울 (영하권)",
+        "value_celsius": -5
+      },
+      {
+        "id": "cold",
+        "label": "봄/가을 서늘함",
+        "value_celsius": 10
+      },
+      {
+        "id": "normal",
+        "label": "봄/가을 보통 또는 초여름",
+        "value_celsius": 18
+      },
+      {
+        "id": "warm",
+        "label": "한여름",
+        "value_celsius": 28
+      },
+      {
+        "id": "hot",
+        "label": "폭염",
+        "value_celsius": 34
+      }
+    ]
+  },
+  "humidity_options": {
+    "indoor": [
+      {
+        "id": "very_dry",
+        "label": "매우 건조함 (난방/냉방 중, 가습기 없음)",
+        "value_percent": 30
+      },
+      {
+        "id": "dry",
+        "label": "건조함",
+        "value_percent": 40
+      },
+      {
+        "id": "normal",
+        "label": "보통",
+        "value_percent": 55
+      },
+      {
+        "id": "humid",
+        "label": "습함 (욕실 근처, 가습기 사용 중)",
+        "value_percent": 70
+      },
+      {
+        "id": "very_humid",
+        "label": "매우 습함",
+        "value_percent": 80
+      }
+    ],
+    "outdoor": [
+      {
+        "id": "very_dry",
+        "label": "건조한 계절 (봄/가을 가뭄철)",
+        "value_percent": 35
+      },
+      {
+        "id": "dry",
+        "label": "봄/가을 보통",
+        "value_percent": 55
+      },
+      {
+        "id": "normal",
+        "label": "다습한 여름철",
+        "value_percent": 65
+      },
+      {
+        "id": "humid",
+        "label": "장마철",
+        "value_percent": 80
+      },
+      {
+        "id": "very_humid",
+        "label": "매우 습함 (폭우 직후 등)",
+        "value_percent": 88
+      }
+    ]
+  },
+  "model_input_mapping": {
+    "description": "Unity에서 위 선택지의 id를 골라 아래처럼 조합하면 predict.py(predict_all)/onnx 모델이 요구하는 4개 입력값이 완성됩니다.",
+    "example": {
+      "user_selection": {
+        "cultivation_context": "indoor",
+        "light": "medium",
+        "temperature": "normal",
+        "humidity": "normal"
+      },
+      "resolved_model_input": {
+        "user_light": 8000,
+        "user_temp": 21,
+        "user_humidity": 55,
+        "user_cultivation_context": "실내"
+      }
+    }
+  }
+}

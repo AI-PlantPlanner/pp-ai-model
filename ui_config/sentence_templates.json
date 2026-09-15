@@ -1,0 +1,23 @@
+{
+  "schema_version": "0.1.0",
+  "status": "draft",
+  "note": "문장 '문구' 자체는 지금 확정 가능한 부분만 작성했습니다. 등급 점수 구간(원예팀 검증)이나 요소별 감점 사유(유리님 데이터)가 필요한 건 '언제 이 문장을 쓸지 판단하는 로직'이지, 문장 내용 자체가 아니라서 미리 써둘 수 있었습니다.\n- unavailable_templates: 지금 바로 카드에 연결해서 씁니다(재배 가능 여부는 이미 계산 가능).\n- grade_templates: 문장은 준비됐지만, 카드의 grade가 아직 None인 동안(등급 점수 구간 미정)은 자동으로 문장도 나오지 않습니다. grade_config.json에 점수 기준만 채워지면 코드 수정 없이 바로 작동합니다.\n- factor_caution_templates: 문장은 준비됐지만 '광량/온도/습도 중 어느 게 문제인지' 알려주는 데이터가 아직 없어서 카드에는 연결하지 않았습니다(sentence_composer.py의 compose_factor_caution_sentence()는 미리 만들어뒀고, 유리님이 요소별 점수를 주시면 그걸 그대로 카드에 연결하면 됩니다).",
+  "unavailable_templates": {
+    "unavailable_context": "{name}{eun_neun} 이 환경(실내/실외)에서는 키울 수 없는 식물이에요.",
+    "unavailable_temperature": "{name}{eun_neun} 지금 온도가 너무 낮아서 키울 수 없는 식물이에요."
+  },
+  "grade_templates": {
+    "optimal": "{name}{eun_neun} 지금 환경에 완벽하게 맞는 식물이에요!",
+    "good": "{name}{eun_neun} 지금 환경에서 무난하게 잘 자랄 식물이에요.",
+    "caution": "{name}{eun_neun} 키울 수는 있지만 조금 신경 써줘야 하는 식물이에요.",
+    "poor": "{name}{eun_neun} 지금 환경에서는 잘 자라기 어려운 식물이에요."
+  },
+  "factor_caution_templates": {
+    "light_too_low": "빛이 부족해요. {name}{i_ga} 좋아하는 밝기보다 어두운 편이에요.",
+    "light_too_high": "빛이 너무 강해요. {name}{i_ga} 좋아하는 밝기보다 밝은 편이에요.",
+    "temp_too_low": "온도가 낮아요. {name}{i_ga} 좋아하는 온도보다 추운 편이에요.",
+    "temp_too_high": "온도가 높아요. {name}{i_ga} 좋아하는 온도보다 더운 편이에요.",
+    "humidity_too_low": "습도가 낮아요. {name}{i_ga} 좋아하는 습도보다 건조한 편이에요.",
+    "humidity_too_high": "습도가 높아요. {name}{i_ga} 좋아하는 습도보다 습한 편이에요."
+  }
+}
