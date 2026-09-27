@@ -10,9 +10,10 @@ config.py의 SCORE_* 상수를 바꾸면(원예팀 답변 반영 등) 이 스크
   1. 순위 방향   — 강한 빛에서는 양지식물이, 어두운 곳에서는 음지식물이 위로 와야 한다.
                   (광량 점수가 전 종 0이 되면 그룹 가중치만 남아 순위가 거꾸로 뒤집혔던 적이 있다)
   2. 절벽 없음   — 입력값을 조금 움직였을 때 점수가 급락하면 안 된다.
-                  (게이트는 예외 — 한계온도/재배구분은 원예팀이 0점으로 확정한 하드컷이다)
+                  (게이트는 예외 — 한계온도/재배구분은 원예팀이 0점으로 확정한 하드컷이다.
+                  적정 습도 상한이 고습 위험 기준과 같은 종(수국 85%)의 그 지점도 원예팀 기준상 예외다)
   3. 배율 감점   — 요구 광량이 큰 종은 어두운 환경에서 광량 점수가 0에 가까워야 한다.
-  4. 습도 예외   — 적정 습도 상한이 80% 이상인 종(수국 등)이 적정범위 바로 밖에서 급락하면 안 된다.
+  4. 습도 기준   — 고습 위험 기준이 원예팀 확정값(일반 80%, 적정 상한 80% 이상인 종 85%)대로 걸려야 한다.
   5. 변별력      — 한 시나리오에서 종끼리 점수가 충분히 갈려야 순위가 의미를 갖는다.
                   (전 종이 같은 점수로 뭉쳐 순위가 사라지는 붕괴를 잡는 것이 목적이다)
   6. 누적 게이트   — 기간 누적 입력에서 한계온도 게이트가 평균이 아니라 극값으로 걸려야 한다.
@@ -27,6 +28,7 @@ from src import config
 from src.predict import predict_all
 from src.teacher_scoring import (
     humidity_score,
+    humidity_upper_level2_edge,
     light_score,
     score_all_plants,
     summarize_environment,
@@ -139,15 +141,26 @@ def check_no_cliffs(plants: pd.DataFrame) -> None:
         ("습도", humidity_grid, humidity_score),
     ]:
         worst_drop, worst_name = 0.0, ""
+        exempt_names = []
         for _, row in plants.iterrows():
-            values = [fn(row, v) for v in grid]
-            drop = float(np.abs(np.diff(values)).max())
+            diffs = np.abs(np.diff([fn(row, v) for v in grid]))
+            if fn is humidity_score:
+                # 적정 상한이 곧 고습 위험 기준인 종(수국 85%)은 ② 구간 없이 ③으로 넘어간다 —
+                # 원예팀 확정 기준이라 그 한 지점의 낙차는 절벽으로 세지 않는다.
+                humidity_max = row[config.NORM_HUMIDITY_MAX]
+                if pd.notna(humidity_max) and humidity_upper_level2_edge(humidity_max) <= humidity_max:
+                    crossing = (grid[:-1] <= humidity_max) & (grid[1:] > humidity_max)
+                    if diffs[crossing].max(initial=0) >= MAX_ADJACENT_DROP:
+                        exempt_names.append(row[config.COL_NAME])
+                    diffs = diffs[~crossing]
+            drop = float(diffs.max())
             if drop > worst_drop:
                 worst_drop, worst_name = drop, row[config.COL_NAME]
+        exempt_note = f" / 원예팀 기준상 예외: {exempt_names}" if exempt_names else ""
         _check(
             worst_drop < MAX_ADJACENT_DROP,
             f"{label} 점수 연속성",
-            f"최대 낙차 {worst_drop:.1f}점 ({worst_name})",
+            f"최대 낙차 {worst_drop:.1f}점 ({worst_name}){exempt_note}",
         )
 
     # 온도는 한계온도(게이트)에서 떨어지는 것이 정상이므로, 한계온도 안쪽만 검사한다.
@@ -181,13 +194,32 @@ def check_ratio_penalty(plants: pd.DataFrame) -> None:
 
 
 def check_humidity_exception(plants: pd.DataFrame) -> None:
-    """적정 습도 상한이 80% 이상인 종이 적정범위 바로 밖에서 급락하지 않는지."""
-    print("\n[4] 습도 예외 처리")
+    """고습 위험 기준(② 구간 끝 = SCORE_LEVEL2_END점)이 원예팀 확정값에서 걸리는지.
+
+    일반 종은 80%, 적정 상한이 80% 이상인 종은 85%. 기준 바로 아래는 ②(생육 둔화)라
+    SCORE_LEVEL2_END보다 높고, 기준을 넘으면 ③이라 그 이하여야 한다.
+    """
+    print("\n[4] 고습 위험 기준")
+    level2_end = config.SCORE_LEVEL2_END
+    for name, edge in [
+        ("몬스테라", config.SCORE_HUMIDITY_LEVEL2_UPPER),
+        ("돌단풍", config.SCORE_HUMIDITY_LEVEL2_UPPER_EXCEPTION),
+    ]:
+        row = _row(plants, name)
+        below = humidity_score(row, edge - 1)
+        above = humidity_score(row, edge + 1)
+        _check(
+            below > level2_end >= above,
+            f"{name}(적정 {row[config.COL_HUMIDITY]}) 고습 기준 {edge:.0f}%",
+            f"{edge - 1:.0f}% {below:.1f}점 / {edge + 1:.0f}% {above:.1f}점",
+        )
+
+    # 수국은 적정 상한(85%)이 곧 고습 기준이라 적정범위 바로 밖부터 ③이다.
     row = _row(plants, "수국")
     just_outside = humidity_score(row, row[config.NORM_HUMIDITY_MAX] + 1)
     _check(
-        just_outside > 80,
-        f"수국(적정 {row[config.COL_HUMIDITY]}) 적정 상한 +1%p 습도 점수",
+        just_outside <= level2_end,
+        f"수국(적정 {row[config.COL_HUMIDITY]}) 적정 상한 +1%p는 ③",
         f"{just_outside:.1f}점",
     )
 

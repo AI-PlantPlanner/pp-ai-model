@@ -11,9 +11,9 @@
     ③ 생육 정지                     -> SCORE_LEVEL2_END에서 0점까지 선형 감점
     ④ 피해 발생                     -> 게이트(총점 0점)
 ④(총점 0점)를 적용하는 조건은 원예팀이 「0점 기준」으로 확정한 두 가지 —
-한계온도 이탈, 재배구분 불일치 — 뿐이다. 판정 기준 시트에서 "③/④"로 병기되어
-어느 단계인지 확정되지 않은 구간(광포화점 초과, 광보상점 미만, 습도 80% 초과)은
-③으로 처리한다. 이 부분은 AI팀 잠정 판단이고 원예팀에 확인 요청을 보낸 상태다.
+한계온도 이탈, 재배구분 불일치 — 뿐이다. 판정 기준 시트에서 "③/④"로 병기된
+구간(광포화점 초과, 광보상점 미만, 고습)은 벗어난 정도에 따라 단계적으로 감점하는
+③으로 처리한다 — 원예팀 확정(2026-09).
 
 ## 입력: 단일 시점이 아니라 기간 누적값
 게임에서 일정 기간(3개월/6개월 등) 측정·계산한 환경값 배열을 받아 summarize_environment()로
@@ -28,11 +28,14 @@
 온도·습도는 종별 범위 폭이 비슷해서 절대값 기준을 그대로 쓴다.
 
 ## 광보상점/광포화점을 경계로 직접 쓰지 않는 이유
-두 값은 4개 그룹당 하나씩만 부여되어(광보상점 2종류, 광포화점 4종류) 종별 변별력이 없다.
+두 값은 그룹 공통값에 가까워(판정 경계로 쓰는 값 기준 광보상점 2종류, 광포화점 4종류)
+종별 변별력이 약하다.
 반면 적정 광량은 100종이 제각각인 종별 실측값이다. 그룹 공통값이 종별값을 덮어쓰면
 같은 그룹이 한꺼번에 같은 점수가 되어 순위가 사라지므로, 광보상점/광포화점은
 ② 구간을 "넓히는" 방향으로만 반영한다(좁히지 않는다).
-실제로 두 값이 적정 광량과 어긋나는 종이 88종 있다(data_normalization.detect_light_conflicts).
+범위로 기재된 값은 원예팀 확정 기준대로 광보상점은 하한, 광포화점은 상한을 쓴다.
+두 값과 적정 광량이 어긋나던 종은 원예팀 광량 검토본(2026-09)으로 대부분 해소됐고,
+남은 종은 data_normalization.detect_light_conflicts가 목록으로 남긴다.
 
 ## 결측치 처리 방침
 필요한 컬럼 중 하나라도 NaN이면 그 종의 점수를 중립값(예: 50점)이나 임의 추정치로 채우지 않고
@@ -216,12 +219,22 @@ def temp_score(plant_row: pd.Series, user_temp: float) -> float:
     return _score_by_distance(distance, edge_level2, edge_level3)
 
 
+def humidity_upper_level2_edge(humidity_max: float) -> float:
+    """고습 쪽 ② 구간이 끝나는 습도(고습 위험 기준).
+
+    원예팀 확정 기준: 적정 습도 상한이 80% 이상인 종은 85%, 그 외는 80%.
+    train_model의 파생 피처도 이 함수를 써서 채점 규칙과 어긋나지 않게 한다.
+    """
+    if humidity_max >= config.SCORE_HUMIDITY_LEVEL2_UPPER:
+        return config.SCORE_HUMIDITY_LEVEL2_UPPER_EXCEPTION
+    return config.SCORE_HUMIDITY_LEVEL2_UPPER
+
+
 def humidity_score(plant_row: pd.Series, user_humidity: float) -> float:
     """습도 판정.
 
-    원예팀 기준은 "적정범위~80%가 ②, 80% 초과가 ③/④"이지만, 적정 습도 상한이 80% 이상인
-    종이 9종(수국 65-85% 등) 있어 적정범위와 피해 구간이 겹친다. 그래서 80% 고정이 아니라
-    "80%와 종별 적정 상한 중 높은 쪽"을 ② 구간 끝으로 쓴다 — AI팀 잠정 판단.
+    고습 쪽은 적정 상한 ~ 고습 위험 기준(80%, 적정 상한이 80% 이상인 종은 85%)이 ②,
+    그 위 SCORE_HUMIDITY_MIN_BAND 폭이 ③이다(humidity_upper_level2_edge 참고).
     """
     humidity_min = plant_row[config.NORM_HUMIDITY_MIN]
     humidity_max = plant_row[config.NORM_HUMIDITY_MAX]
@@ -239,8 +252,8 @@ def humidity_score(plant_row: pd.Series, user_humidity: float) -> float:
         edge_level2 = humidity_min - level2_edge
     else:
         distance = user_humidity - humidity_max
-        level2_edge = max(config.SCORE_HUMIDITY_LEVEL2_UPPER, humidity_max + margin)
-        edge_level2 = level2_edge - humidity_max
+        # 적정 상한이 고습 위험 기준과 같으면(수국 85%) ② 구간 없이 바로 ③이다.
+        edge_level2 = max(0.0, humidity_upper_level2_edge(humidity_max) - humidity_max)
     return _score_by_distance(distance, edge_level2, edge_level2 + margin)
 
 

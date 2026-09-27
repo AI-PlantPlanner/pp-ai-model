@@ -27,6 +27,48 @@ def load_raw_data(path=config.RAW_DATA_PATH, sheet_name=config.RAW_SHEET_NAME) -
     )
     return df
 
+
+# 검토본에서 덮어쓸 광량 컬럼. 검토본 헤더가 3차 원본 컬럼명과 같다.
+_LIGHT_REVIEW_COLUMNS = (
+    config.COL_LIGHT_SATURATION,
+    config.COL_LIGHT_COMPENSATION,
+    config.COL_LIGHT_LUX,
+)
+
+
+def apply_light_review(raw_df: pd.DataFrame, path=config.LIGHT_REVIEW_PATH) -> pd.DataFrame:
+    """원예팀 광량 검토본의 값으로 해당 종의 광량 3개 컬럼(원본 텍스트)을 덮어쓴다.
+
+    원본 파일은 고치지 않고 메모리에서만 덮어쓴다. 파싱 전에 텍스트를 바꾸므로
+    이후 min/max 정규화와 충돌 검사가 모두 검토본 값을 기준으로 돈다.
+    검토본의 식물명이 원본에 없거나 중복이면 조용히 건너뛰지 않고 에러로 멈춘다 —
+    한 종이라도 빠지면 그 종만 옛 값으로 채점되는데 겉으로는 드러나지 않기 때문이다.
+    """
+    review = pd.read_excel(path)
+    names = review[config.LIGHT_REVIEW_NAME_COLUMN].astype(str).str.strip()
+    raw_names = raw_df[config.COL_NAME].astype(str).str.strip()
+
+    missing = sorted(set(names) - set(raw_names))
+    duplicated = sorted(names[names.duplicated()].unique())
+    if missing or duplicated:
+        raise ValueError(
+            f"광량 검토본 식물명 매칭 실패 — 원본에 없음: {missing}, 검토본 내 중복: {duplicated}"
+        )
+
+    result = raw_df.copy()
+    changed = 0
+    for name, (_, review_row) in zip(names, review.iterrows()):
+        mask = raw_names == name
+        for col in _LIGHT_REVIEW_COLUMNS:
+            new_value = review_row[col]
+            old_value = result.loc[mask, col].iloc[0]
+            if parse_numeric_range(new_value) != parse_numeric_range(old_value):
+                changed += 1
+            result.loc[mask, col] = str(new_value)
+    print(f"광량 검토본 반영: {len(review)}종, 값이 바뀐 칸 {changed}개 ({path.name})")
+    return result
+
+
 # 기본 변환기
 def parse_numeric_range(value) -> tuple[float | None, float | None]:
     """"15-25" -> (15,25), "14" -> (14,14), "10,000-20,000" -> (10000,20000).
@@ -177,35 +219,24 @@ def detect_light_conflicts(normalized_df: pd.DataFrame) -> pd.DataFrame:
 
     광보상점(광합성량이 호흡량을 넘어서는 최소 광량)보다 적정 광량 하한이 낮거나
     광포화점보다 적정 광량 상한이 높으면, 그 종은 "적정범위인데 동시에 생육 불가/피해 구간"이 된다.
-    적정 광량(2차 데이터)과 광보상점/광포화점(3차 데이터)의 출처가 달라 생긴 불일치라
     우리가 임의로 고치지 않고 원예팀 확인 요청용 목록으로만 남긴다.
-    채점 단계(teacher_scoring)는 그동안 종별 적정 광량을 우선하도록 처리한다.
+    채점 단계(teacher_scoring)는 종별 적정 광량을 우선하도록 처리한다.
 
-    광보상점/광포화점이 단일값이 아니라 범위로 와서(예: "500-2,000") 경계를 어느 쪽으로
-    보느냐에 따라 충돌 종 수가 달라지므로, 두 해석을 모두 남긴다.
-      - "전체 벗어남": 범위의 관대한 쪽(광포화점 상한 / 광보상점 하한)으로 봐도 어긋나는 경우.
-        적정범위 전체가 피해/생육불가 구간이 되어 사실상 채점이 불가능하다.
-      - "일부 벗어남": 엄격한 쪽(광포화점 하한 / 광보상점 상한)으로 볼 때만 어긋나는 경우.
+    범위로 기재된 값(예: "500-2,000")은 원예팀 확정 기준(2026-09)대로
+    광보상점은 하한, 광포화점은 상한을 판정 경계로 쓴다.
     """
     rows = []
     for _, row in normalized_df.iterrows():
         lux_min = row[config.NORM_LIGHT_LUX_MIN]
         lux_max = row[config.NORM_LIGHT_LUX_MAX]
-        comp_min = row[config.NORM_LIGHT_COMPENSATION_MIN]
-        comp_max = row[config.NORM_LIGHT_COMPENSATION_MAX]
-        sat_min = row[config.NORM_LIGHT_SATURATION_MIN]
-        sat_max = row[config.NORM_LIGHT_SATURATION_MAX]
+        compensation = row[config.NORM_LIGHT_COMPENSATION_MIN]
+        saturation = row[config.NORM_LIGHT_SATURATION_MAX]
 
         reasons = []
-        if pd.notna(lux_max) and pd.notna(sat_max) and lux_max > sat_max:
-            reasons.append("적정 광량 상한 > 광포화점 상한 (전체 벗어남)")
-        elif pd.notna(lux_max) and pd.notna(sat_min) and lux_max > sat_min:
-            reasons.append("적정 광량 상한 > 광포화점 하한 (일부 벗어남)")
-
-        if pd.notna(lux_min) and pd.notna(comp_min) and lux_min < comp_min:
-            reasons.append("적정 광량 하한 < 광보상점 하한 (전체 벗어남)")
-        elif pd.notna(lux_min) and pd.notna(comp_max) and lux_min < comp_max:
-            reasons.append("적정 광량 하한 < 광보상점 상한 (일부 벗어남)")
+        if pd.notna(lux_max) and pd.notna(saturation) and lux_max > saturation:
+            reasons.append("적정 광량 상한 > 광포화점")
+        if pd.notna(lux_min) and pd.notna(compensation) and lux_min < compensation:
+            reasons.append("적정 광량 하한 < 광보상점")
 
         if reasons:
             rows.append({
@@ -216,16 +247,10 @@ def detect_light_conflicts(normalized_df: pd.DataFrame) -> pd.DataFrame:
                 "광포화점(lux)": row[config.COL_LIGHT_SATURATION],
                 "사유": " / ".join(reasons),
             })
-    result = pd.DataFrame(
+    return pd.DataFrame(
         rows,
         columns=["식물명", "생육형그룹", "적정 광량(lux)", "광보상점(lux)", "광포화점(lux)", "사유"],
     )
-    # 적정범위 전체가 어긋나는 종(사실상 채점 불가)을 위로 올려서 검토 우선순위를 드러낸다.
-    if not result.empty:
-        result = result.sort_values(
-            by="사유", key=lambda col: ~col.str.contains("전체 벗어남"), kind="stable"
-        ).reset_index(drop=True)
-    return result
 
 
 def normalize_dataframe(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -259,7 +284,7 @@ def save_outputs(
 
 
 def main() -> None:
-    raw_df = load_raw_data()
+    raw_df = apply_light_review(load_raw_data())
     normalized_df, issues_df = normalize_dataframe(raw_df)
     conflicts_df = detect_light_conflicts(normalized_df)
     save_outputs(normalized_df, issues_df, conflicts_df)
