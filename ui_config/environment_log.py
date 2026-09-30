@@ -9,13 +9,25 @@
 ## 기록(entry)이 실제로 어떻게 쌓이는가
 지금 앱에는 센서가 없어서 자동으로 값이 쌓이지 않습니다. 현실적인 방식은 "사용자가 주기적으로
 (예: 2주~한 달마다) input_options.json 선택지를 다시 골라 기록을 남기는" 것입니다. 이 모듈은
-그렇게 쌓인 기록 리스트를 받아서 "모델에 넣을 평균 입력값"으로 변환하는 순수 계산만 담당하고,
-기록을 어디에(Unity 로컬 저장/서버 DB) 저장할지는 이 모듈의 관심사가 아닙니다 — 호출부가
-저장소에서 기록을 꺼내 여기 넘겨주면 됩니다.
+그렇게 쌓인 기록 리스트를 받아서 "모델에 넣을 EnvironmentWindow"로 변환하는 순수 계산만
+담당하고, 기록을 어디에(Unity 로컬 저장/서버 DB) 저장할지는 이 모듈의 관심사가 아닙니다 —
+호출부가 저장소에서 기록을 꺼내 여기 넘겨주면 됩니다.
+
+## 평균/극값 계산을 직접 하지 않는 이유 (유리님 쪽 구조로 교체)
+원래는 이 모듈이 직접 light/temp/humidity 평균을 냈는데, 유리님이 src/teacher_scoring.py에
+정확히 같은 목적의 summarize_environment()/EnvironmentWindow를 만들면서 한계온도 게이트는
+평균이 아니라 "기간 중 최저/최고"(극값)로 판정해야 한다는 게 명확해졌습니다 — 겨울 한파 며칠이
+평균에 묻히면 실제로는 겨울에 죽는 식물이 "적합"으로 추천되는 문제가 있었기 때문입니다
+(config.ENV_WINDOW_DAYS 주석에 실측 수치가 있습니다: 6개월 평균 기준 24종, 1년 평균 기준
+28종이 겨울에 죽는데도 적합 판정됨). 이 모듈이 자체적으로 평균만 내던 예전 방식은 극값을
+아예 만들지 않아 같은 문제가 재현되므로, 지금은 기록별 값을 배열로 모아
+summarize_environment()에 그대로 넘기고 극값 계산까지 위임합니다.
 
 ## 아직 팀 상의가 필요한 것
-- DEFAULT_WINDOW_DAYS(누적 기간): 지금은 90일(3개월)을 기본값으로 뒀지만 3개월/6개월 중
-  확정 필요합니다.
+- 누적 기간(WINDOW_DAYS)은 src/config.py의 ENV_WINDOW_DAYS(현재 90일/3개월)를 그대로
+  따릅니다. 유리님 쪽에서 실측 근거(6개월/1년 평균 시 겨울철 오추천 종수)까지 남겨서 정한
+  값이라, 이 모듈에서 별도 값을 갖지 않고 그 값을 그대로 참조합니다 — 나중에 그 값이 바뀌면
+  여기도 코드 수정 없이 자동으로 따라갑니다.
 - 재배구분(실내/실외)은 평균을 낼 수 있는 값이 아니라서, 기간 내 가장 최근 기록의 재배구분을
   그대로 씁니다(예: 사용자가 최근에 화분을 실내로 옮겼다면 실내 기준으로 판단). 기간 중간에
   실내/실외가 섞여 있는 경우를 어떻게 다룰지는 더 상의가 필요합니다.
@@ -24,12 +36,13 @@
 """
 
 from datetime import datetime, timedelta
-from statistics import mean
 from typing import Optional
 
+from src.config import ENV_WINDOW_DAYS
+from src.teacher_scoring import EnvironmentWindow, summarize_environment
 from ui_config.input_resolver import load_input_options, resolve_model_input
 
-DEFAULT_WINDOW_DAYS = 90  # TODO: 3개월/6개월 중 팀 상의 후 확정
+DEFAULT_WINDOW_DAYS = ENV_WINDOW_DAYS  # src/config.py 값을 그대로 따름(현재 90일/3개월)
 
 
 def _parse_timestamp(entry: dict) -> datetime:
@@ -40,17 +53,16 @@ def resolve_averaged_model_input(
     entries: list[dict],
     as_of: Optional[datetime] = None,
     window_days: int = DEFAULT_WINDOW_DAYS,
-) -> Optional[dict]:
-    """여러 시점 기록 -> 평균 낸 모델 입력값 하나.
+) -> Optional[tuple[EnvironmentWindow, dict]]:
+    """여러 시점 기록 -> (EnvironmentWindow, 참고용 메타 정보) 튜플.
 
     entries: [{"timestamp": ISO8601 문자열, "cultivation_context": "indoor"|"outdoor",
                "light": 선택지id, "temperature": 선택지id, "humidity": 선택지id}, ...]
     as_of: 기준 시점(생략하면 지금). 과거 시점 기준으로 재계산해볼 때 쓸 수 있습니다.
-    window_days: 이 기간(일) 안의 기록만 평균에 포함합니다.
+    window_days: 이 기간(일) 안의 기록만 포함합니다.
 
-    반환값: predict_all()/build_recommendation_cards()에 그대로 넣을 수 있는 dict
-    (user_light/user_temp/user_humidity/user_cultivation_context) + 참고용 "_meta".
-    기록이 아예 없으면 None.
+    반환값: (EnvironmentWindow, meta). EnvironmentWindow는 build_recommendation_cards()/
+    predict_all()/score_all_plants()에 그대로 넘길 수 있습니다. 기록이 아예 없으면 None.
     """
     if not entries:
         return None
@@ -75,15 +87,16 @@ def resolve_averaged_model_input(
         for e in in_window
     ]
 
-    return {
-        "user_light": mean(r["user_light"] for r in resolved_list),
-        "user_temp": mean(r["user_temp"] for r in resolved_list),
-        "user_humidity": mean(r["user_humidity"] for r in resolved_list),
+    env = summarize_environment(
+        light=[r["user_light"] for r in resolved_list],
+        temp=[r["user_temp"] for r in resolved_list],
+        humidity=[r["user_humidity"] for r in resolved_list],
         # 재배구분은 평균 낼 수 없는 값이라, 기간 내(또는 대체된 기록 중) 가장 최근 값을 사용.
-        "user_cultivation_context": resolved_list[0]["user_cultivation_context"],
-        "_meta": {
-            "entry_count_used": len(in_window),
-            "window_days": window_days,
-            "used_fallback_single_entry": used_fallback,
-        },
+        cultivation_context=resolved_list[0]["user_cultivation_context"],
+    )
+    meta = {
+        "entry_count_used": len(in_window),
+        "window_days": window_days,
+        "used_fallback_single_entry": used_fallback,
     }
+    return env, meta

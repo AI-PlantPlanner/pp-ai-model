@@ -9,6 +9,8 @@ import json
 from pathlib import Path
 from typing import Optional
 
+from src.teacher_scoring import EnvironmentWindow, summarize_environment
+
 INPUT_OPTIONS_PATH = Path(__file__).parent / "input_options.json"
 
 _input_options_cache: Optional[dict] = None
@@ -46,3 +48,25 @@ def resolve_model_input(
         "user_humidity": humidity_option["value_percent"],
         "user_cultivation_context": ctx_value,
     }
+
+
+def resolve_environment_window(
+    cultivation_id: str,
+    light_id: str,
+    temp_id: str,
+    humidity_id: str,
+    input_options: Optional[dict] = None,
+) -> EnvironmentWindow:
+    """resolve_model_input()의 결과를 바로 EnvironmentWindow로 감싼 편의 함수.
+
+    predict.py/teacher_scoring.py/card_builder.py가 전부 EnvironmentWindow를 받는 인터페이스로
+    바뀌어서, 단일 시점 선택지 입력도 이 형태로 맞춰주는 게 필요해졌습니다. 단일 관측 1개짜리
+    기간으로 취급되어(n_samples=1) 기존 단일 시점 채점과 동일하게 동작합니다.
+    """
+    resolved = resolve_model_input(cultivation_id, light_id, temp_id, humidity_id, input_options)
+    return summarize_environment(
+        light=resolved["user_light"],
+        temp=resolved["user_temp"],
+        humidity=resolved["user_humidity"],
+        cultivation_context=resolved["user_cultivation_context"],
+    )

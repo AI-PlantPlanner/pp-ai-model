@@ -10,6 +10,7 @@ interactive_check.py는 input_options.json의 선택지(예: "창가 근처")를
 import pandas as pd
 
 from src import config
+from src.teacher_scoring import summarize_environment
 from ui_config.card_builder import build_recommendation_cards
 
 # 모델 학습 범위(src/config.py의 SYNTHETIC_*_RANGE). 이 범위를 벗어난 입력은 predict.py 상단
@@ -70,14 +71,10 @@ def main() -> None:
 
     _warn_if_out_of_range(ctx_key, light, temp, humidity)
 
+    env = summarize_environment(light=light, temp=temp, humidity=humidity, cultivation_context=ctx_value)
+
     plants_df = pd.read_csv(config.NORMALIZED_OUTPUT_PATH)
-    cards = build_recommendation_cards(
-        plants_df,
-        user_light=light,
-        user_temp=temp,
-        user_humidity=humidity,
-        user_cultivation_context=ctx_value,
-    )
+    cards = build_recommendation_cards(plants_df, env)
 
     print(f"\n입력값: 광량={light}lux, 온도={temp}°C, 습도={humidity}%, 재배환경={ctx_value}")
     print(f"추천 상위 10종 (전체 {len(cards)}종 중):")

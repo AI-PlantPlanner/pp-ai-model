@@ -154,3 +154,69 @@ PYTHONPATH=. python -m ui_config.demo_sentence_check
 ```
 재배 불가 카드는 문장이 바로 나오고, 재배 가능하지만 등급 미정인 카드는 문장이 아직 `None`인
 것, 그리고 요소별 주의 문구 6가지 미리보기까지 확인할 수 있습니다.
+
+## 2026-09 업데이트: 유리님 쪽 EnvironmentWindow 구조로 교체
+
+유리님이 `src/teacher_scoring.py`에 `EnvironmentWindow`/`summarize_environment()`(기간 누적
+환경값 구조)와 `score_plant_detail()`(요인별 점수 + 게이트 사유)을 추가하면서, `predict.py`의
+`predict_score()`/`predict_all()` 시그니처도 `EnvironmentWindow`를 받도록 바뀌었습니다.
+이에 맞춰 ui_config 쪽도 다음과 같이 바꿨습니다.
+
+- **environment_log.py**: 자체적으로 광량/온도/습도 평균을 계산하던 로직을 걷어내고,
+  기록별 값을 배열로 모아 `summarize_environment()`에 그대로 넘기도록 변경했습니다. 기존
+  방식은 평균만 계산해서 기간 중 최저/최고 기온(한계온도 게이트 판정에 필요)을 만들지
+  않았는데, 이게 정확히 유리님이 지적한 문제(겨울 한파가 평균에 묻혀 오추천되는 문제)와
+  같은 문제라서 그대로 두면 안 됐습니다. `DEFAULT_WINDOW_DAYS`도 자체 값 대신
+  `src/config.py`의 `ENV_WINDOW_DAYS`를 그대로 참조합니다.
+- **input_resolver.py**: 선택지 id -> `EnvironmentWindow`를 바로 만들어주는
+  `resolve_environment_window()`를 추가했습니다(기존 `resolve_model_input()`은 그대로 유지).
+- **card_builder.py**: `build_recommendation_card(s)`가 `user_light`/`user_temp`/
+  `user_humidity`/`user_cultivation_context` 4개 인자 대신 `EnvironmentWindow` 하나를
+  받습니다. `predict_score()` 새 시그니처에 맞춘 것과 별개로, 기존 `_availability()`가
+  `is_gated()` 로직을 손으로 옮겨 적어(미러링) 쓰고 있어서 원본이 바뀌면 계속 어긋날 위험이
+  있었는데, 유리님이 만든 `score_plant_detail()`의 `gate_reason`을 그대로 매핑하는 방식으로
+  바꿔서 이 문제를 없앴습니다. 이 김에 `score_plant_detail()`이 주는 요인별 점수(광량/온도/
+  습도)를 카드의 `factor_scores` 필드에 추가해뒀습니다 — 4번 작업(요소별 주의 문구)의
+  블로커였던 "어느 요인 때문에 감점됐는지 모름" 문제가 데이터 상으로는 해결된 상태입니다.
+  남은 건 "몇 점 이하부터 주의 문구를 붙일지" 임계값만 정하면 됩니다.
+- **interactive_check.py / interactive_raw_check.py / demo_*.py**: 전부 위 변경에 맞춰
+  호출부만 `EnvironmentWindow`를 넘기도록 수정했습니다. 로직 자체는 안 바뀌었습니다.
+
+### 확인
+```bash
+python3 -m ui_config.demo_check
+python3 -m ui_config.demo_card_check
+python3 -m ui_config.demo_environment_log_check
+python3 -m ui_config.demo_sentence_check
+python3 -m ui_config.interactive_check
+python3 -m ui_config.interactive_raw_check
+```
+전부 정상 동작 확인했습니다. `demo_environment_log_check`에서 3개월치 기록(15도/21도/26도)을
+넣었을 때 `EnvironmentWindow(temp_mean=20.67, temp_min=15.0, temp_max=26.0, ...)`처럼
+최저/최고가 평균과 별도로 남는 것도 확인했습니다.
+
+## 2026-09 업데이트: caution_sentence(4번 작업) 연결
+
+`card_builder.py`에 요인별 주의 문구를 실제로 연결했습니다.
+
+- **임계값**: `config.SCORE_LEVEL2_END`(=40, 원예팀이 확정한 "②생육 둔화 -> ③생육 정지"
+  경계)를 그대로 재사용했습니다. 원예팀이 이 정확한 용도(화면 주의 문구 트리거)로 승인해준
+  숫자는 아니라서, `card_builder.py`의 `FACTOR_CAUTION_THRESHOLD` 상수 하나만 바꾸면 나중에
+  게임팀/원예팀 논의 결과로 조정 가능합니다.
+- **방향 판단**(부족/과다)은 원예팀 승인이 필요 없는 단순 비교라서 바로 구현했습니다 —
+  사용자 환경값이 그 식물의 적정범위보다 낮으면 `_too_low`, 높으면 `_too_high`.
+- 여러 요인이 동시에 임계값 밑이면 지금은 **가장 점수가 낮은 요인 하나만** 문구로 보여줍니다
+  (예: 광량 17.7점 + 온도 12.0점이면 온도 문구만). 여러 개를 동시에 보여줄지는 게임팀 UI
+  논의 대상입니다.
+- 재배 자체가 불가능한 카드(`availability != "available"`)에는 붙지 않습니다 — 게이트가
+  걸리면 요인 점수가 전부 0으로 나와서, 그대로 적용하면 의미 없는 "전부 문제" 문구가
+  나오기 때문입니다.
+
+### 확인
+```bash
+python3 -m ui_config.demo_sentence_check
+```
+"보통" 환경(광량 medium/온도 normal/습도 normal)에서는 재배 가능한 식물이 대부분 전 요인
+40점 이상이라 주의 문구가 안 뜨는 게 정상입니다. 극단적인 환경(예: 광량 300lux, 온도 8도)을
+넣으면 실제로 뜨는 것까지 확인했습니다 — 예: "산취선인장"은 광량(17.7점)보다 온도(12.0점)가
+더 낮아서 "온도가 낮아요" 문구가 정확히 선택됐습니다.

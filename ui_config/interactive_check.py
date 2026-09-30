@@ -11,7 +11,7 @@ import pandas as pd
 
 from src import config
 from ui_config.card_builder import build_recommendation_cards
-from ui_config.input_resolver import load_input_options, resolve_model_input
+from ui_config.input_resolver import load_input_options, resolve_environment_window
 
 
 def _choose(options: list, prompt: str) -> str:
@@ -33,11 +33,11 @@ def main() -> None:
     temp_id = _choose(input_options["temperature_options"][ctx_id], "3) 온도를 골라주세요:")
     humidity_id = _choose(input_options["humidity_options"][ctx_id], "4) 습도를 골라주세요:")
 
-    resolved = resolve_model_input(ctx_id, light_id, temp_id, humidity_id, input_options)
-    print("\n입력하신 선택 -> 모델 입력값:", resolved)
+    env = resolve_environment_window(ctx_id, light_id, temp_id, humidity_id, input_options)
+    print("\n입력하신 선택 -> 모델 입력값(EnvironmentWindow):", env)
 
     plants_df = pd.read_csv(config.NORMALIZED_OUTPUT_PATH)
-    cards = build_recommendation_cards(plants_df, **resolved)
+    cards = build_recommendation_cards(plants_df, env)
 
     print(f"\n추천 상위 10종 (재배 가능 판정된 것 중 전체 {len(cards)}종 중):")
     for i, c in enumerate(cards[:10], 1):

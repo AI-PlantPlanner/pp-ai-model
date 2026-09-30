@@ -6,14 +6,13 @@ import pandas as pd
 
 from src import config
 from ui_config.card_builder import build_recommendation_cards
-from ui_config.input_resolver import resolve_model_input
-from ui_config.sentence_composer import compose_factor_caution_sentence
+from ui_config.input_resolver import resolve_environment_window
 
 
 def main() -> None:
-    resolved = resolve_model_input("indoor", "medium", "normal", "normal")
+    env = resolve_environment_window("indoor", "medium", "normal", "normal")
     plants_df = pd.read_csv(config.NORMALIZED_OUTPUT_PATH)
-    cards = build_recommendation_cards(plants_df, **resolved)
+    cards = build_recommendation_cards(plants_df, env)
 
     available_with_grade = [c for c in cards if c["availability"] == "available" and c["grade"] is not None]
     available_without_grade = [c for c in cards if c["availability"] == "available" and c["grade"] is None]
@@ -27,18 +26,21 @@ def main() -> None:
     for c in unavailable[:2]:
         print(f"  - {c['name']}: {c['recommendation_sentence']}")
 
-    print("\n[아직 문장이 안 나오는 카드] 재배 가능하지만 등급 미정인 카드 2개 예시:")
+    print("\n[아직 등급 문장이 안 나오는 카드] 재배 가능하지만 등급 미정인 카드 2개 예시:")
     for c in available_without_grade[:2]:
-        print(f"  - {c['name']}: score={c['score']}, grade={c['grade']}, recommendation_sentence={c['recommendation_sentence']}")
+        print(
+            f"  - {c['name']}: score={c['score']}, grade={c['grade']}, "
+            f"factor_scores={c['factor_scores']}, recommendation_sentence={c['recommendation_sentence']}"
+        )
 
-    print("\n[요소별 주의 문구 미리보기] - 아직 카드에는 연결 안 됨, 문구만 확인:")
-    sample_name = cards[0]["name"]
-    for factor_key in [
-        "light_too_low", "light_too_high",
-        "temp_too_low", "temp_too_high",
-        "humidity_too_low", "humidity_too_high",
-    ]:
-        print(f"  - {factor_key}: {compose_factor_caution_sentence(sample_name, factor_key)}")
+    with_caution = [c for c in cards if c["availability"] == "available" and c["caution_sentence"]]
+    without_caution = [c for c in cards if c["availability"] == "available" and not c["caution_sentence"]]
+    print(f"\n재배 가능 + 요인별 주의 문구 있음(어느 요인이 40점 미만): {len(with_caution)}건")
+    print(f"재배 가능 + 주의 문구 없음(전 요인 40점 이상): {len(without_caution)}건")
+
+    print("\n[요인별 주의 문구 예시] 2개:")
+    for c in with_caution[:2]:
+        print(f"  - {c['name']}: factor_scores={c['factor_scores']}, caution_sentence=\"{c['caution_sentence']}\"")
 
 
 if __name__ == "__main__":

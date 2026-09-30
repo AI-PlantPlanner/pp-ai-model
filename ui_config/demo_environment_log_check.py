@@ -39,21 +39,21 @@ entries = [
 
 
 def main() -> None:
-    resolved = resolve_averaged_model_input(entries, as_of=now, window_days=90)
-    print("3개월치 기록 3건 -> 평균 모델 입력값:", resolved)
+    result = resolve_averaged_model_input(entries, as_of=now, window_days=90)
+    env, meta = result
+    print("3개월치 기록 3건 -> 요약된 EnvironmentWindow:", env)
+    print("메타 정보:", meta)
 
     plants_df = pd.read_csv(config.NORMALIZED_OUTPUT_PATH)
-    model_input = {k: v for k, v in resolved.items() if k != "_meta"}
-    cards = build_recommendation_cards(plants_df, **model_input)
+    cards = build_recommendation_cards(plants_df, env)
 
-    print("\n[비교] 평균값 기준 상위 5종:")
+    print("\n[비교] 누적 요약값 기준 상위 5종:")
     for c in cards[:5]:
         print(f"  {c['name']:12s} score={c['score']}")
 
     # 비교: 마지막(가장 최근) 기록 1개만 썼을 때와 결과가 어떻게 달라지는지
-    latest_only = resolve_averaged_model_input(entries[-1:], as_of=now, window_days=90)
-    latest_only_input = {k: v for k, v in latest_only.items() if k != "_meta"}
-    cards_latest = build_recommendation_cards(plants_df, **latest_only_input)
+    latest_env, _ = resolve_averaged_model_input(entries[-1:], as_of=now, window_days=90)
+    cards_latest = build_recommendation_cards(plants_df, latest_env)
     print("\n[비교] 가장 최근 기록 1개만 썼을 때 상위 5종:")
     for c in cards_latest[:5]:
         print(f"  {c['name']:12s} score={c['score']}")

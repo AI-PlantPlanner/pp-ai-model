@@ -7,16 +7,16 @@ import pandas as pd
 
 from src import config
 from src.predict import predict_all
-from ui_config.input_resolver import resolve_model_input
+from ui_config.input_resolver import resolve_environment_window
 
 
 def main() -> None:
     # 예시: "실내 / 창가 근처(medium) / 보통 온도(normal) / 보통 습도(normal)"를 고른 사용자
-    resolved = resolve_model_input("indoor", "medium", "normal", "normal")
-    print("사용자 선택 -> 모델 입력값:", resolved)
+    env = resolve_environment_window("indoor", "medium", "normal", "normal")
+    print("사용자 선택 -> 모델 입력값(EnvironmentWindow):", env)
 
     plants_df = pd.read_csv(config.NORMALIZED_OUTPUT_PATH)
-    result = predict_all(plants_df, **resolved)
+    result = predict_all(plants_df, env)
     print("\n추천 상위 10종:")
     print(result.head(10).to_string(index=False))
 
