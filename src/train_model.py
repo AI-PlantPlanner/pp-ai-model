@@ -27,6 +27,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 
 from src import config
+from src.teacher_scoring import humidity_upper_level2_edge
 
 CULTIVATION_CATEGORIES = (
     config.CULTIVATION_INDOOR,
@@ -156,9 +157,7 @@ def build_features_v2(df: pd.DataFrame) -> pd.DataFrame:
 
     humidity_lower_span = (df[config.NORM_HUMIDITY_MIN] - config.SCORE_HUMIDITY_LEVEL2_LOWER).clip(lower=1e-6)
     humidity_upper_span = (
-        humidity_max_filled.combine(
-            pd.Series(config.SCORE_HUMIDITY_LEVEL2_UPPER, index=df.index), max
-        )
+        humidity_max_filled.map(humidity_upper_level2_edge)
         + config.SCORE_HUMIDITY_MIN_BAND
         - humidity_max_filled
     ).clip(lower=1e-6)
