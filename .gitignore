@@ -226,3 +226,12 @@ __marimo__/
 .streamlit/secrets.toml
 
 .DS_Store
+
+# GBIF 원본 다운로드(대용량). 재현은 data/gbif/download_request.json의 키·DOI로 한다.
+data/gbif/occurrences_*.zip
+data/gbif/occurrences_*/
+# 외부 참조 자료(WCVP, WGSRPD) 원본. 출처·버전은 data/external/SOURCES.md에 기록.
+data/external/wcvp/
+data/external/wgsrpd/
+# 재생성 가능한 대용량 중간 산출물(src/gbif_native_flag.py, src/gbif_clean.R로 다시 만듦)
+data/gbif/*.parquet

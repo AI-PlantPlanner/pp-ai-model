@@ -1,0 +1,6 @@
+{
+  "run_at": "2026-11-05T02:37:11.776688+00:00",
+  "gbif_api": "https://api.gbif.org/v1",
+  "inat_dataset": "50c9509d-22c7-4a22-a47d-8c48425ef4a7",
+  "n_plants": 100
+}

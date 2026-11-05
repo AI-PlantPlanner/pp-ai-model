@@ -31,6 +31,18 @@ RAW_HEADER_SKIPROWS = 2
 LIGHT_REVIEW_PATH = PROJECT_ROOT / "data" / "raw" / "AI식물플래너_광량_검토본.xlsx"
 LIGHT_REVIEW_NAME_COLUMN = "식물명"
 
+# 원예팀 광량 수정본(2026-10-06 수령, 원본 파일명 'AI식물플래너_추가 9종.xlsx').
+# 신규 종이 아니라 기존 100종 중 9종의 적정 광량 수정본이다(비고: "적정 광량 수정").
+# 광포화점·광보상점 칸도 있으나 현재 값과 같아 결과에 영향 없음(2026-11-05 대조).
+# 줄리아페페는 검토본(09월)에도 있으므로, 이 파일을 검토본 다음에 적용해 최신 값이 남게 한다.
+# 헤더가 검토본과 달라('적정광량') 원본 컬럼명으로 매핑한다. 식물명이 빈 행은 출처 이어쓰기 행이다.
+LIGHT_REVISION_9_PATH = PROJECT_ROOT / "data" / "raw" / "AI식물플래너_추가 9종.xlsx"
+LIGHT_REVISION_9_COLUMN_MAP = {
+    "광포화점(lux)": "광포화점(lux)",
+    "광보상점(lux)": "광보상점(lux)",
+    "적정광량": "적정 광량(lux)",
+}
+
 # ---- 원본 컬럼명 ----
 COL_NAME = "식물명 (국명)"
 COL_SCIENTIFIC_NAME = "학명"
