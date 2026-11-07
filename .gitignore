@@ -235,3 +235,12 @@ data/external/wcvp/
 data/external/wgsrpd/
 # 재생성 가능한 대용량 중간 산출물(src/gbif_native_flag.py, src/gbif_clean.R로 다시 만듦)
 data/gbif/*.parquet
+# GEE 기상 추출 결과(대용량, src/gee_annual_extremes.py 등으로 재생성). 사용량 기록 gee_tasks.jsonl만 추적.
+data/weather/*
+!data/weather/gee_tasks.jsonl
+# 실험 결과 요약(논문 근거, 작음)은 추적
+!data/weather/year_window_result.csv
+!data/weather/year_window_species.csv
+!data/weather/min_records_test.csv
+# 학습 데이터 본체(src/build_dataset.py로 재생성). plants.csv·build_report.json·README.md는 추적.
+data/dataset/*.parquet

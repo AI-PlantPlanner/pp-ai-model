@@ -16,3 +16,12 @@
 - 받은 곳: https://raw.githubusercontent.com/tdwg/wgsrpd/master/geojson/level3.geojson
 - 받은 날: 2026-11-05
 - 인용: Brummitt R.K. (2001) World Geographical Scheme for Recording Plant Distributions, Edition 2. TDWG. (인용 형식은 투고 전 TDWG 저장소에서 재확인)
+
+## ERA5-Land Daily Aggregated (Google Earth Engine)
+- 용도: 칸별 일 기상(기온 평균·최저·최고, 이슬점, 일사량) 2016–2025, 연 극값 1991–2025(연도 실험)
+- 받은 곳: GEE `ECMWF/ERA5_LAND/DAILY_AGGR`, 프로젝트 ai-plant-planner(비상업 커뮤니티 등급)
+- 받은 날: 2026-11-06(연 극값, 일괄 내보내기) ~ 2026-11-07(일별, 즉시 요청 computeFeatures)
+- 격자: 0.1°, 칸 중심 = 0.1° 배수(transform [0.1,0,-180.05,0,-0.1,90.05]). 육지 칸만 값 있음 → 해안 칸은 src/coast_fill.py
+- 인용: Muñoz Sabater J. (2019) ERA5-Land hourly data from 1950 to present. Copernicus C3S CDS. doi:10.24381/cds.e2161bac (일 집계본 DOI는 투고 전 확인)
+  방법 논문: Muñoz-Sabater J. et al. (2021) ERA5-Land: a state-of-the-art global reanalysis dataset for land applications. Earth Syst. Sci. Data 13:4349–4383. doi:10.5194/essd-13-4349-2021
+- 원본 산출물은 data/weather/(git 제외). 요청·사용량 기록만 data/weather/gee_tasks.jsonl로 추적.

@@ -1,0 +1,101 @@
+﻿식물명,rawdata_학명,count_key,rank,gbif_scientificName,wcvp_accepted_name,wcvp_status,is_cultivar,cells_v_main,cells_v_urban,cells_v_intro,cells_v_all,cells_v_coast1,cells_v_coast20,note,set_main,set_main_d14,set_no_cultivar
+아스파라거스 미리오클라두스,Asparagus?densiflorus?'Myriocladus',2768503,SPECIES,Asparagus densiflorus (Kunth) Jessop,Asparagus densiflorus,accepted,True,121,134,142,251,126,134,,True,True,False
+꼬리조팝나무,Spiraea salicifolia,3026454,SPECIES,Spiraea salicifolia L.,Spiraea salicifolia,accepted,False,981,1062,1660,1778,989,998,,True,True,True
+디펜바키아,Dieffenbachia seguine,2869345,SPECIES,Dieffenbachia seguine (Jacq.) Schott,Dieffenbachia seguine,accepted,False,400,436,444,926,402,413,,True,True,True
+패랭이,Dianthus chinensis,3085418,SPECIES,Dianthus chinensis L.,Dianthus chinensis,accepted,False,2943,3191,2988,3044,2945,2949,,True,True,True
+드라세나'송오브인디아',Dracaena reflexa 'Song of India',5304436,SPECIES,Dracaena reflexa Lam.,Dracaena reflexa,accepted,True,281,281,282,457,283,293,,True,True,False
+둥근잎꿩의비름,Hylotelephium ussuriense,7334591,SPECIES,Hylotelephium ussuriense (Kom.) H.Ohba,Hylotelephium ussuriense,accepted,False,20,20,20,20,20,20,칸 14~24(감도 세트만),False,True,False
+몬스테라,Monstera deliciosa,2868241,SPECIES,Monstera deliciosa Liebm.,Monstera deliciosa,accepted,False,167,171,262,941,169,171,,True,True,True
+마조람,Origanum?majorana,2926615,SPECIES,Origanum majorana L.,Origanum majorana,accepted,False,11,12,33,105,11,11,원산 칸 부족(<14),False,False,False
+돌단풍,Mukdenia rossii,7339206,SPECIES,Mukdenia rossii (Oliv.) Koidz.,Mukdenia rossii,accepted,False,46,66,46,48,46,48,,True,True,True
+글록시니아,Sinningia speciosa,3825228,SPECIES,Sinningia speciosa (G.Lodd. ex Ker Gawl.) Hiern,Sinningia speciosa,accepted,False,26,34,26,36,26,26,,True,True,True
+망종화,Hypericum patulum,3713491,SPECIES,Hypericum patulum Thunb.,Hypericum patulum,accepted,False,175,181,295,321,176,176,,True,True,True
+황매화,Kerria?japonica,5371450,SPECIES,Kerria japonica (L.) DC.,Kerria japonica,accepted,False,659,899,1030,1394,663,664,,True,True,True
+금영화,Eschscholzia californica,2888380,SPECIES,Eschscholzia californica Cham.,Eschscholzia californica,accepted,False,2683,2911,4681,5345,2705,2764,,True,True,True
+매발톱,Aquilegia oxysepala,3930047,SPECIES,Aquilegia oxysepala Trautv. & C.A.Mey.,Aquilegia oxysepala,accepted,False,258,276,258,271,259,259,,True,True,True
+블루스타고사리,Phlebodium aureum,2650479,SPECIES,Phlebodium aureum (L.) J.Sm.,Phlebodium aureum,accepted,False,719,806,800,1024,732,747,,True,True,True
+원추천인국,Rudbeckia hirta,3114225,SPECIES,Rudbeckia hirta L.,Rudbeckia hirta,accepted,False,11635,12563,13127,13477,11671,11716,,True,True,True
+오색마삭줄,Trachelospermum asiaticum,7317060,SPECIES,Trachelospermum asiaticum (Siebold & Zucc.) Nakai,Trachelospermum asiaticum,accepted,False,365,581,366,436,372,383,,True,True,True
+수박페페로미아,Peperomia argyreia,4189296,SPECIES,Peperomia argyreia (Miq.) É.Morren,Peperomia argyraea,via_Illegitimate,False,0,0,1,12,0,0,원산 칸 부족(<14),False,False,False
+멕시코돌나물,Sedum mexicanum,5361977,SPECIES,Sedum mexicanum Britton,Sedum mexicanum,accepted,False,8,8,80,197,8,8,원산 칸 부족(<14),False,False,False
+문샤인산세베리아,Sansevieria trifasciata 'Moonshine',11041822,SPECIES,Sansevieria trifasciata Prain,Dracaena trifasciata,via_Synonym,True,26,28,318,867,26,27,,True,True,False
+백목련,Magnolia denudata,3153582,SPECIES,Magnolia denudata Desr.,Magnolia denudata,accepted,False,157,177,157,208,157,157,,True,True,True
+부처꽃,Lythrum salicaria,3188736,SPECIES,Lythrum salicaria L.,Lythrum salicaria,accepted,False,15590,17618,22286,22424,15724,15913,,True,True,True
+줄리아페페,Peperomia tetragona,4183682,SPECIES,Peperomia tetragona Ruiz & Pav.,Peperomia tetragona,accepted,False,66,66,66,67,66,66,,True,True,True
+프리지아,Freesia refracta,2747084,SPECIES,Freesia refracta (Jacq.) Klatt,Freesia refracta,accepted,False,103,103,130,154,103,103,,True,True,True
+리아트리스,Liatris spicata,3104314,SPECIES,Liatris spicata (L.) Willd.,Liatris spicata,accepted,False,1146,1360,1163,1226,1152,1156,,True,True,True
+구문초,Pelargonium graveolens,2891608,SPECIES,Pelargonium graveolens (Thunb.) L'Hér.,Pelargonium graveolens,accepted,False,60,69,63,131,60,60,,True,True,True
+미산딸나무,Cornus florida,3082240,SPECIES,Cornus florida L.,Cornus florida,accepted,False,6165,6730,6165,6199,6175,6192,,True,True,True
+개암나무,Corylus heterophylla,2876072,SPECIES,Corylus heterophylla Fisch. ex Trautv.,Corylus heterophylla,accepted,False,635,770,635,642,637,640,,True,True,True
+홍단풍,Acer palmatum,3189882,SPECIES,Acer palmatum Thunb.,Acer palmatum,accepted,False,869,1198,1133,1412,874,882,,True,True,True
+섬초롱꽃,Campanula takesimana,7222087,SPECIES,Campanula takesimana Nakai,Campanula punctata var. punctata,via_Synonym,False,202,283,203,204,202,204,"heterotypic 이명(섬초롱꽃, SAGE 규칙상 병합 불가)",False,False,False
+자주루드베키아,Echinacea purpurea,3150935,SPECIES,Echinacea purpurea (L.) Moench,Echinacea purpurea,accepted,False,2121,2499,2473,3012,2122,2131,,True,True,True
+네군도단풍,Acer negundo,3189866,SPECIES,Acer negundo L.,Acer negundo,accepted,False,11167,12208,18414,19258,11200,11237,,True,True,True
+아펠란드라,Aphelandra squarrosa,7263987,SPECIES,Aphelandra squarrosa Nees,,ambiguous:Unplaced,False,0,0,0,0,0,0,WCVP Unplaced(원산 판정 불가),False,False,False
+애기달맞이꽃,Oenothera laciniata,3188867,SPECIES,Oenothera laciniata Hill,Oenothera laciniata,accepted,False,2495,2857,2745,2795,2508,2525,,True,True,True
+말발도리,Deutzia parviflora,2985967,SPECIES,Deutzia parviflora Bunge,Deutzia parviflora,accepted,False,293,324,293,303,295,295,,True,True,True
+부용화,Hibiscus mutabilis,3152555,SPECIES,Hibiscus mutabilis L.,Hibiscus mutabilis,accepted,False,255,329,374,628,255,257,,True,True,True
+자금우,Ardisia japonica,5558066,SPECIES,Ardisia japonica (Thunb.) Blume,Ardisia japonica,accepted,False,556,752,590,606,557,565,,True,True,True
+꼬리진달래,Rhododendron?micranthum,4170281,SPECIES,Rhododendron micranthum Turcz.,Rhododendron micranthum,accepted,False,261,301,261,267,262,262,,True,True,True
+짚신나물,Agrimonia?pilosa,3002003,SPECIES,Agrimonia pilosa Ledeb.,Agrimonia pilosa,accepted,False,3337,3823,3337,3459,3351,3358,,True,True,True
+서양골담초,Cytisus scoparius,5354656,SPECIES,Cytisus scoparius (L.) Link,Cytisus scoparius,accepted,False,5943,6700,8185,8399,5992,6070,,True,True,True
+구즈베리,Ribes?grossularia,2986095,GENUS,Ribes L.,,,False,0,0,0,0,0,0,Ribes grossularia = R. uva-crispa의 heterotypic 이명(원예팀 확인 대기),False,False,False
+당아욱,Malva?sylvestris,3152374,SPECIES,Malva sylvestris L.,Malva sylvestris,accepted,False,6338,7770,8064,8173,6451,6595,,True,True,True
+칠자화나무,Heptacodium miconioides,3855518,SPECIES,Heptacodium miconioides Rehder,Heptacodium miconioides,accepted,False,5,10,5,43,5,5,원산 칸 부족(<14),False,False,False
+호주매화,Leptospermum scoparium,3181762,SPECIES,Leptospermum scoparium Forst.,Leptospermum scoparium,accepted,False,1508,1530,1528,1579,1542,1609,,True,True,True
+아단소니몬스테라,Monstera adansonii,2868136,SPECIES,Monstera adansonii Schott,Monstera adansonii,accepted,False,1263,1300,1265,1322,1290,1317,,True,True,True
+개운죽,Dracaena sanderiana,7431653,SPECIES,Dracaena sanderiana Mast.,Dracaena sanderiana,accepted,False,45,45,45,141,45,45,,True,True,True
+거북알로카시아,Alocasia?×?mortfontanensis,5532250,SPECIES,Alocasia × mortfontanensis André,Alocasia × mortfontanensis,via_Artificial Hybrid,False,0,0,0,0,0,0,인공 교배종(원산 없음),False,False,False
+긴기아난,Dendrobium kingianum,5316009,SPECIES,Dendrobium kingianum Bidwill ex Lindl.,Dendrobium kingianum,accepted,False,82,89,85,89,82,83,,True,True,True
+마지나타,Dracaena?marginata,10818704,SPECIES,Dracaena marginata Lem.,,ambiguous:Illegitimate/Synonym,False,0,0,0,0,0,0,"Dracaena marginata 저자 갈림(Lam./Aiton), 원산 판정 불가(원예팀 확인 대기)",False,False,False
+자스민,Jasminum officinale,3172261,SPECIES,Jasminum officinale L.,Jasminum officinale,accepted,False,84,87,103,177,84,84,,True,True,True
+제라늄,Pelargonium inquinans,2891615,SPECIES,Pelargonium inquinans (L.) L'Hér.,Pelargonium inquinans,accepted,False,71,75,92,109,72,72,,True,True,True
+청페페,Peperomia obtusifolia,3086423,SPECIES,Peperomia obtusifolia (L.) A.Dietr.,Peperomia obtusifolia,accepted,False,940,954,940,950,948,957,,True,True,True
+카틀레아,Cattleya spp.,2800821,GENUS,Cattleya Lindl.,,,False,0,0,0,0,0,0,"속 단위 학명(종 미상, 원예팀에 대표 종 확인)",False,False,False
+칼란디바,Kalanchoe blossfeldiana 'Calandiva',2985944,SPECIES,Kalanchoe blossfeldiana Poelln.,Kalanchoe blossfeldiana,accepted,True,2,2,10,82,2,2,원산 칸 부족(<14),False,False,False
+콜레우스,Coleus scutellarioides,5341492,SPECIES,Coleus scutellarioides (L.) Benth.,Coleus scutellarioides,accepted,False,547,576,840,1170,555,571,,True,True,True
+드라세나콤팩타,Dracaena fragrans 'Compacta',5304583,SPECIES,Dracaena fragrans (L.) Ker Gawl.,Dracaena fragrans,accepted,True,157,158,312,688,158,158,,True,True,False
+콩고,Philodendron?'Congo',2861312,GENUS,Philodendron Schott,,,True,0,0,0,0,0,0,"원예 품종(속명만, 원종 불명)",False,False,False
+크로시아,Clusia rosea,5421060,SPECIES,Clusia rosea Jacq.,Clusia rosea,accepted,False,328,357,398,424,335,351,,True,True,True
+크로톤,Codiaeum variegatum,3071476,SPECIES,Codiaeum variegatum (L.) Rumph. ex A.Juss.,Codiaeum variegatum,accepted,False,321,327,497,1217,334,355,,True,True,True
+테이블야자,Chamaedorea elegans,2734661,SPECIES,Chamaedorea elegans Mart.,Chamaedorea elegans,accepted,False,214,216,214,228,215,215,,True,True,True
+아글라오네마,Aglaonema commutatum,2866467,SPECIES,Aglaonema commutatum Schott,Aglaonema commutatum,accepted,False,16,18,18,117,16,17,칸 14~24(감도 세트만),False,True,False
+필로덴드론,Philodendron spp.,2861312,GENUS,Philodendron Schott,,,False,0,0,0,0,0,0,"속 단위 학명(종 미상, 원예팀에 대표 종 확인)",False,False,False
+덴드로비움,Dendrobium spp.,2821327,GENUS,Dendrobium Sw.,,,False,0,0,0,0,0,0,"속 단위 학명(종 미상, 원예팀에 대표 종 확인)",False,False,False
+벵갈고무나무,Ficus benghalensis,5361919,SPECIES,Ficus benghalensis L.,Ficus benghalensis,accepted,False,394,485,416,483,397,404,,True,True,True
+송악,Hedera rhombea,3036022,SPECIES,Hedera rhombea (Miq.) Bean,Hedera rhombea,accepted,False,298,476,298,304,306,319,,True,True,True
+소철,Cycas revoluta,2683217,SPECIES,Cycas revoluta Thunb.,Cycas revoluta,accepted,False,52,86,60,254,57,62,,True,True,True
+벤자민고무나무,Ficus benjamina,5361932,SPECIES,Ficus benjamina L.,Ficus benjamina,accepted,False,449,563,487,750,465,486,,True,True,True
+레몬밤,Melissa officinalis,5341501,SPECIES,Melissa officinalis L.,Melissa officinalis,accepted,False,796,988,2457,2676,810,820,,True,True,True
+용설란,Agave americana,2767031,SPECIES,Agave americana L.,Agave americana,accepted,False,523,592,2248,2710,527,533,,True,True,True
+팔손이,Fatsia japonic,3039046,SPECIES,Fatsia japonica (Thunb.) Decne. & Planch.,Fatsia japonica,accepted,False,111,308,267,334,113,117,,True,True,True
+종려나무,Trachycarpus fortunei,2739071,SPECIES,Trachycarpus fortunei (Hook.) H.Wendl.,Trachycarpus fortunei,accepted,False,81,93,293,677,81,81,,True,True,True
+수국,Hydrangea macrophylla,2985994,SPECIES,Hydrangea macrophylla (Thunb.) Ser.,Hydrangea macrophylla,accepted,False,52,122,502,844,53,55,,True,True,True
+칼라,Zantedeschia aethiopica,2868827,SPECIES,Zantedeschia aethiopica (L.) Spreng.,Zantedeschia aethiopica,accepted,False,578,616,1988,2528,582,591,,True,True,True
+금유선인장,Aporocactus flagelliformis,7283331,SPECIES,Aporocactus flagelliformis (L.) Lem.,Aporocactus flagelliformis,accepted,False,23,23,23,29,23,23,칸 14~24(감도 세트만),False,True,False
+드라코,Dracaena draco,5304469,SPECIES,Dracaena draco (L.) L.,Dracaena draco,accepted,False,33,33,48,58,36,41,,True,True,True
+공작선인장,Disocactus ackermannii,7649247,SPECIES,Disocactus ackermannii (Haw.) Ralf Bauer,Disocactus ackermannii,accepted,False,51,51,61,67,51,51,,True,True,True
+쿠페아,Cuphea hyssopifolia,3188698,SPECIES,Cuphea hyssopifolia Kunth,Cuphea hyssopifolia,accepted,False,387,407,640,1123,389,391,,True,True,True
+칼라데아 마코야나,Goeppertia makoyana,7708211,SPECIES,Goeppertia makoyana (É.Morren) Borchs. & S.Suárez,Goeppertia makoyana,accepted,False,2,3,2,8,2,2,원산 칸 부족(<14),False,False,False
+디펜바키아 ‘마리안느’,Dieffenbachia ‘Marianne’,2869330,GENUS,Dieffenbachia Schott,,,True,0,0,0,0,0,0,"원예 품종(속명만, 원종 불명)",False,False,False
+헬리코니아,Heliconia spp.,2760545,GENUS,Heliconia L.,,,False,0,0,0,0,0,0,"속 단위 학명(종 미상, 원예팀에 대표 종 확인)",False,False,False
+틸란드시아 이오난사,Tillandsia ionantha,2695006,SPECIES,Tillandsia ionantha Planch.,Tillandsia ionantha,accepted,False,341,349,341,353,345,346,,True,True,True
+막실라리아,Maxillaria tenuifolia,5317968,SPECIES,Maxillaria tenuifolia Lindl.,Maxillaria tenuifolia,accepted,False,143,143,143,147,143,145,,True,True,True
+산취선인장,Echinopsis chamaecereus,3944596,SPECIES,Echinopsis chamaecereus H.Friedrich & Glaetzle,Echinopsis chamaecereus,accepted,False,0,0,0,9,0,0,원산 기록 없음,False,False,False
+마란타,Maranta leuconeura,2761337,SPECIES,Maranta leuconeura É.Morren,Maranta leuconeura,accepted,False,52,71,59,98,52,52,,True,True,True
+박쥐나무,Alangium platanifolium,7326268,SPECIES,Alangium platanifolium (Siebold & Zucc.) Harms,Alangium platanifolium,accepted,False,653,763,653,660,654,656,,True,True,True
+피나타라벤더,Lavandula pinnata,7894021,SPECIES,Lavandula pinnata Lundmark,Lavandula pinnata,accepted,False,14,14,14,18,15,16,칸 14~24(감도 세트만),False,True,False
+디펜바키아 '트로픽스노우',Dieffenbachia seguine ‘Tropic Snow’,2869345,SPECIES,Dieffenbachia seguine (Jacq.) Schott,Dieffenbachia seguine,accepted,True,400,436,444,926,402,413,,True,True,False
+부채선인장,Opuntia ficus-indica,5384064,SPECIES,Opuntia ficus-indica (L.) Mill.,Opuntia ficus-indica,accepted,False,87,89,3526,4062,91,92,,True,True,True
+멜라니 고무나무,Ficus elastica ‘Melany’,7835333,SPECIES,Ficus elastica Roxb.,Ficus elastica,accepted,True,60,73,150,360,61,61,,True,True,False
+보스턴고사리,Nephrolepis exaltata ‘Bostoniensis,2650927,SPECIES,Nephrolepis exaltata (L.) Schott,Nephrolepis exaltata,accepted,True,252,317,258,355,253,259,,True,True,False
+부겐빌레아,Bougainvillea glabra,5384862,SPECIES,Bougainvillea glabra Choisy,Bougainvillea glabra,accepted,False,143,180,206,582,143,143,,True,True,True
+삭소롬,Streptocarpus saxorum,5590445,SPECIES,Streptocarpus saxorum Engl.,Streptocarpus saxorum,accepted,False,20,20,20,26,20,20,칸 14~24(감도 세트만),False,True,False
+아데니움,Adenium obesum,7155887,SPECIES,Adenium obesum (Forssk.) Roem. & Schult.,Adenium obesum,accepted,False,297,300,297,653,302,306,,True,True,True
+아레카야자,Chrysalidocarpus lutescens,2735935,SPECIES,Chrysalidocarpus lutescens H.Wendl.,Chrysalidocarpus lutescens,accepted,False,18,18,62,429,18,20,칸 14~24(감도 세트만),False,True,False
+아비스고사리,Asplenium antiquum ‘Avis’,4257299,SPECIES,Asplenium antiquum Makino,Asplenium antiquum,accepted,True,59,69,59,63,60,61,,True,True,False
+파키라,Pachira aquatica,3152235,SPECIES,Pachira aquatica Aubl.,Pachira aquatica,accepted,False,781,802,785,863,794,807,,True,True,True
+페퍼민트,Mentha × piperita,8707933,SPECIES,Mentha × piperita L.,Mentha × piperita,accepted,False,151,224,1004,1266,156,158,,True,True,True
+구슬세덤,Sedum dasyphyllum,7172720,SPECIES,Sedum dasyphyllum L.,Sedum dasyphyllum,accepted,False,2025,2255,2059,2074,2036,2051,,True,True,True
+푸밀라고무나무,Ficus pumila,5361930,SPECIES,Ficus pumila L.,Ficus pumila,accepted,False,598,795,745,1095,609,618,,True,True,True
+하트호야,Hoya kerrii,3573959,SPECIES,Hoya kerrii Craib,Hoya kerrii,accepted,False,42,43,42,42,42,42,,True,True,True
