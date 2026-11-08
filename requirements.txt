@@ -25,3 +25,6 @@ requests==2.34.2
 # 기상 추출(src/gee_*.py, src/coast_fill.py) — Google Earth Engine 비상업 등록 + `earthengine authenticate` 필요
 earthengine-api==1.7.51
 google-api-python-client==2.201.0
+
+# 추천 모델(백로그 6번, src/model_*.py) — Apple M4에서 MPS 사용 확인(11-07)
+torch==2.15.0

@@ -244,3 +244,9 @@ data/weather/*
 !data/weather/min_records_test.csv
 # 학습 데이터 본체(src/build_dataset.py로 재생성). plants.csv·build_report.json·README.md는 추적.
 data/dataset/*.parquet
+
+# 사전학습 체크포인트(재현 가능, 로그·설정·요약만 커밋)
+results/pretrain/**/*.pt
+
+# 정렬 학습 체크포인트
+results/align/**/*.pt
