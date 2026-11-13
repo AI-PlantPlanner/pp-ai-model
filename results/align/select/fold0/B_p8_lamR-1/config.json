@@ -1,0 +1,32 @@
+{
+ "args": {
+  "fold": 0,
+  "loss": "B",
+  "patch": 8,
+  "lam": "R-1",
+  "lp_steps": 1000,
+  "ft_steps": 3000,
+  "bs": 256,
+  "eval_every": 250,
+  "seed": 0,
+  "final": false
+ },
+ "lambda": 48.0,
+ "R_train_plants": 49,
+ "n_inner_val_plants": 12,
+ "G": 5,
+ "inner_val_plants": [
+  "블루스타고사리",
+  "줄리아페페",
+  "프리지아",
+  "개암나무",
+  "자스민",
+  "송악",
+  "레몬밤",
+  "종려나무",
+  "칼라",
+  "드라코",
+  "쿠페아",
+  "멜라니 고무나무"
+ ]
+}

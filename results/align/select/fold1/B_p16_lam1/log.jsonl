@@ -1,0 +1,16 @@
+{"step": 250, "phase": "lp", "train_loss": 0.13427891424298286, "scale": 14.348628997802734, "minutes": 0.6, "inner_auc": 0.7800167098062434}
+{"step": 500, "phase": "lp", "train_loss": 0.09660214895009994, "scale": 14.538970947265625, "minutes": 1.3, "inner_auc": 0.8454544353127539}
+{"step": 750, "phase": "lp", "train_loss": 0.09075655347108841, "scale": 14.796085357666016, "minutes": 1.9, "inner_auc": 0.8548078773746407}
+{"step": 1000, "phase": "lp", "train_loss": 0.08544794815778732, "scale": 15.178411483764648, "minutes": 2.5, "inner_auc": 0.8603615376883823}
+{"step": 1250, "phase": "ft", "train_loss": 0.0768257049024105, "scale": 15.53165340423584, "minutes": 4.2, "inner_auc": 0.841885243194792}
+{"step": 1500, "phase": "ft", "train_loss": 0.06591034746170044, "scale": 16.403779983520508, "minutes": 5.9, "inner_auc": 0.8402123804833255}
+{"step": 1750, "phase": "ft", "train_loss": 0.061414037704467773, "scale": 17.288143157958984, "minutes": 7.6, "inner_auc": 0.8057793679016902}
+{"step": 2000, "phase": "ft", "train_loss": 0.058700752153992654, "scale": 18.112045288085938, "minutes": 9.3, "inner_auc": 0.82030791442637}
+{"step": 2250, "phase": "ft", "train_loss": 0.05679687307775021, "scale": 18.827022552490234, "minutes": 11.0, "inner_auc": 0.8137877901651817}
+{"step": 2500, "phase": "ft", "train_loss": 0.05564781481027603, "scale": 19.429677963256836, "minutes": 12.7, "inner_auc": 0.8017704563867755}
+{"step": 2750, "phase": "ft", "train_loss": 0.05475974164903164, "scale": 19.97220230102539, "minutes": 14.4, "inner_auc": 0.8122987497219955}
+{"step": 3000, "phase": "ft", "train_loss": 0.05404515941441059, "scale": 20.425739288330078, "minutes": 16.2, "inner_auc": 0.8130594614115333}
+{"step": 3250, "phase": "ft", "train_loss": 0.05326999917626381, "scale": 20.896484375, "minutes": 17.9, "inner_auc": 0.8064580627090945}
+{"step": 3500, "phase": "ft", "train_loss": 0.05275921718776226, "scale": 21.236103057861328, "minutes": 19.6, "inner_auc": 0.7910449385348977}
+{"step": 3750, "phase": "ft", "train_loss": 0.052363676488399506, "scale": 21.577409744262695, "minutes": 21.4, "inner_auc": 0.7878300970251848}
+{"step": 4000, "phase": "ft", "train_loss": 0.0521380203962326, "scale": 21.86082649230957, "minutes": 23.1, "inner_auc": 0.784796530705053}

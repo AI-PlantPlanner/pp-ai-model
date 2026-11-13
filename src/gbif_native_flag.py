@@ -85,7 +85,13 @@ def main() -> None:
     occ = load_occurrences()
     species = wcvp_species_map()
     species.to_csv(OUT_DIR / "wcvp_species_map.csv", index=False, encoding="utf-8-sig")
+    occ = flag_occurrences(occ, species)
+    occ.to_parquet(OUT_DIR / "occurrences_flagged.parquet", index=False)
+    print(occ["native_status"].value_counts().to_string())
 
+
+def flag_occurrences(occ: pd.DataFrame, species: pd.DataFrame) -> pd.DataFrame:
+    """기록에 count_key·WGSRPD 지역·WCVP 원산 표시를 붙인다(11-12: 추가 다운로드에도 같은 규칙을 쓰려고 main에서 분리)."""
     # 요청 키가 종보다 낮은 계급일 수 있다(예: 섬초롱꽃 -> GBIF 정명이 C. punctata var. punctata).
     # 기록에는 speciesKey가 있으므로, 요청 키마다 GBIF가 매긴 speciesKey를 조회해 그 값으로 붙인다.
     # 서로 다른 요청 키가 같은 speciesKey를 가지면 구분할 수 없으므로 멈춘다.
@@ -126,8 +132,7 @@ def main() -> None:
     occ.loc[occ["introduced"] == "1", "native_status"] = "introduced"
     occ.loc[occ["area_code_l3"].isna(), "native_status"] = "no_region"
     occ.loc[~has_dist, "native_status"] = "no_wcvp"
-    occ.to_parquet(OUT_DIR / "occurrences_flagged.parquet", index=False)
-    print(occ["native_status"].value_counts().to_string())
+    return occ
 
 
 if __name__ == "__main__":

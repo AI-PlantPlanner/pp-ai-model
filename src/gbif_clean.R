@@ -16,7 +16,10 @@ suppressPackageStartupMessages({
   library(CoordinateCleaner)
 })
 
-occ <- read_parquet("data/gbif/occurrences_flagged.parquet",
+args <- commandArgs(trailingOnly = TRUE)  # 11-12: 추가 다운로드용 입력·출력 경로(없으면 기본값)
+in_path <- if (length(args) >= 1) args[1] else "data/gbif/occurrences_flagged.parquet"
+out_path <- if (length(args) >= 2) args[2] else "data/gbif/cc_flags.parquet"
+occ <- read_parquet(in_path,
                     col_select = c("gbifID", "count_key", "decimalLongitude", "decimalLatitude"))
 occ <- as.data.frame(occ)
 occ$count_key <- as.character(occ$count_key)
@@ -34,9 +37,9 @@ flags <- clean_coordinates(
 )
 
 out <- data.frame(gbifID = occ$gbifID, flags[, grepl("^\\.", names(flags))])
-write_parquet(out, "data/gbif/cc_flags.parquet")
+write_parquet(out, out_path)
 
-sink("data/gbif/cc_session.txt")
+sink(sub("\\.parquet$", "_session.txt", out_path))
 cat("run_at:", format(Sys.time(), tz = "UTC", usetz = TRUE), "\n")
 cat("tests:", paste(tests, collapse = ", "), "\n\n")
 print(sessionInfo())

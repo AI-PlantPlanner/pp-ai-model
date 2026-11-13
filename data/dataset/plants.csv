@@ -39,7 +39,7 @@
 꼬리진달래,Rhododendron?micranthum,4170281,SPECIES,Rhododendron micranthum Turcz.,Rhododendron micranthum,accepted,False,261,301,261,267,262,262,,True,True,True
 짚신나물,Agrimonia?pilosa,3002003,SPECIES,Agrimonia pilosa Ledeb.,Agrimonia pilosa,accepted,False,3337,3823,3337,3459,3351,3358,,True,True,True
 서양골담초,Cytisus scoparius,5354656,SPECIES,Cytisus scoparius (L.) Link,Cytisus scoparius,accepted,False,5943,6700,8185,8399,5992,6070,,True,True,True
-구즈베리,Ribes?grossularia,2986095,GENUS,Ribes L.,,,False,0,0,0,0,0,0,Ribes grossularia = R. uva-crispa의 heterotypic 이명(원예팀 확인 대기),False,False,False
+구즈베리,Ribes?grossularia,2986185,SPECIES,Ribes uva-crispa L.,Ribes uva-crispa,accepted,False,1213,1385,2596,2998,1218,1228,,True,True,True
 당아욱,Malva?sylvestris,3152374,SPECIES,Malva sylvestris L.,Malva sylvestris,accepted,False,6338,7770,8064,8173,6451,6595,,True,True,True
 칠자화나무,Heptacodium miconioides,3855518,SPECIES,Heptacodium miconioides Rehder,Heptacodium miconioides,accepted,False,5,10,5,43,5,5,원산 칸 부족(<14),False,False,False
 호주매화,Leptospermum scoparium,3181762,SPECIES,Leptospermum scoparium Forst.,Leptospermum scoparium,accepted,False,1508,1530,1528,1579,1542,1609,,True,True,True
@@ -47,7 +47,7 @@
 개운죽,Dracaena sanderiana,7431653,SPECIES,Dracaena sanderiana Mast.,Dracaena sanderiana,accepted,False,45,45,45,141,45,45,,True,True,True
 거북알로카시아,Alocasia?×?mortfontanensis,5532250,SPECIES,Alocasia × mortfontanensis André,Alocasia × mortfontanensis,via_Artificial Hybrid,False,0,0,0,0,0,0,인공 교배종(원산 없음),False,False,False
 긴기아난,Dendrobium kingianum,5316009,SPECIES,Dendrobium kingianum Bidwill ex Lindl.,Dendrobium kingianum,accepted,False,82,89,85,89,82,83,,True,True,True
-마지나타,Dracaena?marginata,10818704,SPECIES,Dracaena marginata Lem.,,ambiguous:Illegitimate/Synonym,False,0,0,0,0,0,0,"Dracaena marginata 저자 갈림(Lam./Aiton), 원산 판정 불가(원예팀 확인 대기)",False,False,False
+마지나타,Dracaena?marginata,5304436,SPECIES,Dracaena reflexa Lam.,Dracaena reflexa,accepted,False,281,281,282,457,283,293,,True,True,True
 자스민,Jasminum officinale,3172261,SPECIES,Jasminum officinale L.,Jasminum officinale,accepted,False,84,87,103,177,84,84,,True,True,True
 제라늄,Pelargonium inquinans,2891615,SPECIES,Pelargonium inquinans (L.) L'Hér.,Pelargonium inquinans,accepted,False,71,75,92,109,72,72,,True,True,True
 청페페,Peperomia obtusifolia,3086423,SPECIES,Peperomia obtusifolia (L.) A.Dietr.,Peperomia obtusifolia,accepted,False,940,954,940,950,948,957,,True,True,True

@@ -1,0 +1,120 @@
+setting1 (시드 1개)
+{
+ "auc_mean": [
+  0.802,
+  null
+ ],
+ "n_species": [
+  76.0,
+  null
+ ],
+ "no_suitable": [
+  3.0,
+  null
+ ],
+ "rho_model": {
+  "전체": [
+   0.784,
+   null
+  ],
+  "열대·아열대": [
+   0.524,
+   null
+  ],
+  "온대": [
+   -0.055,
+   null
+  ]
+ },
+ "rho_ridge": {
+  "전체": [
+   0.811,
+   null
+  ],
+  "열대·아열대": [
+   0.62,
+   null
+  ],
+  "온대": [
+   -0.017,
+   null
+  ]
+ },
+ "rho_rf": {
+  "전체": [
+   0.851,
+   null
+  ],
+  "열대·아열대": [
+   0.732,
+   null
+  ],
+  "온대": [
+   -0.002,
+   null
+  ]
+ },
+ "rho_ctype": {
+  "전체": [
+   0.729,
+   null
+  ],
+  "열대·아열대": [
+   0.322,
+   null
+  ],
+  "온대": [
+   -0.493,
+   null
+  ]
+ },
+ "mae_model": [
+  6.88,
+  null
+ ],
+ "mae_ridge": [
+  6.277,
+  null
+ ],
+ "mae_rf": [
+  5.87,
+  null
+ ],
+ "mae_ctype": [
+  5.5,
+  null
+ ]
+}
+setting2 (시드 1개)
+{
+ "rho_model": {
+  "전체": [
+   0.873,
+   null
+  ],
+  "열대·아열대": [
+   0.738,
+   null
+  ],
+  "온대": [
+   0.313,
+   null
+  ]
+ },
+ "loo_mae": [
+  5.68,
+  null
+ ],
+ "loo_median_ae": [
+  3.89,
+  null
+ ],
+ "mean_only_mae": [
+  13.22,
+  null
+ ],
+ "n_species": [
+  76.0,
+  null
+ ]
+}

@@ -1,101 +1,101 @@
-﻿식물명,rawdata_학명,조회_학명,matchType,confidence,rank,status,gbif_scientificName,gbif_accepted,count_key,family,n_coord_all,n_specimen,n_inat_rg,n_wild
-아스파라거스 미리오클라두스,Asparagus?densiflorus?'Myriocladus',Asparagus densiflorus 'Myriocladus',EXACT,88,SPECIES,ACCEPTED,Asparagus densiflorus (Kunth) Jessop,,2768503,Asparagaceae,1948,443,502,945
-꼬리조팝나무,Spiraea salicifolia,Spiraea salicifolia,EXACT,99,SPECIES,ACCEPTED,Spiraea salicifolia L.,,3026454,Rosaceae,15022,2812,1717,4529
-디펜바키아,Dieffenbachia seguine,Dieffenbachia seguine,EXACT,99,SPECIES,ACCEPTED,Dieffenbachia seguine (Jacq.) Schott,,2869345,Araceae,3748,620,2524,3144
-패랭이,Dianthus chinensis,Dianthus chinensis,EXACT,100,SPECIES,ACCEPTED,Dianthus chinensis L.,,3085418,Caryophyllaceae,13865,3905,7155,11060
-드라세나'송오브인디아',Dracaena reflexa 'Song of India',Dracaena reflexa 'Song of India',EXACT,87,SPECIES,ACCEPTED,Dracaena reflexa Lam.,,5304436,Asparagaceae,5670,2165,757,2922
-둥근잎꿩의비름,Hylotelephium ussuriense,Hylotelephium ussuriense,EXACT,100,SPECIES,ACCEPTED,Hylotelephium ussuriense (Kom.) H.Ohba,,7334591,Crassulaceae,136,14,38,52
-몬스테라,Monstera deliciosa,Monstera deliciosa,EXACT,100,SPECIES,ACCEPTED,Monstera deliciosa Liebm.,,2868241,Araceae,5940,543,4233,4776
-마조람,Origanum?majorana,Origanum majorana,EXACT,100,SPECIES,ACCEPTED,Origanum majorana L.,,2926615,Lamiaceae,2563,291,20,311
-돌단풍,Mukdenia rossii,Mukdenia rossii,EXACT,100,SPECIES,ACCEPTED,Mukdenia rossii (Oliv.) Koidz.,,7339206,Saxifragaceae,625,172,71,243
-글록시니아,Sinningia speciosa,Sinningia speciosa,EXACT,99,SPECIES,ACCEPTED,Sinningia speciosa (G.Lodd. ex Ker Gawl.) Hiern,,3825228,Gesneriaceae,194,100,23,123
-망종화,Hypericum patulum,Hypericum patulum,EXACT,99,SPECIES,ACCEPTED,Hypericum patulum Thunb.,,3713491,Hypericaceae,2084,2022,20,2042
-황매화,Kerria?japonica,Kerria japonica,EXACT,100,SPECIES,ACCEPTED,Kerria japonica (L.) DC.,,5371450,Rosaceae,14825,5201,2140,7341
-금영화,Eschscholzia californica,Eschscholzia californica,EXACT,99,SPECIES,ACCEPTED,Eschscholzia californica Cham.,,2888380,Papaveraceae,118233,5478,65797,71275
-매발톱,Aquilegia oxysepala,Aquilegia oxysepala,EXACT,100,SPECIES,ACCEPTED,Aquilegia oxysepala Trautv. & C.A.Mey.,,3930047,Ranunculaceae,1423,710,222,932
-블루스타고사리,Phlebodium aureum,Phlebodium aureum,EXACT,100,SPECIES,ACCEPTED,Phlebodium aureum (L.) J.Sm.,,2650479,Polypodiaceae,6938,1599,5045,6644
-원추천인국,Rudbeckia hirta,Rudbeckia hirta,EXACT,100,SPECIES,ACCEPTED,Rudbeckia hirta L.,,3114225,Asteraceae,72579,7802,57341,65143
-오색마삭줄,Trachelospermum asiaticum,Trachelospermum asiaticum,EXACT,100,SPECIES,ACCEPTED,Trachelospermum asiaticum (Siebold & Zucc.) Nakai,,7317060,Apocynaceae,6124,1482,1108,2590
-수박페페로미아,Peperomia argyreia,Peperomia argyreia,EXACT,100,SPECIES,ACCEPTED,Peperomia argyreia (Miq.) É.Morren,,4189296,Piperaceae,65,41,0,41
-멕시코돌나물,Sedum mexicanum,Sedum mexicanum,EXACT,100,SPECIES,ACCEPTED,Sedum mexicanum Britton,,5361977,Crassulaceae,807,333,354,687
-문샤인산세베리아,Sansevieria trifasciata 'Moonshine',Sansevieria trifasciata 'Moonshine',EXACT,88,SPECIES,SYNONYM,Sansevieria trifasciata Prain,Dracaena trifasciata,11041822,Asparagaceae,3025,447,2096,2543
-백목련,Magnolia denudata,Magnolia denudata,EXACT,100,SPECIES,ACCEPTED,Magnolia denudata Desr.,,3153582,Magnoliaceae,1024,761,36,797
-부처꽃,Lythrum salicaria,Lythrum salicaria,EXACT,100,SPECIES,ACCEPTED,Lythrum salicaria L.,,3188736,Lythraceae,823625,13708,106837,120545
-줄리아페페,Peperomia tetragona,Peperomia tetragona,EXACT,100,SPECIES,ACCEPTED,Peperomia tetragona Ruiz & Pav.,,4183682,Piperaceae,158,156,2,158
-프리지아,Freesia refracta,Freesia refracta,EXACT,100,SPECIES,ACCEPTED,Freesia refracta (Jacq.) Klatt,,2747084,Iridaceae,838,213,290,503
-리아트리스,Liatris spicata,Liatris spicata,EXACT,100,SPECIES,ACCEPTED,Liatris spicata (L.) Willd.,,3104314,Asteraceae,5815,1474,3788,5262
-구문초,Pelargonium graveolens,Pelargonium graveolens,EXACT,100,SPECIES,ACCEPTED,Pelargonium graveolens (Thunb.) L'Hér.,,2891608,Geraniaceae,471,203,106,309
-미산딸나무,Cornus florida,Cornus florida,EXACT,99,SPECIES,ACCEPTED,Cornus florida L.,,3082240,Cornaceae,43450,4535,32690,37225
-개암나무,Corylus heterophylla,Corylus heterophylla,EXACT,99,SPECIES,ACCEPTED,Corylus heterophylla Fisch. ex Trautv.,,2876072,Betulaceae,6377,3239,386,3625
-홍단풍,Acer palmatum,Acer palmatum,EXACT,99,SPECIES,ACCEPTED,Acer palmatum Thunb.,,3189882,Sapindaceae,17056,5161,2736,7897
-섬초롱꽃,Campanula takesimana,Campanula takesimana,EXACT,100,SPECIES,SYNONYM,Campanula takesimana Nakai,Campanula punctata,7222087,Campanulaceae,1061,727,182,909
-자주루드베키아,Echinacea purpurea,Echinacea purpurea,EXACT,100,SPECIES,ACCEPTED,Echinacea purpurea (L.) Moench,,3150935,Asteraceae,17093,1063,15005,16068
-네군도단풍,Acer negundo,Acer negundo,EXACT,100,SPECIES,ACCEPTED,Acer negundo L.,,3189866,Sapindaceae,259459,9908,140724,150632
-아펠란드라,Aphelandra squarrosa,Aphelandra squarrosa,EXACT,100,SPECIES,ACCEPTED,Aphelandra squarrosa Nees,,7263987,Acanthaceae,142,67,36,103
-애기달맞이꽃,Oenothera laciniata,Oenothera laciniata,EXACT,100,SPECIES,ACCEPTED,Oenothera laciniata Hill,,3188867,Onagraceae,13378,3518,8805,12323
-말발도리,Deutzia parviflora,Deutzia parviflora,EXACT,100,SPECIES,ACCEPTED,Deutzia parviflora Bunge,,2985967,Hydrangeaceae,1881,1072,151,1223
-부용화,Hibiscus mutabilis,Hibiscus mutabilis,EXACT,100,SPECIES,ACCEPTED,Hibiscus mutabilis L.,,3152555,Malvaceae,2141,874,887,1761
-자금우,Ardisia japonica,Ardisia japonica,EXACT,100,SPECIES,ACCEPTED,Ardisia japonica (Thunb.) Blume,,5558066,Primulaceae,5358,2648,322,2970
-꼬리진달래,Rhododendron?micranthum,Rhododendron micranthum,EXACT,99,SPECIES,ACCEPTED,Rhododendron micranthum Turcz.,,4170281,Ericaceae,1852,1167,168,1335
-짚신나물,Agrimonia?pilosa,Agrimonia pilosa,EXACT,99,SPECIES,ACCEPTED,Agrimonia pilosa Ledeb.,,3002003,Rosaceae,20622,8411,5751,14162
-서양골담초,Cytisus scoparius,Cytisus scoparius,EXACT,100,SPECIES,ACCEPTED,Cytisus scoparius (L.) Link,,5354656,Fabaceae,553336,6249,44215,50464
-구즈베리,Ribes?grossularia,Ribes grossularia,HIGHERRANK,99,GENUS,ACCEPTED,Ribes L.,,2986095,Grossulariaceae,1208859,86727,116765,203492
-당아욱,Malva?sylvestris,Malva sylvestris,EXACT,100,SPECIES,ACCEPTED,Malva sylvestris L.,,3152374,Malvaceae,345953,6219,38044,44263
-칠자화나무,Heptacodium miconioides,Heptacodium miconioides,EXACT,100,SPECIES,ACCEPTED,Heptacodium miconioides Rehder,,3855518,Caprifoliaceae,185,71,91,162
-호주매화,Leptospermum scoparium,Leptospermum scoparium,EXACT,100,SPECIES,ACCEPTED,Leptospermum scoparium Forst.,,3181762,Myrtaceae,23697,3507,7408,10915
-아단소니몬스테라,Monstera adansonii,Monstera adansonii,EXACT,100,SPECIES,ACCEPTED,Monstera adansonii Schott,,2868136,Araceae,5790,2853,1586,4439
-개운죽,Dracaena sanderiana,Dracaena sanderiana,EXACT,99,SPECIES,ACCEPTED,Dracaena sanderiana Mast.,,7431653,Asparagaceae,374,144,217,361
-거북알로카시아,Alocasia?×?mortfontanensis,Alocasia × mortfontanensis,EXACT,100,SPECIES,ACCEPTED,Alocasia × mortfontanensis André,,5532250,Araceae,33,4,10,14
-긴기아난,Dendrobium kingianum,Dendrobium kingianum,EXACT,99,SPECIES,ACCEPTED,Dendrobium kingianum Bidwill ex Lindl.,,5316009,Orchidaceae,1418,279,785,1064
-마지나타,Dracaena?marginata,Dracaena marginata,EXACT,99,SPECIES,ACCEPTED,Dracaena marginata Lem.,,10818704,Asparagaceae,15,4,0,4
-자스민,Jasminum officinale,Jasminum officinale,EXACT,100,SPECIES,ACCEPTED,Jasminum officinale L.,,3172261,Oleaceae,2232,777,71,848
-제라늄,Pelargonium inquinans,Pelargonium inquinans,EXACT,99,SPECIES,ACCEPTED,Pelargonium inquinans (L.) L'Hér.,,2891615,Geraniaceae,444,88,254,342
-청페페,Peperomia obtusifolia,Peperomia obtusifolia,EXACT,99,SPECIES,ACCEPTED,Peperomia obtusifolia (L.) A.Dietr.,,3086423,Piperaceae,3435,3001,264,3265
-카틀레아,Cattleya spp.,Cattleya spp.,HIGHERRANK,96,GENUS,ACCEPTED,Cattleya Lindl.,,2800821,Orchidaceae,95084,2935,1653,4588
-칼란디바,Kalanchoe blossfeldiana 'Calandiva',Kalanchoe blossfeldiana 'Calandiva',EXACT,88,SPECIES,ACCEPTED,Kalanchoe blossfeldiana Poelln.,,2985944,Crassulaceae,320,120,62,182
-콜레우스,Coleus scutellarioides,Coleus scutellarioides,EXACT,99,SPECIES,ACCEPTED,Coleus scutellarioides (L.) Benth.,,5341492,Lamiaceae,4749,1872,1844,3716
-드라세나콤팩타,Dracaena fragrans 'Compacta',Dracaena fragrans 'Compacta',EXACT,85,SPECIES,ACCEPTED,Dracaena fragrans (L.) Ker Gawl.,,5304583,Asparagaceae,2458,613,1462,2075
-콩고,Philodendron?'Congo',Philodendron 'Congo',HIGHERRANK,95,GENUS,ACCEPTED,Philodendron Schott,,2861312,Araceae,76452,55450,13073,68523
-크로시아,Clusia rosea,Clusia rosea,EXACT,99,SPECIES,ACCEPTED,Clusia rosea Jacq.,,5421060,Clusiaceae,3554,588,2262,2850
-크로톤,Codiaeum variegatum,Codiaeum variegatum,EXACT,99,SPECIES,ACCEPTED,Codiaeum variegatum (L.) Rumph. ex A.Juss.,,3071476,Euphorbiaceae,6108,1618,2828,4446
-테이블야자,Chamaedorea elegans,Chamaedorea elegans,EXACT,100,SPECIES,ACCEPTED,Chamaedorea elegans Mart.,,2734661,Arecaceae,723,508,142,650
-아글라오네마,Aglaonema commutatum,Aglaonema commutatum,EXACT,100,SPECIES,ACCEPTED,Aglaonema commutatum Schott,,2866467,Araceae,504,105,300,405
-필로덴드론,Philodendron spp.,Philodendron spp.,HIGHERRANK,95,GENUS,ACCEPTED,Philodendron Schott,,2861312,Araceae,76452,55450,13073,68523
-덴드로비움,Dendrobium spp.,Dendrobium spp.,HIGHERRANK,95,GENUS,ACCEPTED,Dendrobium Sw.,,2821327,Orchidaceae,52837,20819,15968,36787
-벵갈고무나무,Ficus benghalensis,Ficus benghalensis,EXACT,100,SPECIES,ACCEPTED,Ficus benghalensis L.,,5361919,Moraceae,12150,222,1884,2106
-송악,Hedera rhombea,Hedera rhombea,EXACT,99,SPECIES,ACCEPTED,Hedera rhombea (Miq.) Bean,,3036022,Araliaceae,4797,1278,911,2189
-소철,Cycas revoluta,Cycas revoluta,EXACT,99,SPECIES,ACCEPTED,Cycas revoluta Thunb.,,2683217,Cycadaceae,1312,444,579,1023
-벤자민고무나무,Ficus benjamina,Ficus benjamina,EXACT,99,SPECIES,ACCEPTED,Ficus benjamina L.,,5361932,Moraceae,5062,1645,1459,3104
-레몬밤,Melissa officinalis,Melissa officinalis,EXACT,100,SPECIES,ACCEPTED,Melissa officinalis L.,,5341501,Lamiaceae,133568,2454,6789,9243
-용설란,Agave americana,Agave americana,EXACT,100,SPECIES,ACCEPTED,Agave americana L.,,2767031,Asparagaceae,33868,769,14508,15277
-팔손이,Fatsia japonic,Fatsia japonic,FUZZY,98,SPECIES,ACCEPTED,Fatsia japonica (Thunb.) Decne. & Planch.,,3039046,Araliaceae,5140,522,2485,3007
-종려나무,Trachycarpus fortunei,Trachycarpus fortunei,EXACT,100,SPECIES,ACCEPTED,Trachycarpus fortunei (Hook.) H.Wendl.,,2739071,Arecaceae,22431,848,2325,3173
-수국,Hydrangea macrophylla,Hydrangea macrophylla,EXACT,100,SPECIES,ACCEPTED,Hydrangea macrophylla (Thunb.) Ser.,,2985994,Hydrangeaceae,12910,1188,2490,3678
-칼라,Zantedeschia aethiopica,Zantedeschia aethiopica,EXACT,100,SPECIES,ACCEPTED,Zantedeschia aethiopica (L.) Spreng.,,2868827,Araceae,48130,1007,18303,19310
-금유선인장,Aporocactus flagelliformis,Aporocactus flagelliformis,EXACT,100,SPECIES,ACCEPTED,Aporocactus flagelliformis (L.) Lem.,,7283331,Cactaceae,144,66,60,126
-드라코,Dracaena draco,Dracaena draco,EXACT,100,SPECIES,ACCEPTED,Dracaena draco (L.) L.,,5304469,Asparagaceae,2059,157,718,875
-공작선인장,Disocactus ackermannii,Disocactus ackermannii,EXACT,99,SPECIES,ACCEPTED,Disocactus ackermannii (Haw.) Ralf Bauer,,7649247,Cactaceae,150,87,55,142
-쿠페아,Cuphea hyssopifolia,Cuphea hyssopifolia,EXACT,99,SPECIES,ACCEPTED,Cuphea hyssopifolia Kunth,,3188698,Lythraceae,3682,799,2451,3250
-칼라데아 마코야나,Goeppertia makoyana,Goeppertia makoyana,EXACT,100,SPECIES,ACCEPTED,Goeppertia makoyana (É.Morren) Borchs. & S.Suárez,,7708211,Marantaceae,27,12,4,16
-디펜바키아 ‘마리안느’,Dieffenbachia ‘Marianne’,Dieffenbachia 'Marianne',HIGHERRANK,96,GENUS,ACCEPTED,Dieffenbachia Schott,,2869330,Araceae,10733,6961,2706,9667
-헬리코니아,Heliconia spp.,Heliconia spp.,HIGHERRANK,96,GENUS,ACCEPTED,Heliconia L.,,2760545,Heliconiaceae,59439,27887,25131,53018
-틸란드시아 이오난사,Tillandsia ionantha,Tillandsia ionantha,EXACT,100,SPECIES,ACCEPTED,Tillandsia ionantha Planch.,,2695006,Bromeliaceae,1276,531,664,1195
-막실라리아,Maxillaria tenuifolia,Maxillaria tenuifolia,EXACT,100,SPECIES,ACCEPTED,Maxillaria tenuifolia Lindl.,,5317968,Orchidaceae,384,278,96,374
-산취선인장,Echinopsis chamaecereus,Echinopsis chamaecereus,EXACT,100,SPECIES,SYNONYM,Echinopsis chamaecereus H.Friedrich & Glaetzle,Chamaecereus silvestrii,3944596,Cactaceae,37,8,18,26
-마란타,Maranta leuconeura,Maranta leuconeura,EXACT,100,SPECIES,ACCEPTED,Maranta leuconeura É.Morren,,2761337,Marantaceae,433,109,137,246
-박쥐나무,Alangium platanifolium,Alangium platanifolium,EXACT,100,SPECIES,ACCEPTED,Alangium platanifolium (Siebold & Zucc.) Harms,,7326268,Cornaceae,4674,2377,65,2442
-피나타라벤더,Lavandula pinnata,Lavandula pinnata,EXACT,99,SPECIES,ACCEPTED,Lavandula pinnata Lundmark,,7894021,Lamiaceae,248,48,138,186
-디펜바키아 '트로픽스노우',Dieffenbachia seguine ‘Tropic Snow’,Dieffenbachia seguine 'Tropic Snow',EXACT,87,SPECIES,ACCEPTED,Dieffenbachia seguine (Jacq.) Schott,,2869345,Araceae,3748,620,2524,3144
-부채선인장,Opuntia ficus-indica,Opuntia ficus-indica,EXACT,99,SPECIES,ACCEPTED,Opuntia ficus-indica (L.) Mill.,,5384064,Cactaceae,33495,1270,20861,22131
-멜라니 고무나무,Ficus elastica ‘Melany’,Ficus elastica 'Melany',EXACT,85,SPECIES,ACCEPTED,Ficus elastica Roxb.,,7835333,Moraceae,3484,365,1114,1479
-보스턴고사리,Nephrolepis exaltata ‘Bostoniensis,Nephrolepis exaltata 'Bostoniensis,EXACT,100,SPECIES,ACCEPTED,Nephrolepis exaltata (L.) Schott,,2650927,Nephrolepidaceae,1609,925,428,1353
-부겐빌레아,Bougainvillea glabra,Bougainvillea glabra,EXACT,99,SPECIES,ACCEPTED,Bougainvillea glabra Choisy,,5384862,Nyctaginaceae,3255,1417,469,1886
-삭소롬,Streptocarpus saxorum,Streptocarpus saxorum,EXACT,100,SPECIES,ACCEPTED,Streptocarpus saxorum Engl.,,5590445,Gesneriaceae,96,78,8,86
-아데니움,Adenium obesum,Adenium obesum,EXACT,100,SPECIES,ACCEPTED,Adenium obesum (Forssk.) Roem. & Schult.,,7155887,Apocynaceae,3105,439,1607,2046
-아레카야자,Chrysalidocarpus lutescens,Chrysalidocarpus lutescens,EXACT,100,SPECIES,SYNONYM,Chrysalidocarpus lutescens H.Wendl.,Dypsis lutescens,2735935,Arecaceae,2058,255,1188,1443
-아비스고사리,Asplenium antiquum ‘Avis’,Asplenium antiquum 'Avis',EXACT,88,SPECIES,ACCEPTED,Asplenium antiquum Makino,,4257299,Aspleniaceae,485,243,77,320
-파키라,Pachira aquatica,Pachira aquatica,EXACT,100,SPECIES,ACCEPTED,Pachira aquatica Aubl.,,3152235,Malvaceae,3548,1819,1094,2913
-페퍼민트,Mentha × piperita,Mentha × piperita,EXACT,100,SPECIES,ACCEPTED,Mentha × piperita L.,,8707933,Lamiaceae,7366,2691,640,3331
-구슬세덤,Sedum dasyphyllum,Sedum dasyphyllum,EXACT,100,SPECIES,ACCEPTED,Sedum dasyphyllum L.,,7172720,Crassulaceae,54724,1099,6499,7598
-푸밀라고무나무,Ficus pumila,Ficus pumila,EXACT,99,SPECIES,ACCEPTED,Ficus pumila L.,,5361930,Moraceae,9373,1834,6514,8348
-하트호야,Hoya kerrii,Hoya kerrii,EXACT,100,SPECIES,ACCEPTED,Hoya kerrii Craib,,3573959,Apocynaceae,79,10,62,72
+﻿식물명,rawdata_학명,조회_학명,matchType,confidence,rank,status,gbif_scientificName,gbif_accepted,count_key,family,n_coord_all,n_specimen,n_inat_rg,n_wild,override
+아스파라거스 미리오클라두스,Asparagus?densiflorus?'Myriocladus',Asparagus densiflorus 'Myriocladus',EXACT,88,SPECIES,ACCEPTED,Asparagus densiflorus (Kunth) Jessop,,2768503,Asparagaceae,1948,443,502,945,
+꼬리조팝나무,Spiraea salicifolia,Spiraea salicifolia,EXACT,99,SPECIES,ACCEPTED,Spiraea salicifolia L.,,3026454,Rosaceae,15022,2812,1717,4529,
+디펜바키아,Dieffenbachia seguine,Dieffenbachia seguine,EXACT,99,SPECIES,ACCEPTED,Dieffenbachia seguine (Jacq.) Schott,,2869345,Araceae,3748,620,2524,3144,
+패랭이,Dianthus chinensis,Dianthus chinensis,EXACT,100,SPECIES,ACCEPTED,Dianthus chinensis L.,,3085418,Caryophyllaceae,13865,3905,7155,11060,
+드라세나'송오브인디아',Dracaena reflexa 'Song of India',Dracaena reflexa 'Song of India',EXACT,87,SPECIES,ACCEPTED,Dracaena reflexa Lam.,,5304436,Asparagaceae,5670,2165,757,2922,
+둥근잎꿩의비름,Hylotelephium ussuriense,Hylotelephium ussuriense,EXACT,100,SPECIES,ACCEPTED,Hylotelephium ussuriense (Kom.) H.Ohba,,7334591,Crassulaceae,136,14,38,52,
+몬스테라,Monstera deliciosa,Monstera deliciosa,EXACT,100,SPECIES,ACCEPTED,Monstera deliciosa Liebm.,,2868241,Araceae,5940,543,4233,4776,
+마조람,Origanum?majorana,Origanum majorana,EXACT,100,SPECIES,ACCEPTED,Origanum majorana L.,,2926615,Lamiaceae,2563,291,20,311,
+돌단풍,Mukdenia rossii,Mukdenia rossii,EXACT,100,SPECIES,ACCEPTED,Mukdenia rossii (Oliv.) Koidz.,,7339206,Saxifragaceae,625,172,71,243,
+글록시니아,Sinningia speciosa,Sinningia speciosa,EXACT,99,SPECIES,ACCEPTED,Sinningia speciosa (G.Lodd. ex Ker Gawl.) Hiern,,3825228,Gesneriaceae,194,100,23,123,
+망종화,Hypericum patulum,Hypericum patulum,EXACT,99,SPECIES,ACCEPTED,Hypericum patulum Thunb.,,3713491,Hypericaceae,2084,2022,20,2042,
+황매화,Kerria?japonica,Kerria japonica,EXACT,100,SPECIES,ACCEPTED,Kerria japonica (L.) DC.,,5371450,Rosaceae,14825,5201,2140,7341,
+금영화,Eschscholzia californica,Eschscholzia californica,EXACT,99,SPECIES,ACCEPTED,Eschscholzia californica Cham.,,2888380,Papaveraceae,118233,5478,65797,71275,
+매발톱,Aquilegia oxysepala,Aquilegia oxysepala,EXACT,100,SPECIES,ACCEPTED,Aquilegia oxysepala Trautv. & C.A.Mey.,,3930047,Ranunculaceae,1423,710,222,932,
+블루스타고사리,Phlebodium aureum,Phlebodium aureum,EXACT,100,SPECIES,ACCEPTED,Phlebodium aureum (L.) J.Sm.,,2650479,Polypodiaceae,6938,1599,5045,6644,
+원추천인국,Rudbeckia hirta,Rudbeckia hirta,EXACT,100,SPECIES,ACCEPTED,Rudbeckia hirta L.,,3114225,Asteraceae,72579,7802,57341,65143,
+오색마삭줄,Trachelospermum asiaticum,Trachelospermum asiaticum,EXACT,100,SPECIES,ACCEPTED,Trachelospermum asiaticum (Siebold & Zucc.) Nakai,,7317060,Apocynaceae,6124,1482,1108,2590,
+수박페페로미아,Peperomia argyreia,Peperomia argyreia,EXACT,100,SPECIES,ACCEPTED,Peperomia argyreia (Miq.) É.Morren,,4189296,Piperaceae,65,41,0,41,
+멕시코돌나물,Sedum mexicanum,Sedum mexicanum,EXACT,100,SPECIES,ACCEPTED,Sedum mexicanum Britton,,5361977,Crassulaceae,807,333,354,687,
+문샤인산세베리아,Sansevieria trifasciata 'Moonshine',Sansevieria trifasciata 'Moonshine',EXACT,88,SPECIES,SYNONYM,Sansevieria trifasciata Prain,Dracaena trifasciata,11041822,Asparagaceae,3025,447,2096,2543,
+백목련,Magnolia denudata,Magnolia denudata,EXACT,100,SPECIES,ACCEPTED,Magnolia denudata Desr.,,3153582,Magnoliaceae,1024,761,36,797,
+부처꽃,Lythrum salicaria,Lythrum salicaria,EXACT,100,SPECIES,ACCEPTED,Lythrum salicaria L.,,3188736,Lythraceae,823625,13708,106837,120545,
+줄리아페페,Peperomia tetragona,Peperomia tetragona,EXACT,100,SPECIES,ACCEPTED,Peperomia tetragona Ruiz & Pav.,,4183682,Piperaceae,158,156,2,158,
+프리지아,Freesia refracta,Freesia refracta,EXACT,100,SPECIES,ACCEPTED,Freesia refracta (Jacq.) Klatt,,2747084,Iridaceae,838,213,290,503,
+리아트리스,Liatris spicata,Liatris spicata,EXACT,100,SPECIES,ACCEPTED,Liatris spicata (L.) Willd.,,3104314,Asteraceae,5815,1474,3788,5262,
+구문초,Pelargonium graveolens,Pelargonium graveolens,EXACT,100,SPECIES,ACCEPTED,Pelargonium graveolens (Thunb.) L'Hér.,,2891608,Geraniaceae,471,203,106,309,
+미산딸나무,Cornus florida,Cornus florida,EXACT,99,SPECIES,ACCEPTED,Cornus florida L.,,3082240,Cornaceae,43450,4535,32690,37225,
+개암나무,Corylus heterophylla,Corylus heterophylla,EXACT,99,SPECIES,ACCEPTED,Corylus heterophylla Fisch. ex Trautv.,,2876072,Betulaceae,6377,3239,386,3625,
+홍단풍,Acer palmatum,Acer palmatum,EXACT,99,SPECIES,ACCEPTED,Acer palmatum Thunb.,,3189882,Sapindaceae,17056,5161,2736,7897,
+섬초롱꽃,Campanula takesimana,Campanula takesimana,EXACT,100,SPECIES,SYNONYM,Campanula takesimana Nakai,Campanula punctata,7222087,Campanulaceae,1061,727,182,909,
+자주루드베키아,Echinacea purpurea,Echinacea purpurea,EXACT,100,SPECIES,ACCEPTED,Echinacea purpurea (L.) Moench,,3150935,Asteraceae,17093,1063,15005,16068,
+네군도단풍,Acer negundo,Acer negundo,EXACT,100,SPECIES,ACCEPTED,Acer negundo L.,,3189866,Sapindaceae,259459,9908,140724,150632,
+아펠란드라,Aphelandra squarrosa,Aphelandra squarrosa,EXACT,100,SPECIES,ACCEPTED,Aphelandra squarrosa Nees,,7263987,Acanthaceae,142,67,36,103,
+애기달맞이꽃,Oenothera laciniata,Oenothera laciniata,EXACT,100,SPECIES,ACCEPTED,Oenothera laciniata Hill,,3188867,Onagraceae,13378,3518,8805,12323,
+말발도리,Deutzia parviflora,Deutzia parviflora,EXACT,100,SPECIES,ACCEPTED,Deutzia parviflora Bunge,,2985967,Hydrangeaceae,1881,1072,151,1223,
+부용화,Hibiscus mutabilis,Hibiscus mutabilis,EXACT,100,SPECIES,ACCEPTED,Hibiscus mutabilis L.,,3152555,Malvaceae,2141,874,887,1761,
+자금우,Ardisia japonica,Ardisia japonica,EXACT,100,SPECIES,ACCEPTED,Ardisia japonica (Thunb.) Blume,,5558066,Primulaceae,5358,2648,322,2970,
+꼬리진달래,Rhododendron?micranthum,Rhododendron micranthum,EXACT,99,SPECIES,ACCEPTED,Rhododendron micranthum Turcz.,,4170281,Ericaceae,1852,1167,168,1335,
+짚신나물,Agrimonia?pilosa,Agrimonia pilosa,EXACT,99,SPECIES,ACCEPTED,Agrimonia pilosa Ledeb.,,3002003,Rosaceae,20622,8411,5751,14162,
+서양골담초,Cytisus scoparius,Cytisus scoparius,EXACT,100,SPECIES,ACCEPTED,Cytisus scoparius (L.) Link,,5354656,Fabaceae,553336,6249,44215,50464,
+구즈베리,Ribes?grossularia,Ribes uva-crispa,EXACT,99,SPECIES,ACCEPTED,Ribes uva-crispa L.,,2986185,Grossulariaceae,228848,2865,4921,7786,"WCVP 정명(R. grossularia 이명), 11-12 사용자 결정"
+당아욱,Malva?sylvestris,Malva sylvestris,EXACT,100,SPECIES,ACCEPTED,Malva sylvestris L.,,3152374,Malvaceae,345953,6219,38044,44263,
+칠자화나무,Heptacodium miconioides,Heptacodium miconioides,EXACT,100,SPECIES,ACCEPTED,Heptacodium miconioides Rehder,,3855518,Caprifoliaceae,185,71,91,162,
+호주매화,Leptospermum scoparium,Leptospermum scoparium,EXACT,100,SPECIES,ACCEPTED,Leptospermum scoparium Forst.,,3181762,Myrtaceae,23697,3507,7408,10915,
+아단소니몬스테라,Monstera adansonii,Monstera adansonii,EXACT,100,SPECIES,ACCEPTED,Monstera adansonii Schott,,2868136,Araceae,5790,2853,1586,4439,
+개운죽,Dracaena sanderiana,Dracaena sanderiana,EXACT,99,SPECIES,ACCEPTED,Dracaena sanderiana Mast.,,7431653,Asparagaceae,374,144,217,361,
+거북알로카시아,Alocasia?×?mortfontanensis,Alocasia × mortfontanensis,EXACT,100,SPECIES,ACCEPTED,Alocasia × mortfontanensis André,,5532250,Araceae,33,4,10,14,
+긴기아난,Dendrobium kingianum,Dendrobium kingianum,EXACT,99,SPECIES,ACCEPTED,Dendrobium kingianum Bidwill ex Lindl.,,5316009,Orchidaceae,1418,279,785,1064,
+마지나타,Dracaena?marginata,Dracaena reflexa,EXACT,99,SPECIES,ACCEPTED,Dracaena reflexa Lam.,,5304436,Asparagaceae,5670,2165,757,2922,"D. reflexa var. angustifolia → 원종 근사(11-07 규칙), 11-12 사용자 결정"
+자스민,Jasminum officinale,Jasminum officinale,EXACT,100,SPECIES,ACCEPTED,Jasminum officinale L.,,3172261,Oleaceae,2232,777,71,848,
+제라늄,Pelargonium inquinans,Pelargonium inquinans,EXACT,99,SPECIES,ACCEPTED,Pelargonium inquinans (L.) L'Hér.,,2891615,Geraniaceae,444,88,254,342,
+청페페,Peperomia obtusifolia,Peperomia obtusifolia,EXACT,99,SPECIES,ACCEPTED,Peperomia obtusifolia (L.) A.Dietr.,,3086423,Piperaceae,3435,3001,264,3265,
+카틀레아,Cattleya spp.,Cattleya spp.,HIGHERRANK,96,GENUS,ACCEPTED,Cattleya Lindl.,,2800821,Orchidaceae,95084,2935,1653,4588,
+칼란디바,Kalanchoe blossfeldiana 'Calandiva',Kalanchoe blossfeldiana 'Calandiva',EXACT,88,SPECIES,ACCEPTED,Kalanchoe blossfeldiana Poelln.,,2985944,Crassulaceae,320,120,62,182,
+콜레우스,Coleus scutellarioides,Coleus scutellarioides,EXACT,99,SPECIES,ACCEPTED,Coleus scutellarioides (L.) Benth.,,5341492,Lamiaceae,4749,1872,1844,3716,
+드라세나콤팩타,Dracaena fragrans 'Compacta',Dracaena fragrans 'Compacta',EXACT,85,SPECIES,ACCEPTED,Dracaena fragrans (L.) Ker Gawl.,,5304583,Asparagaceae,2458,613,1462,2075,
+콩고,Philodendron?'Congo',Philodendron 'Congo',HIGHERRANK,95,GENUS,ACCEPTED,Philodendron Schott,,2861312,Araceae,76452,55450,13073,68523,
+크로시아,Clusia rosea,Clusia rosea,EXACT,99,SPECIES,ACCEPTED,Clusia rosea Jacq.,,5421060,Clusiaceae,3554,588,2262,2850,
+크로톤,Codiaeum variegatum,Codiaeum variegatum,EXACT,99,SPECIES,ACCEPTED,Codiaeum variegatum (L.) Rumph. ex A.Juss.,,3071476,Euphorbiaceae,6108,1618,2828,4446,
+테이블야자,Chamaedorea elegans,Chamaedorea elegans,EXACT,100,SPECIES,ACCEPTED,Chamaedorea elegans Mart.,,2734661,Arecaceae,723,508,142,650,
+아글라오네마,Aglaonema commutatum,Aglaonema commutatum,EXACT,100,SPECIES,ACCEPTED,Aglaonema commutatum Schott,,2866467,Araceae,504,105,300,405,
+필로덴드론,Philodendron spp.,Philodendron spp.,HIGHERRANK,95,GENUS,ACCEPTED,Philodendron Schott,,2861312,Araceae,76452,55450,13073,68523,
+덴드로비움,Dendrobium spp.,Dendrobium spp.,HIGHERRANK,95,GENUS,ACCEPTED,Dendrobium Sw.,,2821327,Orchidaceae,52837,20819,15968,36787,
+벵갈고무나무,Ficus benghalensis,Ficus benghalensis,EXACT,100,SPECIES,ACCEPTED,Ficus benghalensis L.,,5361919,Moraceae,12150,222,1884,2106,
+송악,Hedera rhombea,Hedera rhombea,EXACT,99,SPECIES,ACCEPTED,Hedera rhombea (Miq.) Bean,,3036022,Araliaceae,4797,1278,911,2189,
+소철,Cycas revoluta,Cycas revoluta,EXACT,99,SPECIES,ACCEPTED,Cycas revoluta Thunb.,,2683217,Cycadaceae,1312,444,579,1023,
+벤자민고무나무,Ficus benjamina,Ficus benjamina,EXACT,99,SPECIES,ACCEPTED,Ficus benjamina L.,,5361932,Moraceae,5062,1645,1459,3104,
+레몬밤,Melissa officinalis,Melissa officinalis,EXACT,100,SPECIES,ACCEPTED,Melissa officinalis L.,,5341501,Lamiaceae,133568,2454,6789,9243,
+용설란,Agave americana,Agave americana,EXACT,100,SPECIES,ACCEPTED,Agave americana L.,,2767031,Asparagaceae,33868,769,14508,15277,
+팔손이,Fatsia japonic,Fatsia japonic,FUZZY,98,SPECIES,ACCEPTED,Fatsia japonica (Thunb.) Decne. & Planch.,,3039046,Araliaceae,5140,522,2485,3007,
+종려나무,Trachycarpus fortunei,Trachycarpus fortunei,EXACT,100,SPECIES,ACCEPTED,Trachycarpus fortunei (Hook.) H.Wendl.,,2739071,Arecaceae,22431,848,2325,3173,
+수국,Hydrangea macrophylla,Hydrangea macrophylla,EXACT,100,SPECIES,ACCEPTED,Hydrangea macrophylla (Thunb.) Ser.,,2985994,Hydrangeaceae,12910,1188,2490,3678,
+칼라,Zantedeschia aethiopica,Zantedeschia aethiopica,EXACT,100,SPECIES,ACCEPTED,Zantedeschia aethiopica (L.) Spreng.,,2868827,Araceae,48130,1007,18303,19310,
+금유선인장,Aporocactus flagelliformis,Aporocactus flagelliformis,EXACT,100,SPECIES,ACCEPTED,Aporocactus flagelliformis (L.) Lem.,,7283331,Cactaceae,144,66,60,126,
+드라코,Dracaena draco,Dracaena draco,EXACT,100,SPECIES,ACCEPTED,Dracaena draco (L.) L.,,5304469,Asparagaceae,2059,157,718,875,
+공작선인장,Disocactus ackermannii,Disocactus ackermannii,EXACT,99,SPECIES,ACCEPTED,Disocactus ackermannii (Haw.) Ralf Bauer,,7649247,Cactaceae,150,87,55,142,
+쿠페아,Cuphea hyssopifolia,Cuphea hyssopifolia,EXACT,99,SPECIES,ACCEPTED,Cuphea hyssopifolia Kunth,,3188698,Lythraceae,3682,799,2451,3250,
+칼라데아 마코야나,Goeppertia makoyana,Goeppertia makoyana,EXACT,100,SPECIES,ACCEPTED,Goeppertia makoyana (É.Morren) Borchs. & S.Suárez,,7708211,Marantaceae,27,12,4,16,
+디펜바키아 ‘마리안느’,Dieffenbachia ‘Marianne’,Dieffenbachia 'Marianne',HIGHERRANK,96,GENUS,ACCEPTED,Dieffenbachia Schott,,2869330,Araceae,10733,6961,2706,9667,
+헬리코니아,Heliconia spp.,Heliconia spp.,HIGHERRANK,96,GENUS,ACCEPTED,Heliconia L.,,2760545,Heliconiaceae,59439,27887,25131,53018,
+틸란드시아 이오난사,Tillandsia ionantha,Tillandsia ionantha,EXACT,100,SPECIES,ACCEPTED,Tillandsia ionantha Planch.,,2695006,Bromeliaceae,1276,531,664,1195,
+막실라리아,Maxillaria tenuifolia,Maxillaria tenuifolia,EXACT,100,SPECIES,ACCEPTED,Maxillaria tenuifolia Lindl.,,5317968,Orchidaceae,384,278,96,374,
+산취선인장,Echinopsis chamaecereus,Echinopsis chamaecereus,EXACT,100,SPECIES,SYNONYM,Echinopsis chamaecereus H.Friedrich & Glaetzle,Chamaecereus silvestrii,3944596,Cactaceae,37,8,18,26,
+마란타,Maranta leuconeura,Maranta leuconeura,EXACT,100,SPECIES,ACCEPTED,Maranta leuconeura É.Morren,,2761337,Marantaceae,433,109,137,246,
+박쥐나무,Alangium platanifolium,Alangium platanifolium,EXACT,100,SPECIES,ACCEPTED,Alangium platanifolium (Siebold & Zucc.) Harms,,7326268,Cornaceae,4674,2377,65,2442,
+피나타라벤더,Lavandula pinnata,Lavandula pinnata,EXACT,99,SPECIES,ACCEPTED,Lavandula pinnata Lundmark,,7894021,Lamiaceae,248,48,138,186,
+디펜바키아 '트로픽스노우',Dieffenbachia seguine ‘Tropic Snow’,Dieffenbachia seguine 'Tropic Snow',EXACT,87,SPECIES,ACCEPTED,Dieffenbachia seguine (Jacq.) Schott,,2869345,Araceae,3748,620,2524,3144,
+부채선인장,Opuntia ficus-indica,Opuntia ficus-indica,EXACT,99,SPECIES,ACCEPTED,Opuntia ficus-indica (L.) Mill.,,5384064,Cactaceae,33495,1270,20861,22131,
+멜라니 고무나무,Ficus elastica ‘Melany’,Ficus elastica 'Melany',EXACT,85,SPECIES,ACCEPTED,Ficus elastica Roxb.,,7835333,Moraceae,3484,365,1114,1479,
+보스턴고사리,Nephrolepis exaltata ‘Bostoniensis,Nephrolepis exaltata 'Bostoniensis,EXACT,100,SPECIES,ACCEPTED,Nephrolepis exaltata (L.) Schott,,2650927,Nephrolepidaceae,1609,925,428,1353,
+부겐빌레아,Bougainvillea glabra,Bougainvillea glabra,EXACT,99,SPECIES,ACCEPTED,Bougainvillea glabra Choisy,,5384862,Nyctaginaceae,3255,1417,469,1886,
+삭소롬,Streptocarpus saxorum,Streptocarpus saxorum,EXACT,100,SPECIES,ACCEPTED,Streptocarpus saxorum Engl.,,5590445,Gesneriaceae,96,78,8,86,
+아데니움,Adenium obesum,Adenium obesum,EXACT,100,SPECIES,ACCEPTED,Adenium obesum (Forssk.) Roem. & Schult.,,7155887,Apocynaceae,3105,439,1607,2046,
+아레카야자,Chrysalidocarpus lutescens,Chrysalidocarpus lutescens,EXACT,100,SPECIES,SYNONYM,Chrysalidocarpus lutescens H.Wendl.,Dypsis lutescens,2735935,Arecaceae,2058,255,1188,1443,
+아비스고사리,Asplenium antiquum ‘Avis’,Asplenium antiquum 'Avis',EXACT,88,SPECIES,ACCEPTED,Asplenium antiquum Makino,,4257299,Aspleniaceae,485,243,77,320,
+파키라,Pachira aquatica,Pachira aquatica,EXACT,100,SPECIES,ACCEPTED,Pachira aquatica Aubl.,,3152235,Malvaceae,3548,1819,1094,2913,
+페퍼민트,Mentha × piperita,Mentha × piperita,EXACT,100,SPECIES,ACCEPTED,Mentha × piperita L.,,8707933,Lamiaceae,7366,2691,640,3331,
+구슬세덤,Sedum dasyphyllum,Sedum dasyphyllum,EXACT,100,SPECIES,ACCEPTED,Sedum dasyphyllum L.,,7172720,Crassulaceae,54724,1099,6499,7598,
+푸밀라고무나무,Ficus pumila,Ficus pumila,EXACT,99,SPECIES,ACCEPTED,Ficus pumila L.,,5361930,Moraceae,9373,1834,6514,8348,
+하트호야,Hoya kerrii,Hoya kerrii,EXACT,100,SPECIES,ACCEPTED,Hoya kerrii Craib,,3573959,Apocynaceae,79,10,62,72,

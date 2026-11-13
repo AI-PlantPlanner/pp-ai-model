@@ -32,11 +32,10 @@ D_MAIN, D_SENS = 25, 14
 EXCLUDE_KEYS = {7222087: "heterotypic 이명(섬초롱꽃, SAGE 규칙상 병합 불가)"}
 YEARS = range(2016, 2026)
 # 11-06 학명 조사에서 사유가 밝혀진 식물(메모 project_aiplant_data_build). 학습 세트 판정에는 쓰지 않고 설명만 단다.
+# 11-12: 구즈베리(→ R. uva-crispa)·마지나타(→ D. reflexa 원종 근사)는 src/name_overrides.py로 해소되어 목록에서 뺐다.
 KNOWN_REASONS = {
     "콩고": "원예 품종(속명만, 원종 불명)",
     "디펜바키아 ‘마리안느’": "원예 품종(속명만, 원종 불명)",
-    "구즈베리": "Ribes grossularia = R. uva-crispa의 heterotypic 이명(원예팀 확인 대기)",
-    "마지나타": "Dracaena marginata 저자 갈림(Lam./Aiton), 원산 판정 불가(원예팀 확인 대기)",
     "거북알로카시아": "인공 교배종(원산 없음)",
     "아펠란드라": "WCVP Unplaced(원산 판정 불가)",
 }
@@ -126,7 +125,9 @@ def check_weather(sc: pd.DataFrame) -> dict:
     s = sc["src_id"].drop_duplicates().sample(200, random_state=0)
     wrong = 0
     for i, g in s.groupby(s // CHUNK):
-        ids = set(pd.read_parquet(OUT / "daily_features" / "2025" / f"p{i:02d}.parquet", columns=["src_id"])["src_id"])
+        ids = set()  # 11-12: 추가 칸은 같은 조각 번호의 p16b 파일에 있음 → 조각 번호로 시작하는 파일 모두
+        for f in (OUT / "daily_features" / "2025").glob(f"p{i:02d}*.parquet"):
+            ids |= set(pd.read_parquet(f, columns=["src_id"])["src_id"])
         wrong += len(set(g) - ids)
     return {"src_ids_needed": len(need), "missing_by_year": miss, "chunk_rule_errors_in_200": wrong}
 

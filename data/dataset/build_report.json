@@ -2,64 +2,64 @@
  "species_cell_pairs_dropped_coast": 135,
  "sets": {
   "main(v_main,D25,품종 근사)": {
-   "plants": 76,
-   "species": 75,
-   "species_cell_pairs": 94091,
-   "cells": 63629,
-   "records": 266941
+   "plants": 78,
+   "species": 76,
+   "species_cell_pairs": 95304,
+   "cells": 63995,
+   "records": 268820
   },
   "D14 감도": {
-   "plants": 82,
-   "species": 81,
-   "species_cell_pairs": 94202,
-   "cells": 63677,
-   "records": 267189
+   "plants": 84,
+   "species": 82,
+   "species_cell_pairs": 95415,
+   "cells": 64043,
+   "records": 269068
   },
   "품종 제외": {
-   "plants": 68,
-   "species": 68,
-   "species_cell_pairs": 93135,
-   "cells": 62983,
-   "records": 264997
+   "plants": 70,
+   "species": 70,
+   "species_cell_pairs": 94629,
+   "cells": 63630,
+   "records": 267798
   },
   "v_urban 감도": {
-   "plants": 76,
-   "species": 75,
-   "species_cell_pairs": 106281,
-   "cells": 68145,
-   "records": 386120
+   "plants": 78,
+   "species": 76,
+   "species_cell_pairs": 107666,
+   "cells": 68511,
+   "records": 388346
   },
   "v_intro 감도": {
-   "plants": 79,
-   "species": 78,
-   "species_cell_pairs": 129845,
-   "cells": 76831,
-   "records": 378279
+   "plants": 81,
+   "species": 79,
+   "species_cell_pairs": 132441,
+   "cells": 77446,
+   "records": 382190
   },
   "v_all 감도": {
-   "plants": 84,
-   "species": 83,
-   "species_cell_pairs": 144582,
-   "cells": 81226,
-   "records": 402187
+   "plants": 86,
+   "species": 84,
+   "species_cell_pairs": 147580,
+   "cells": 81992,
+   "records": 406771
   },
   "v_coast1 감도": {
-   "plants": 76,
-   "species": 75,
-   "species_cell_pairs": 94799,
-   "cells": 64119,
-   "records": 269563
+   "plants": 78,
+   "species": 76,
+   "species_cell_pairs": 96017,
+   "cells": 64488,
+   "records": 271450
   },
   "v_coast20 감도": {
-   "plants": 76,
-   "species": 75,
-   "species_cell_pairs": 95797,
-   "cells": 64830,
-   "records": 274158
+   "plants": 78,
+   "species": 76,
+   "species_cell_pairs": 97025,
+   "cells": 65201,
+   "records": 276061
   }
  },
  "weather": {
-  "src_ids_needed": 84340,
+  "src_ids_needed": 85096,
   "missing_by_year": {
    "2016": 0,
    "2017": 0,
@@ -96,20 +96,12 @@
    "WCVP Unplaced(원산 판정 불가)"
   ],
   [
-   "구즈베리",
-   "Ribes grossularia = R. uva-crispa의 heterotypic 이명(원예팀 확인 대기)"
-  ],
-  [
    "칠자화나무",
    "원산 칸 부족(<14)"
   ],
   [
    "거북알로카시아",
    "인공 교배종(원산 없음)"
-  ],
-  [
-   "마지나타",
-   "Dracaena marginata 저자 갈림(Lam./Aiton), 원산 판정 불가(원예팀 확인 대기)"
   ],
   [
    "카틀레아",

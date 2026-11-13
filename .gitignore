@@ -250,3 +250,11 @@ results/pretrain/**/*.pt
 
 # 정렬 학습 체크포인트
 results/align/**/*.pt
+
+# 11-13: 체크포인트·대용량 배열은 위치와 상관없이 제외(재현 가능, 로그·설정·요약만 커밋)
+results/**/*.pt
+results/**/*.npy
+results/**/*.npz
+# 학명 재확인 추가 다운로드 원본·중간 산출물(재생성: src/gbif_addendum.py, src/addendum_pipeline.py)
+data/gbif/addendum/*.zip
+data/gbif/addendum/*.parquet

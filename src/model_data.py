@@ -39,6 +39,7 @@ VARS = ["t_min", "t_mean", "t_max", "rh_mean"]
 N_DAYS = 365
 CACHE = OUT / "model_cache"
 CLIM_F = CACHE / "clim_f16.npy"
+CLIM_MEAN_F = CACHE / "clim_mean_f16.npy"  # 부품 제거 '10년 평균 1개 입력': (1, 칸, 365, 4) 날짜별 10년 평균
 DAYLEN_F = CACHE / "daylen_f16.npy"
 STATS_F = CACHE / "norm_stats.json"
 FOLDS_F = DS / "folds.csv"
@@ -79,11 +80,22 @@ def build_cache() -> None:
     STATS_F.write_text(json.dumps(stats, indent=1))
 
 
-class Climate:
-    """기후 캐시를 메모리 맵으로 열고 (칸, 연도) 묶음을 표준화된 (B, 365, 7) 텐서로 돌려준다."""
+def build_mean_cache() -> None:
+    clim = np.load(CLIM_F, mmap_mode="r")
+    out = np.lib.format.open_memmap(CLIM_MEAN_F, mode="w+", dtype=np.float16, shape=(1, *clim.shape[1:]))
+    for i in range(0, clim.shape[1], 5000):
+        out[0, i:i + 5000] = clim[:, i:i + 5000].astype(np.float32).mean(0).astype(np.float16)
+    out.flush()
 
-    def __init__(self, in_memory: bool = False):
-        self.clim = np.load(CLIM_F, mmap_mode=None if in_memory else "r")
+
+class Climate:
+    """기후 캐시를 메모리 맵으로 열고 (칸, 연도) 묶음을 표준화된 (B, 365, 7) 텐서로 돌려준다.
+    mean=True면 10년 평균 1개(연도 축 길이 1) — 표준화 통계는 같은 것(전체 칸·연도)을 쓴다."""
+
+    def __init__(self, in_memory: bool = False, mean: bool = False):
+        if mean and not CLIM_MEAN_F.exists():
+            build_mean_cache()
+        self.clim = np.load(CLIM_MEAN_F if mean else CLIM_F, mmap_mode=None if in_memory else "r")
         self.daylen = np.load(DAYLEN_F)
         st = json.loads(STATS_F.read_text())
         self.mean = np.asarray(st["mean"], np.float32)

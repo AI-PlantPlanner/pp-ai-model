@@ -1,0 +1,55 @@
+{
+  "download_key": "0003688-261110092616502",
+  "requested_at": "2026-11-12T12:59:57.557284+00:00",
+  "taxa": {
+    "구즈베리": [
+      "Ribes uva-crispa",
+      2986185
+    ]
+  },
+  "request_body": {
+    "creator": "<redacted>",
+    "format": "SIMPLE_CSV",
+    "predicate": {
+      "type": "and",
+      "predicates": [
+        {
+          "type": "in",
+          "key": "TAXON_KEY",
+          "values": [
+            "2986185"
+          ]
+        },
+        {
+          "type": "equals",
+          "key": "HAS_COORDINATE",
+          "value": "true"
+        },
+        {
+          "type": "equals",
+          "key": "HAS_GEOSPATIAL_ISSUE",
+          "value": "false"
+        },
+        {
+          "type": "or",
+          "predicates": [
+            {
+              "type": "equals",
+              "key": "BASIS_OF_RECORD",
+              "value": "PRESERVED_SPECIMEN"
+            },
+            {
+              "type": "equals",
+              "key": "DATASET_KEY",
+              "value": "50c9509d-22c7-4a22-a47d-8c48425ef4a7"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "doi": "10.15468/dl.ac4nug",
+  "total_records": 7786,
+  "file": "occurrences_0003688-261110092616502.zip",
+  "fetched_at": "2026-11-12T13:02:03.728138+00:00"
+}

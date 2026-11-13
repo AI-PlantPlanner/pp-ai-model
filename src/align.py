@@ -37,7 +37,33 @@ from sklearn.model_selection import StratifiedShuffleSplit
 from torch import nn
 
 from src.gee_annual_extremes import ROOT
+from src.gee_annual_extremes import OUT
 from src.model_data import CLIMATE_COL, FOLDS_F, Climate, PairSampler, PlantFeatures, plant_table
+
+ABLATIONS = ["none", "no_pretrain", "stats_mlp", "no_ctype", "mean_input", "unbalanced"]
+STAT_COLS = ["cold_ext", "hot_ext", "t_annual", "rh_annual", "rh_p05", "bio6", "bio5", "rh_dry_month"]  # 베이스라인 지표 8개
+
+
+class StatsInput:
+    """'요약통계 + MLP'용 입력: 기후 대신 칸 번호를 넘기고 모델(StatsTower)이 표를 찾아 씀. 연도 없음(n_years 1)."""
+
+    def __init__(self):
+        d = pd.read_parquet(OUT / "cell_climate_10y.parquet").sort_values("src_id")
+        x = d[STAT_COLS].to_numpy(np.float32)
+        self.table = torch.from_numpy((x - x.mean(0)) / x.std(0))  # 라벨 없는 기후값만으로 표준화
+        self.n_src, self.n_years = len(d), 1
+
+    def batch(self, src, year_idx):
+        return torch.as_tensor(np.asarray(src), dtype=torch.long)
+
+
+def make_inputs(ablate: str):
+    return StatsInput() if ablate == "stats_mlp" else Climate(mean=ablate == "mean_input")
+
+
+def build_model(ablate: str, patch: int, d_plant: int, C) -> "AlignModel":
+    return AlignModel(patch, d_plant, pretrained=ablate != "no_pretrain",
+                      stats=C.table if ablate == "stats_mlp" else None)
 from src.model_patchtst import PatchTSTEncoder
 
 RES = ROOT / "results" / "align"
@@ -50,16 +76,32 @@ SEED = 0
 
 
 class ClimateTower(nn.Module):
-    def __init__(self, patch: int):
+    def __init__(self, patch: int, pretrained: bool = True):
         super().__init__()
         self.enc = PatchTSTEncoder(patch)
-        st = torch.load(PRE / f"p{patch}" / "best.pt", map_location="cpu")
-        self.enc.load_state_dict({k[len("encoder."):]: v for k, v in st["model"].items() if k.startswith("encoder.")})
+        if pretrained:  # 부품 제거 '사전학습 없음'이면 무작위 초기값
+            st = torch.load(PRE / f"p{patch}" / "best.pt", map_location="cpu")
+            self.enc.load_state_dict({k[len("encoder."):]: v for k, v in st["model"].items() if k.startswith("encoder.")})
         self.head = nn.Sequential(nn.Flatten(1), nn.Dropout(0.2),
                                   nn.Linear(self.enc.n_ch * self.enc.n_patch * self.enc.d, E))
 
     def forward(self, x):
         return F.normalize(self.head(self.enc(x)), dim=-1)
+
+
+class StatsTower(nn.Module):
+    """부품 제거 '요약통계 + MLP'(설계 2-3 ②): 베이스라인 기후 지표 8개(칸별 10년 통계) → MLP(식물 쪽과 같은 폭).
+    입력이 연도와 무관하므로 연도 인자는 무시. 인코더가 없어 2단계 일정의 1단계(고정)도 같은 매개변수를 학습."""
+
+    def __init__(self, stats: torch.Tensor):
+        super().__init__()
+        self.register_buffer("x", stats)  # (칸, 8) 표준화
+        self.enc = nn.Identity()
+        self.net = nn.Sequential(nn.Linear(stats.shape[1], 256), nn.ReLU(), nn.Dropout(0.2), nn.Linear(256, 256), nn.ReLU(),
+                                 nn.Dropout(0.2), nn.Linear(256, E))
+
+    def forward(self, src):
+        return F.normalize(self.net(self.x[src]), dim=-1)
 
 
 class PlantTower(nn.Module):
@@ -73,9 +115,10 @@ class PlantTower(nn.Module):
 
 
 class AlignModel(nn.Module):
-    def __init__(self, patch: int, d_plant: int):
+    def __init__(self, patch: int, d_plant: int, pretrained: bool = True, stats: torch.Tensor | None = None):
         super().__init__()
-        self.climate, self.plant = ClimateTower(patch), PlantTower(d_plant)
+        self.climate = StatsTower(stats) if stats is not None else ClimateTower(patch, pretrained)
+        self.plant = PlantTower(d_plant)
         self.t = nn.Parameter(torch.tensor(np.log(1 / 0.07), dtype=torch.float32))
         self.b = nn.Parameter(torch.tensor(0.0))
 
@@ -160,6 +203,7 @@ def main() -> None:
     ap.add_argument("--eval_every", type=int, default=250)
     ap.add_argument("--seed", type=int, default=SEED)
     ap.add_argument("--final", action="store_true", help="내부 분할 없이 바깥 학습 종 전체로(선택 후 본 학습)")
+    ap.add_argument("--ablate", choices=ABLATIONS, default="none", help="부품 제거 실험(설계 3단계 6)")
     a = ap.parse_args()
     dev = "mps" if torch.backends.mps.is_available() else "cpu"
     torch.manual_seed(a.seed)
@@ -169,18 +213,19 @@ def main() -> None:
     assert (folds["식물명"].to_numpy() == table["식물명"].to_numpy()).all()
     outer_tr = np.flatnonzero(folds["fold"].to_numpy() != a.fold)
     tr, va = (outer_tr, np.array([], int)) if a.final else inner_split(table, outer_tr)
-    C = Climate()
-    pf = PlantFeatures(table).fit_scaler(tr)
+    C = make_inputs(a.ablate)
+    pf = PlantFeatures(table, use_climate_type=a.ablate != "no_ctype").fit_scaler(tr)
     P = pf.tensor()
-    sampler = PairSampler(table, tr, seed=a.seed)
+    sampler = PairSampler(table, tr, balanced=a.ablate != "unbalanced", seed=a.seed)
     keys_tr = table.loc[tr, "count_key"].to_numpy()
     R = len(tr)
     lam = float(R - 1) if a.lam == "R-1" else float(a.lam)
-    tag = f"{a.loss}_p{a.patch}" + (f"_lam{a.lam}" if a.loss == "B" else "") + (f"_s{a.seed}" if a.seed != SEED else "")
+    tag = f"{a.loss}_p{a.patch}" + (f"_lam{a.lam}" if a.loss == "B" else "") + (f"_s{a.seed}" if a.seed != SEED else "") \
+        + (f"_abl-{a.ablate}" if a.ablate != "none" else "")
     out = RES / ("final" if a.final else "select") / f"fold{a.fold}" / tag
     out.mkdir(parents=True, exist_ok=True)
 
-    model = AlignModel(a.patch, pf.dim).to(dev)
+    model = build_model(a.ablate, a.patch, pf.dim, C).to(dev)
     evaluator = None if a.final else InnerEval(table, va, C)
     col_of_row = {r: i for i, r in enumerate(tr)}
     same_key_full = torch.from_numpy(keys_tr[:, None] == keys_tr[None, :]).to(dev)  # (R,R)
@@ -191,14 +236,14 @@ def main() -> None:
         if a.loss == "A":
             losses = []
             for _ in range(G):
-                rows, src, yr = sampler.sample_unique()
+                rows, src, yr = sampler.sample_unique(C.n_years)
                 zc = model.climate(C.batch(src, yr).to(dev))
                 zp = model.plant(P_tr[[col_of_row[r] for r in rows]])
                 losses.append(loss_clip(model, zc, zp))
             return torch.stack(losses).mean()
-        rows, src, yr = sampler.sample(a.bs)
+        rows, src, yr = sampler.sample(a.bs, C.n_years)
         cols = torch.tensor([col_of_row[r] for r in rows], device=dev)
-        rs, ry = sampler.random_cells(a.bs, C.n_src)
+        rs, ry = sampler.random_cells(a.bs, C.n_src, C.n_years)
         zc = model.climate(torch.cat([C.batch(src, yr), C.batch(rs, ry)]).to(dev))
         same = same_key_full[cols] & ~F.one_hot(cols, R).bool()
         return loss_an_full(model, zc[:a.bs], zc[a.bs:], model.plant(P_tr), cols, same, lam)
@@ -213,7 +258,7 @@ def main() -> None:
     for phase, n_steps in [("lp", a.lp_steps), ("ft", a.ft_steps)]:
         for p in enc_params:
             p.requires_grad_(phase == "ft")
-        groups = [{"params": other, "lr": 5e-4}] + ([{"params": enc_params, "lr": 1e-4}] if phase == "ft" else [])
+        groups = [{"params": other, "lr": 5e-4}] + ([{"params": enc_params, "lr": 1e-4}] if phase == "ft" and enc_params else [])
         opt = torch.optim.Adam(groups)
         if phase == "lp":
             model.climate.enc.eval()  # 고정 단계: 인코더 BatchNorm·드롭아웃도 고정

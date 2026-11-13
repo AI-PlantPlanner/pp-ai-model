@@ -1,0 +1,32 @@
+{
+ "args": {
+  "fold": 2,
+  "loss": "A",
+  "patch": 8,
+  "lam": "1",
+  "lp_steps": 1000,
+  "ft_steps": 3000,
+  "bs": 256,
+  "eval_every": 250,
+  "seed": 0,
+  "final": false
+ },
+ "lambda": 1.0,
+ "R_train_plants": 49,
+ "n_inner_val_plants": 12,
+ "G": 5,
+ "inner_val_plants": [
+  "망종화",
+  "황매화",
+  "블루스타고사리",
+  "줄리아페페",
+  "개암나무",
+  "자주루드베키아",
+  "호주매화",
+  "종려나무",
+  "칼라",
+  "공작선인장",
+  "틸란드시아 이오난사",
+  "하트호야"
+ ]
+}
