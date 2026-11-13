@@ -1,0 +1,5 @@
+{"step": 250, "phase": "lp", "train_loss": 0.12792943572998047, "scale": 14.398198127746582, "minutes": 1.5}
+{"step": 500, "phase": "lp", "train_loss": 0.08460382682085037, "scale": 14.569356918334961, "minutes": 2.9}
+{"step": 750, "phase": "lp", "train_loss": 0.08067738646268845, "scale": 14.759486198425293, "minutes": 4.3}
+{"step": 1000, "phase": "lp", "train_loss": 0.07802063959836959, "scale": 14.987664222717285, "minutes": 5.8}
+{"step": 1250, "phase": "ft", "train_loss": 0.06698095731437206, "scale": 15.4316987991333, "minutes": 9.9}

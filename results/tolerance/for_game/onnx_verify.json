@@ -1,0 +1,16 @@
+{
+ "n_cases": 2000,
+ "n_plants": 100,
+ "max_abs_diff": {
+  "score": 0.00017,
+  "light": 3e-05,
+  "temp": 0.00028,
+  "humidity": 0.00042
+ },
+ "mismatch_counts": {
+  "gate": 0,
+  "suitable": 0,
+  "warn_dry": 0
+ },
+ "pass": true
+}

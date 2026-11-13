@@ -11,3 +11,20 @@ onnxruntime==1.17.0
 # 환경 프로파일 생성(src/env_profiles.py generate)에만 필요하다.
 # 생성 결과는 JSON으로 커밋해두므로, 파이프라인 실행·재학습에는 필요 없다.
 anthropic==1.5.0
+
+# GBIF 데이터 구축(src/gbif_*.py)에 필요
+geopandas==0.14.4
+shapely==2.0.4
+pyarrow==15.0.2
+# 좌표 정제(src/gbif_clean.R)는 R 4.6.2 + CoordinateCleaner 3.0.1 + arrow 26.0.0 (data/gbif/cc_session.txt에 전체 버전 기록)
+scipy==1.17.1
+pyproj==3.7.2
+fiona==1.10.1
+requests==2.34.2
+
+# 기상 추출(src/gee_*.py, src/coast_fill.py) — Google Earth Engine 비상업 등록 + `earthengine authenticate` 필요
+earthengine-api==1.7.51
+google-api-python-client==2.201.0
+
+# 추천 모델(백로그 6번, src/model_*.py) — Apple M4에서 MPS 사용 확인(11-07)
+torch==2.15.0

@@ -1,0 +1,18 @@
+{
+ "n_plants": 76,
+ "cold_cal_fit": {
+  "a": 0.881,
+  "b": 8.242
+ },
+ "rho_cold_vs_hort": 0.873,
+ "cold_loo_mae": 4.97,
+ "cold_loo_median": 3.6,
+ "rho_hot_vs_hort": 0.389,
+ "rho_dry_vs_hort_hum_min": 0.255,
+ "seed_sd_median": {
+  "cold": 0.84,
+  "hot": 0.23,
+  "dry": 1.57
+ },
+ "note": "식물 76행 단위(평가의 종 75 단위와 약간 다름). cold_cal은 76식물 전체로 맞춤 — 제품용 값, 오차는 LOO로 보고."
+}

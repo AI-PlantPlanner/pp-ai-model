@@ -1,0 +1,89 @@
+{
+ "placement_id": "example_seoul_livingroom_2025",
+ "cultivation_context": "실내",
+ "room_summary": {
+  "t_min_year": 21.5,
+  "t_max_year": 28.0,
+  "t_mean": 22.5,
+  "rh_mean": 54.6,
+  "rh_dry_p05": 35.4,
+  "light_lux_mean": 1000.0
+ },
+ "plants": [
+  {
+   "name": "칼라데아 마코야나",
+   "scientific_name": "Goeppertia makoyana",
+   "score": 100.0,
+   "suitable": true,
+   "factor_scores": {
+    "light": 100.0,
+    "temp": 100.0,
+    "humidity": 100.0
+   },
+   "gate_reason": null,
+   "warnings": []
+  },
+  {
+   "name": "멜라니 고무나무",
+   "scientific_name": "Ficus elastica ‘Melany’",
+   "score": 100.0,
+   "suitable": true,
+   "factor_scores": {
+    "light": 100.0,
+    "temp": 100.0,
+    "humidity": 100.0
+   },
+   "gate_reason": null,
+   "warnings": []
+  },
+  {
+   "name": "콩고",
+   "scientific_name": "Philodendron 'Congo'",
+   "score": 100.0,
+   "suitable": true,
+   "factor_scores": {
+    "light": 100.0,
+    "temp": 100.0,
+    "humidity": 100.0
+   },
+   "gate_reason": null,
+   "warnings": []
+  },
+  {
+   "name": "페퍼민트",
+   "scientific_name": "Mentha × piperita",
+   "score": 0.0,
+   "suitable": false,
+   "factor_scores": {
+    "light": 0.0,
+    "temp": 0.0,
+    "humidity": 0.0
+   },
+   "gate_reason": "재배구분 불일치",
+   "warnings": []
+  },
+  {
+   "name": "파키라",
+   "scientific_name": "Pachira aquatica",
+   "score": 100.0,
+   "suitable": true,
+   "factor_scores": {
+    "light": 100.0,
+    "temp": 100.0,
+    "humidity": 100.0
+   },
+   "gate_reason": null,
+   "warnings": [
+    {
+     "type": "model_dry",
+     "basis": "model_estimate",
+     "room_value": 35.4,
+     "plant_limit": 36.6,
+     "message": "건조한 시기 습도 35%가 이 식물 자생지의 건조 한계 37%보다 낮음 (모델 추정, 참고)"
+    }
+   ]
+  }
+ ],
+ "spec_version": "v1-draft",
+ "_note": "예시: 서울 바깥 날씨로 만든 난방 거실 시나리오, 광량 1000 lux 고정. 식물 5개만 발췌."
+}

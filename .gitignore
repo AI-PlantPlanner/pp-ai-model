@@ -226,3 +226,35 @@ __marimo__/
 .streamlit/secrets.toml
 
 .DS_Store
+
+# GBIF 원본 다운로드(대용량). 재현은 data/gbif/download_request.json의 키·DOI로 한다.
+data/gbif/occurrences_*.zip
+data/gbif/occurrences_*/
+# 외부 참조 자료(WCVP, WGSRPD) 원본. 출처·버전은 data/external/SOURCES.md에 기록.
+data/external/wcvp/
+data/external/wgsrpd/
+# 재생성 가능한 대용량 중간 산출물(src/gbif_native_flag.py, src/gbif_clean.R로 다시 만듦)
+data/gbif/*.parquet
+# GEE 기상 추출 결과(대용량, src/gee_annual_extremes.py 등으로 재생성). 사용량 기록 gee_tasks.jsonl만 추적.
+data/weather/*
+!data/weather/gee_tasks.jsonl
+# 실험 결과 요약(논문 근거, 작음)은 추적
+!data/weather/year_window_result.csv
+!data/weather/year_window_species.csv
+!data/weather/min_records_test.csv
+# 학습 데이터 본체(src/build_dataset.py로 재생성). plants.csv·build_report.json·README.md는 추적.
+data/dataset/*.parquet
+
+# 사전학습 체크포인트(재현 가능, 로그·설정·요약만 커밋)
+results/pretrain/**/*.pt
+
+# 정렬 학습 체크포인트
+results/align/**/*.pt
+
+# 11-13: 체크포인트·대용량 배열은 위치와 상관없이 제외(재현 가능, 로그·설정·요약만 커밋)
+results/**/*.pt
+results/**/*.npy
+results/**/*.npz
+# 학명 재확인 추가 다운로드 원본·중간 산출물(재생성: src/gbif_addendum.py, src/addendum_pipeline.py)
+data/gbif/addendum/*.zip
+data/gbif/addendum/*.parquet

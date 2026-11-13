@@ -1,0 +1,151 @@
+{
+ "species_cell_pairs_dropped_coast": 135,
+ "sets": {
+  "main(v_main,D25,품종 근사)": {
+   "plants": 76,
+   "species": 75,
+   "species_cell_pairs": 94091,
+   "cells": 63629,
+   "records": 266941
+  },
+  "D14 감도": {
+   "plants": 82,
+   "species": 81,
+   "species_cell_pairs": 94202,
+   "cells": 63677,
+   "records": 267189
+  },
+  "품종 제외": {
+   "plants": 68,
+   "species": 68,
+   "species_cell_pairs": 93135,
+   "cells": 62983,
+   "records": 264997
+  },
+  "v_urban 감도": {
+   "plants": 76,
+   "species": 75,
+   "species_cell_pairs": 106281,
+   "cells": 68145,
+   "records": 386120
+  },
+  "v_intro 감도": {
+   "plants": 79,
+   "species": 78,
+   "species_cell_pairs": 129845,
+   "cells": 76831,
+   "records": 378279
+  },
+  "v_all 감도": {
+   "plants": 84,
+   "species": 83,
+   "species_cell_pairs": 144582,
+   "cells": 81226,
+   "records": 402187
+  },
+  "v_coast1 감도": {
+   "plants": 76,
+   "species": 75,
+   "species_cell_pairs": 94799,
+   "cells": 64119,
+   "records": 269563
+  },
+  "v_coast20 감도": {
+   "plants": 76,
+   "species": 75,
+   "species_cell_pairs": 95797,
+   "cells": 64830,
+   "records": 274158
+  }
+ },
+ "weather": {
+  "src_ids_needed": 84340,
+  "missing_by_year": {
+   "2016": 0,
+   "2017": 0,
+   "2018": 0,
+   "2019": 0,
+   "2020": 0,
+   "2021": 0,
+   "2022": 0,
+   "2023": 0,
+   "2024": 0,
+   "2025": 0
+  },
+  "chunk_rule_errors_in_200": 0
+ },
+ "excluded": [
+  [
+   "마조람",
+   "원산 칸 부족(<14)"
+  ],
+  [
+   "수박페페로미아",
+   "원산 칸 부족(<14)"
+  ],
+  [
+   "멕시코돌나물",
+   "원산 칸 부족(<14)"
+  ],
+  [
+   "섬초롱꽃",
+   "heterotypic 이명(섬초롱꽃, SAGE 규칙상 병합 불가)"
+  ],
+  [
+   "아펠란드라",
+   "WCVP Unplaced(원산 판정 불가)"
+  ],
+  [
+   "구즈베리",
+   "Ribes grossularia = R. uva-crispa의 heterotypic 이명(원예팀 확인 대기)"
+  ],
+  [
+   "칠자화나무",
+   "원산 칸 부족(<14)"
+  ],
+  [
+   "거북알로카시아",
+   "인공 교배종(원산 없음)"
+  ],
+  [
+   "마지나타",
+   "Dracaena marginata 저자 갈림(Lam./Aiton), 원산 판정 불가(원예팀 확인 대기)"
+  ],
+  [
+   "카틀레아",
+   "속 단위 학명(종 미상, 원예팀에 대표 종 확인)"
+  ],
+  [
+   "칼란디바",
+   "원산 칸 부족(<14)"
+  ],
+  [
+   "콩고",
+   "원예 품종(속명만, 원종 불명)"
+  ],
+  [
+   "필로덴드론",
+   "속 단위 학명(종 미상, 원예팀에 대표 종 확인)"
+  ],
+  [
+   "덴드로비움",
+   "속 단위 학명(종 미상, 원예팀에 대표 종 확인)"
+  ],
+  [
+   "칼라데아 마코야나",
+   "원산 칸 부족(<14)"
+  ],
+  [
+   "디펜바키아 ‘마리안느’",
+   "원예 품종(속명만, 원종 불명)"
+  ],
+  [
+   "헬리코니아",
+   "속 단위 학명(종 미상, 원예팀에 대표 종 확인)"
+  ],
+  [
+   "산취선인장",
+   "원산 기록 없음"
+  ]
+ ]
+}

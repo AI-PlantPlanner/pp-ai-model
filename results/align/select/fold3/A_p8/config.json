@@ -1,0 +1,32 @@
+{
+ "args": {
+  "fold": 3,
+  "loss": "A",
+  "patch": 8,
+  "lam": "1",
+  "lp_steps": 1000,
+  "ft_steps": 3000,
+  "bs": 256,
+  "eval_every": 250,
+  "seed": 0,
+  "final": false
+ },
+ "lambda": 1.0,
+ "R_train_plants": 48,
+ "n_inner_val_plants": 12,
+ "G": 5,
+ "inner_val_plants": [
+  "드라세나'송오브인디아'",
+  "블루스타고사리",
+  "부처꽃",
+  "구문초",
+  "미산딸나무",
+  "개암나무",
+  "꼬리진달래",
+  "긴기아난",
+  "테이블야자",
+  "종려나무",
+  "드라코",
+  "멜라니 고무나무"
+ ]
+}

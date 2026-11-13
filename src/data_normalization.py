@@ -36,15 +36,26 @@ _LIGHT_REVIEW_COLUMNS = (
 )
 
 
-def apply_light_review(raw_df: pd.DataFrame, path=config.LIGHT_REVIEW_PATH) -> pd.DataFrame:
+def apply_light_review(
+    raw_df: pd.DataFrame, path=config.LIGHT_REVIEW_PATH, column_map: dict | None = None
+) -> pd.DataFrame:
     """원예팀 광량 검토본의 값으로 해당 종의 광량 3개 컬럼(원본 텍스트)을 덮어쓴다.
 
     원본 파일은 고치지 않고 메모리에서만 덮어쓴다. 파싱 전에 텍스트를 바꾸므로
     이후 min/max 정규화와 충돌 검사가 모두 검토본 값을 기준으로 돈다.
     검토본의 식물명이 원본에 없거나 중복이면 조용히 건너뛰지 않고 에러로 멈춘다 —
     한 종이라도 빠지면 그 종만 옛 값으로 채점되는데 겉으로는 드러나지 않기 때문이다.
+    column_map: 검토 파일 헤더 -> 원본 컬럼명 (헤더가 원본과 다른 파일용).
+    범위 구분자 en dash(–)는 하이픈으로 바꾼다 — 그대로 두면 파서가 None으로 읽어 값이 사라진다.
     """
     review = pd.read_excel(path)
+    if column_map:
+        review = review.rename(columns=column_map)
+    review = review.dropna(subset=[config.LIGHT_REVIEW_NAME_COLUMN]).reset_index(drop=True)
+    for col in _LIGHT_REVIEW_COLUMNS:
+        review[col] = review[col].map(
+            lambda v: v.replace("–", "-") if isinstance(v, str) else v
+        )
     names = review[config.LIGHT_REVIEW_NAME_COLUMN].astype(str).str.strip()
     raw_names = raw_df[config.COL_NAME].astype(str).str.strip()
 
@@ -62,6 +73,8 @@ def apply_light_review(raw_df: pd.DataFrame, path=config.LIGHT_REVIEW_PATH) -> p
         for col in _LIGHT_REVIEW_COLUMNS:
             new_value = review_row[col]
             old_value = result.loc[mask, col].iloc[0]
+            if parse_numeric_range(new_value) == (None, None):
+                raise ValueError(f"광량 검토값 파싱 실패: {name} {col}={new_value!r} ({path.name})")
             if parse_numeric_range(new_value) != parse_numeric_range(old_value):
                 changed += 1
             result.loc[mask, col] = str(new_value)
@@ -285,6 +298,9 @@ def save_outputs(
 
 def main() -> None:
     raw_df = apply_light_review(load_raw_data())
+    raw_df = apply_light_review(
+        raw_df, config.LIGHT_REVISION_9_PATH, config.LIGHT_REVISION_9_COLUMN_MAP
+    )
     normalized_df, issues_df = normalize_dataframe(raw_df)
     conflicts_df = detect_light_conflicts(normalized_df)
     save_outputs(normalized_df, issues_df, conflicts_df)
